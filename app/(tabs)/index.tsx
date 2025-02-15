@@ -10,12 +10,15 @@ import { ScrollView } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useCallback } from "react";
 
+// for some reason relative fetch isn't working on dev even though it should
+const fetchPath = __DEV__ ? "http://localhost:8081" : "";
+
 function useFetchHello() {
   const toast = useToast();
 
   const fetchHello = useCallback(async () => {
     try {
-      const response = await fetch(`/hello`);
+      const response = await fetch(`${fetchPath}/hello`);
 
       const data = await response.json();
 
