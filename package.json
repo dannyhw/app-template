@@ -4,12 +4,12 @@
   "version": "1.0.0",
   "scripts": {
     "start": "expo start --dev-client",
-    "reset-project": "node ./scripts/reset-project.js",
     "android": "DARK_MODE=media expo run:android",
     "ios": "DARK_MODE=media expo run:ios",
     "web": "DARK_MODE=media expo start --web",
     "test": "jest --watchAll",
-    "lint": "expo lint"
+    "lint": "expo lint",
+    "format:fix": "prettier --write \"**/*.{js,jsx,ts,tsx,json}\""
   },
   "jest": {
     "preset": "jest-expo"
