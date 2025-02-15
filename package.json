@@ -3,13 +3,13 @@
   "main": "expo-router/entry",
   "version": "1.0.0",
   "scripts": {
-    "start": "expo start --dev-client",
-    "reset-project": "node ./scripts/reset-project.js",
-    "android": "DARK_MODE=media expo run:android",
-    "ios": "DARK_MODE=media expo run:ios",
-    "web": "DARK_MODE=media expo start --web",
-    "test": "jest --watchAll",
-    "lint": "expo lint"
+    "start": "bun expo start --dev-client",
+    "reset-project": "bun ./scripts/reset-project.js",
+    "android": "DARK_MODE=media bun expo run:android",
+    "ios": "DARK_MODE=media bun expo run:ios",
+    "web": "DARK_MODE=media bun expo start --web",
+    "test": "bun jest --watchAll",
+    "lint": "bun expo lint"
   },
   "jest": {
     "preset": "jest-expo"
