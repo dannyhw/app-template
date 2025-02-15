@@ -5,17 +5,17 @@ import React, {
   useContext,
   useMemo,
   forwardRef,
-} from 'react';
-import type { VariantProps } from '@gluestack-ui/nativewind-utils';
-import { View, Dimensions, Platform, ViewProps } from 'react-native';
-import { gridStyle, gridItemStyle } from './styles';
-import { cssInterop } from 'nativewind';
+} from "react";
+import type { VariantProps } from "@gluestack-ui/nativewind-utils";
+import { View, Dimensions, Platform, ViewProps } from "react-native";
+import { gridStyle, gridItemStyle } from "./styles";
+import { cssInterop } from "nativewind";
 import {
   useBreakpointValue,
   getBreakPointValue,
-} from '@/components/ui/utils/use-break-point-value';
+} from "@/components/ui/utils/use-break-point-value";
 
-const { width: DEVICE_WIDTH } = Dimensions.get('window');
+const { width: DEVICE_WIDTH } = Dimensions.get("window");
 
 const GridContext = createContext<any>({});
 
@@ -70,7 +70,7 @@ function generateResponsiveNumColumns({ gridClass }: { gridClass: string }) {
   numColumns.forEach((classname) => {
     const match = classname.match(regex);
     if (match) {
-      const prefix = match[1] || 'default';
+      const prefix = match[1] || "default";
       const value = parseInt(match[2], 10);
       result[prefix] = value;
     }
@@ -98,7 +98,7 @@ function generateResponsiveColSpans({
   colSpan.forEach((classname: any) => {
     const match = classname.match(regex);
     if (match) {
-      const prefix = match[1] || 'default';
+      const prefix = match[1] || "default";
       const value = parseInt(match[2], 10);
       result[prefix] = value;
     }
@@ -112,7 +112,7 @@ type IGridProps = ViewProps &
     gap?: number;
     rowGap?: number;
     columnGap?: number;
-    flexDirection?: 'row' | 'column' | 'row-reverse' | 'column-reverse';
+    flexDirection?: "row" | "column" | "row-reverse" | "column-reverse";
     padding?: number;
     paddingLeft?: number;
     paddingRight?: number;
@@ -141,7 +141,7 @@ const Grid = forwardRef<React.ElementRef<typeof View>, IGridProps>(
 
         const colSpan2 = getBreakPointValue(
           generateResponsiveColSpans({ gridItemClassName }),
-          DEVICE_WIDTH
+          DEVICE_WIDTH,
         );
         const colSpan = colSpan2 ? colSpan2 : 1;
 
@@ -172,7 +172,7 @@ const Grid = forwardRef<React.ElementRef<typeof View>, IGridProps>(
     });
 
     const gridClassMerged = `${Platform.select({
-      web: gridClass ?? '',
+      web: gridClass ?? "",
     })}`;
 
     const contextValue = useMemo(() => {
@@ -180,7 +180,7 @@ const Grid = forwardRef<React.ElementRef<typeof View>, IGridProps>(
         calculatedWidth,
         numColumns: responsiveNumColumns,
         itemsPerRow,
-        flexDirection: props?.flexDirection || 'row',
+        flexDirection: props?.flexDirection || "row",
         gap: props?.gap || 0,
         columnGap: props?.columnGap || 0,
       };
@@ -195,7 +195,7 @@ const Grid = forwardRef<React.ElementRef<typeof View>, IGridProps>(
         <View
           ref={ref}
           className={gridStyle({
-            class: className + ' ' + gridClassMerged,
+            class: className + " " + gridClassMerged,
           })}
           onLayout={(event: any) => {
             const paddingLeftToSubtract =
@@ -218,25 +218,25 @@ const Grid = forwardRef<React.ElementRef<typeof View>, IGridProps>(
         </View>
       </GridContext.Provider>
     );
-  }
+  },
 );
 
 cssInterop(Grid, {
   className: {
-    target: 'style',
+    target: "style",
     nativeStyleToProp: {
-      gap: 'gap',
-      rowGap: 'rowGap',
-      columnGap: 'columnGap',
-      flexDirection: 'flexDirection',
-      padding: 'padding',
-      paddingLeft: 'paddingLeft',
-      paddingRight: 'paddingRight',
-      paddingStart: 'paddingStart',
-      paddingEnd: 'paddingEnd',
-      borderWidth: 'borderWidth',
-      borderLeftWidth: 'borderLeftWidth',
-      borderRightWidth: 'borderRightWidth',
+      gap: "gap",
+      rowGap: "rowGap",
+      columnGap: "columnGap",
+      flexDirection: "flexDirection",
+      padding: "padding",
+      paddingLeft: "paddingLeft",
+      paddingRight: "paddingRight",
+      paddingStart: "paddingStart",
+      paddingEnd: "paddingEnd",
+      borderWidth: "borderWidth",
+      borderLeftWidth: "borderLeftWidth",
+      borderRightWidth: "borderRightWidth",
     },
   },
 });
@@ -253,7 +253,7 @@ const GridItem = forwardRef<React.ElementRef<typeof View>, IGridItemProps>(
   ({ className, _extra, ...props }, ref) => {
     const [flexBasisValue, setFlexBasisValue] = useState<
       number | string | null
-    >('auto');
+    >("auto");
 
     const {
       calculatedWidth,
@@ -267,12 +267,12 @@ const GridItem = forwardRef<React.ElementRef<typeof View>, IGridItemProps>(
     const gridItemClass = _extra?.className;
     const responsiveColSpan: number =
       useBreakpointValue(
-        generateResponsiveColSpans({ gridItemClassName: gridItemClass })
+        generateResponsiveColSpans({ gridItemClassName: gridItemClass }),
       ) ?? 1;
 
     useEffect(() => {
       if (
-        !flexDirection?.includes('column') &&
+        !flexDirection?.includes("column") &&
         calculatedWidth &&
         numColumns > 0 &&
         responsiveColSpan > 0
@@ -298,8 +298,8 @@ const GridItem = forwardRef<React.ElementRef<typeof View>, IGridItemProps>(
               numColumns /
               calculatedWidth) *
               100,
-            100
-          ) + '%';
+            100,
+          ) + "%";
 
         setFlexBasisValue(flexBasisVal);
       }
@@ -330,10 +330,10 @@ const GridItem = forwardRef<React.ElementRef<typeof View>, IGridItemProps>(
         ]}
       />
     );
-  }
+  },
 );
 
-Grid.displayName = 'Grid';
-GridItem.displayName = 'GridItem';
+Grid.displayName = "Grid";
+GridItem.displayName = "GridItem";
 
 export { Grid, GridItem };
