@@ -1,13 +1,56 @@
+import {
+  useToast,
+  Toast,
+  ToastTitle,
+  ToastDescription,
+} from "@/components/ui/toast";
+import { Button, ButtonText } from "@/components/ui/button";
 import { Text } from "@/components/ui/text";
 import { ScrollView } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { useCallback } from "react";
+
+function usefetchHello() {
+  const toast = useToast();
+
+  const fetchHello = useCallback(async () => {
+    try {
+      const response = await fetch(`${process.env.EXPO_PUBLIC_API_URL}/hello`);
+
+      const data = await response.json();
+
+      toast.show({
+        placement: "bottom",
+        duration: 3000,
+        render(props) {
+          return (
+            <Toast action="muted" variant="solid" className="min-w-40">
+              <ToastTitle>Hello!</ToastTitle>
+              <ToastDescription>{data.hello}</ToastDescription>
+            </Toast>
+          );
+        },
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }, []);
+
+  return fetchHello;
+}
 
 export default function HomeScreen() {
   const insets = useSafeAreaInsets();
 
+  const fetchHello = usefetchHello();
+
   return (
     <ScrollView style={{ padding: insets.top }}>
-      <Text>Tab1</Text>
+      <Text className="text-blue-800">Tab1</Text>
+
+      <Button onPress={() => fetchHello()}>
+        <ButtonText>Fetch Hello</ButtonText>
+      </Button>
     </ScrollView>
   );
 }
