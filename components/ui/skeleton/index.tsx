@@ -33,8 +33,11 @@ const Skeleton = forwardRef<
     ref,
   ) => {
     const pulseAnim = new Animated.Value(1);
+
     const customTimingFunction = Easing.bezier(0.4, 0, 0.6, 1);
+
     const fadeDuration = 0.6;
+
     const animationDuration = (fadeDuration * 10000) / speed; // Convert seconds to milliseconds
 
     const pulse = Animated.sequence([
@@ -134,6 +137,7 @@ const SkeletonText = forwardRef<
 );
 
 Skeleton.displayName = "Skeleton";
+
 SkeletonText.displayName = "SkeletonText";
 
 export { Skeleton, SkeletonText };

@@ -22,6 +22,7 @@ type IGridProps = React.ComponentPropsWithoutRef<"div"> &
 const Grid = React.forwardRef<HTMLDivElement, IGridProps>(
   ({ className, _extra, ...props }, ref) => {
     const gridClass = _extra?.className;
+
     const finalGridClass = gridClass ?? "";
 
     return (
@@ -63,6 +64,7 @@ const GridItem = React.forwardRef<HTMLDivElement, IGridItemProps>(
 );
 
 Grid.displayName = "Grid";
+
 GridItem.displayName = "GridItem";
 
 export { Grid, GridItem };

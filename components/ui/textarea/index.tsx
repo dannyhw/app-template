@@ -11,6 +11,7 @@ import {
 import type { VariantProps } from "@gluestack-ui/nativewind-utils";
 
 const SCOPE = "TEXTAREA";
+
 const UITextarea = createTextarea({
   Root: withStyleContext(View, SCOPE),
   Input: TextInput,
@@ -86,6 +87,7 @@ const TextareaInput = React.forwardRef<
 });
 
 Textarea.displayName = "Textarea";
+
 TextareaInput.displayName = "TextareaInput";
 
 export { Textarea, TextareaInput };

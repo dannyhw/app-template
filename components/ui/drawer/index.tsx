@@ -17,9 +17,13 @@ import { cssInterop } from "nativewind";
 import type { VariantProps } from "@gluestack-ui/nativewind-utils";
 
 const AnimatedPressable = createMotionAnimatedComponent(Pressable);
+
 const SCOPE = "MODAL";
+
 const screenWidth = Dimensions.get("window").width;
+
 const screenHeight = Dimensions.get("window").height;
+
 const sizes: { [key: string]: number } = {
   sm: 0.25,
   md: 0.5,
@@ -39,6 +43,7 @@ const UIDrawer = createDrawer({
 });
 
 cssInterop(AnimatedPressable, { className: "style" });
+
 cssInterop(Motion.View, { className: "style" });
 
 const drawerStyle = tva({
@@ -217,6 +222,7 @@ const DrawerContent = React.forwardRef<
   const { size: parentSize, anchor: parentAnchor } = useStyleContext(SCOPE);
 
   const drawerHeight = screenHeight * (sizes[parentSize] || sizes.md);
+
   const drawerWidth = screenWidth * (sizes[parentSize] || sizes.md);
 
   const isHorizontal = parentAnchor === "left" || parentAnchor === "right";
@@ -319,11 +325,17 @@ const DrawerCloseButton = React.forwardRef<
 });
 
 Drawer.displayName = "Drawer";
+
 DrawerBackdrop.displayName = "DrawerBackdrop";
+
 DrawerContent.displayName = "DrawerContent";
+
 DrawerHeader.displayName = "DrawerHeader";
+
 DrawerBody.displayName = "DrawerBody";
+
 DrawerFooter.displayName = "DrawerFooter";
+
 DrawerCloseButton.displayName = "DrawerCloseButton";
 
 export {

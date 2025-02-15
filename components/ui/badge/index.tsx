@@ -211,7 +211,9 @@ const BadgeIcon = React.forwardRef<
 });
 
 Badge.displayName = "Badge";
+
 BadgeText.displayName = "BadgeText";
+
 BadgeIcon.displayName = "BadgeIcon";
 
 export { Badge, BadgeIcon, BadgeText };

@@ -25,6 +25,7 @@ const TableHeaderContext = createContext<{
 }>({
   isHeaderRow: false,
 });
+
 const TableFooterContext = createContext<{
   isFooterRow: boolean;
 }>({
@@ -150,6 +151,7 @@ const TableRow = React.forwardRef<
   ITableRowProps
 >(({ className, ...props }, ref) => {
   const { isHeaderRow } = useContext(TableHeaderContext);
+
   const { isFooterRow } = useContext(TableFooterContext);
 
   return (
@@ -204,12 +206,19 @@ const TableCaption = React.forwardRef<
 });
 
 Table.displayName = "Table";
+
 TableHeader.displayName = "TableHeader";
+
 TableBody.displayName = "TableBody";
+
 TableFooter.displayName = "TableFooter";
+
 TableHead.displayName = "TableHead";
+
 TableRow.displayName = "TableRow";
+
 TableData.displayName = "TableData";
+
 TableCaption.displayName = "TableCaption";
 
 export {

@@ -52,17 +52,25 @@ export const UIActionsheet = createActionsheet({
 });
 
 cssInterop(UIActionsheet, { className: "style" });
+
 cssInterop(UIActionsheet.Content, { className: "style" });
+
 cssInterop(ItemWrapper, { className: "style" });
+
 cssInterop(UIActionsheet.ItemText, { className: "style" });
+
 cssInterop(UIActionsheet.DragIndicator, { className: "style" });
+
 cssInterop(UIActionsheet.DragIndicatorWrapper, { className: "style" });
+
 cssInterop(UIActionsheet.Backdrop, { className: "style" });
+
 cssInterop(UIActionsheet.ScrollView, {
   className: "style",
   contentContainerClassName: "contentContainerStyle",
   indicatorClassName: "indicatorStyle",
 });
+
 cssInterop(UIActionsheet.VirtualizedList, {
   className: "style",
   ListFooterComponentClassName: "ListFooterComponentStyle",
@@ -70,6 +78,7 @@ cssInterop(UIActionsheet.VirtualizedList, {
   contentContainerClassName: "contentContainerStyle",
   indicatorClassName: "indicatorStyle",
 });
+
 cssInterop(UIActionsheet.FlatList, {
   className: "style",
   ListFooterComponentClassName: "ListFooterComponentStyle",
@@ -78,7 +87,9 @@ cssInterop(UIActionsheet.FlatList, {
   contentContainerClassName: "contentContainerStyle",
   indicatorClassName: "indicatorStyle",
 });
+
 cssInterop(UIActionsheet.SectionList, { className: "style" });
+
 cssInterop(UIActionsheet.SectionHeaderText, { className: "style" });
 
 cssInterop(PrimitiveIcon, {

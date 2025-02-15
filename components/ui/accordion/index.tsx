@@ -40,6 +40,7 @@ const accordionItemStyle = tva({
     },
   },
 });
+
 const accordionTitleTextStyle = tva({
   base: "text-typography-900 font-bold flex-1 text-left",
   parentVariants: {
@@ -50,6 +51,7 @@ const accordionTitleTextStyle = tva({
     },
   },
 });
+
 const accordionIconStyle = tva({
   base: "text-typography-900 fill-none",
   parentVariants: {
@@ -63,6 +65,7 @@ const accordionIconStyle = tva({
     },
   },
 });
+
 const accordionContentTextStyle = tva({
   base: "text-typography-700 font-normal",
   parentVariants: {
@@ -73,12 +76,15 @@ const accordionContentTextStyle = tva({
     },
   },
 });
+
 const accordionHeaderStyle = tva({
   base: "mx-0 my-0",
 });
+
 const accordionContentStyle = tva({
   base: "pt-1 pb-3 px-4",
 });
+
 const accordionTriggerStyle = tva({
   base: "w-full flex-row justify-between items-center web:outline-none focus:outline-none data-[disabled=true]:opacity-40 data-[disabled=true]:cursor-not-allowed data-[focus-visible=true]:bg-background-50 py-3 px-4",
 });
@@ -297,6 +303,7 @@ const AccordionTrigger = React.forwardRef<
     />
   );
 });
+
 const AccordionTitleText = React.forwardRef<
   React.ElementRef<typeof UIAccordion.TitleText>,
   IAccordionTitleTextProps
@@ -316,12 +323,19 @@ const AccordionTitleText = React.forwardRef<
 });
 
 Accordion.displayName = "Accordion";
+
 AccordionItem.displayName = "AccordionItem";
+
 AccordionHeader.displayName = "AccordionHeader";
+
 AccordionTrigger.displayName = "AccordionTrigger";
+
 AccordionTitleText.displayName = "AccordionTitleText";
+
 AccordionContentText.displayName = "AccordionContentText";
+
 AccordionIcon.displayName = "AccordionIcon";
+
 AccordionContent.displayName = "AccordionContent";
 
 export {

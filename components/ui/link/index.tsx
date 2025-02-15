@@ -17,6 +17,7 @@ export const UILink = createLink({
 });
 
 cssInterop(UILink, { className: "style" });
+
 cssInterop(UILink.Text, { className: "style" });
 
 const linkStyle = tva({
@@ -99,6 +100,7 @@ const LinkText = React.forwardRef<
 });
 
 Link.displayName = "Link";
+
 LinkText.displayName = "LinkText";
 
 export { Link, LinkText };
