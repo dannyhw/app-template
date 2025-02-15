@@ -8,8 +8,11 @@
     "ios": "DARK_MODE=media expo run:ios",
     "web": "DARK_MODE=media expo start --web",
     "test": "jest --watchAll",
-    "lint": "expo lint",
-    "format:fix": "prettier --write \"**/*.{js,jsx,ts,tsx,json}\""
+    "lint": "bun eslint . --cache --max-warnings 0 && bun prettier --check \"**/*.{js,jsx,ts,tsx,json,md,css,scss}\"",
+    "format": "bun prettier --write \"**/*.{js,jsx,ts,tsx,json,md,css,scss}\" && bun eslint . --fix --cache",
+    "check": "bun tsc --noEmit --skipLibCheck",
+    "validate": "bun run format && bun run lint",
+    "validate:strict": "bun run validate && bun run check"
   },
   "jest": {
     "preset": "jest-expo"
