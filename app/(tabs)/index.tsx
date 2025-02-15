@@ -10,19 +10,19 @@ import { ScrollView } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useCallback } from "react";
 
-function usefetchHello() {
+function useFetchHello() {
   const toast = useToast();
 
   const fetchHello = useCallback(async () => {
     try {
-      const response = await fetch(`${process.env.EXPO_PUBLIC_API_URL}/hello`);
+      const response = await fetch(`/hello`);
 
       const data = await response.json();
 
       toast.show({
         placement: "bottom",
         duration: 3000,
-        render(props) {
+        render() {
           return (
             <Toast action="muted" variant="solid" className="min-w-40">
               <ToastTitle>Hello!</ToastTitle>
@@ -42,7 +42,7 @@ function usefetchHello() {
 export default function HomeScreen() {
   const insets = useSafeAreaInsets();
 
-  const fetchHello = usefetchHello();
+  const fetchHello = useFetchHello();
 
   return (
     <ScrollView style={{ padding: insets.top }}>
