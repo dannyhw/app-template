@@ -37,7 +37,7 @@ function useFetchHello() {
     } catch (error) {
       console.error(error);
     }
-  }, []);
+  }, [toast]);
 
   return fetchHello;
 }
