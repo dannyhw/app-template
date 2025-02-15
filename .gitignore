@@ -39,6 +39,3 @@ app-example
 android/
 ios/
 .env
-
-# windsurf rules
-.windsurfrules
