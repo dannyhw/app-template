@@ -34,6 +34,7 @@ const TableHeader = React.forwardRef(
         isHeaderRow: true,
       };
     }, []);
+
     return (
       <TableHeaderContext.Provider value={contextValue}>
         <thead
@@ -65,6 +66,7 @@ const TableFooter = React.forwardRef(
         isFooterRow: true,
       };
     }, []);
+
     return (
       <TableFooterContext.Provider value={contextValue}>
         <tfoot
@@ -92,6 +94,7 @@ const TableHead = React.forwardRef(
 const TableRow = React.forwardRef(({ className, ...props }: any, ref?: any) => {
   const { isHeaderRow } = useContext(TableHeaderContext);
   const { isFooterRow } = useContext(TableFooterContext);
+
   return (
     <tr
       ref={ref}

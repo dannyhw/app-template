@@ -1,4 +1,5 @@
 "use client";
+
 import React from "react";
 import { Text, View } from "react-native";
 import { PrimitiveIcon, UIIcon } from "@gluestack-ui/icon";
@@ -9,6 +10,7 @@ import {
 } from "@gluestack-ui/nativewind-utils/withStyleContext";
 import { cssInterop } from "nativewind";
 import type { VariantProps } from "@gluestack-ui/nativewind-utils";
+
 const SCOPE = "BADGE";
 
 const badgeStyle = tva({
@@ -110,6 +112,7 @@ cssInterop(PrimitiveIcon, {
 
 type IBadgeProps = React.ComponentPropsWithoutRef<typeof ContextView> &
   VariantProps<typeof badgeStyle>;
+
 const Badge = ({
   children,
   action = "muted",
@@ -141,6 +144,7 @@ const BadgeText = React.forwardRef<
   IBadgeTextProps
 >(({ children, className, size, ...props }, ref) => {
   const { size: parentSize, action: parentAction } = useStyleContext(SCOPE);
+
   return (
     <Text
       ref={ref}
@@ -189,6 +193,7 @@ const BadgeIcon = React.forwardRef<
       />
     );
   }
+
   return (
     <UIIcon
       className={badgeIconStyle({

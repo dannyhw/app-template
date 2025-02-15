@@ -32,16 +32,23 @@ const TableFooterContext = createContext<{
 });
 
 type ITableProps = React.ComponentProps<typeof ExpoTable>;
+
 type ITableHeaderProps = React.ComponentProps<typeof ExpoTHead>;
+
 type ITableBodyProps = React.ComponentProps<typeof ExpoTBody>;
+
 type ITableFooterProps = React.ComponentProps<typeof ExpoTFoot>;
+
 type ITableHeadProps = React.ComponentProps<typeof View | typeof Text> & {
   useRNView?: boolean;
 };
+
 type ITableRowProps = React.ComponentProps<typeof ExpoTR>;
+
 type ITableDataProps = React.ComponentProps<typeof View | typeof Text> & {
   useRNView?: boolean;
 };
+
 type ITableCaptionProps = React.ComponentProps<typeof ExpoTCaption>;
 
 const Table = React.forwardRef<React.ElementRef<typeof ExpoTable>, ITableProps>(
@@ -66,6 +73,7 @@ const TableHeader = React.forwardRef<
       isHeaderRow: true,
     };
   }, []);
+
   return (
     <TableHeaderContext.Provider value={contextValue}>
       <ExpoTHead
@@ -101,6 +109,7 @@ const TableFooter = React.forwardRef<
       isFooterRow: true,
     };
   }, []);
+
   return (
     <TableFooterContext.Provider value={contextValue}>
       <ExpoTFoot

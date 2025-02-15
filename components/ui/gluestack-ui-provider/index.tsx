@@ -14,6 +14,7 @@ const getColorSchemeName = (
   if (mode === "system") {
     return colorScheme ?? "light";
   }
+
   return mode;
 };
 

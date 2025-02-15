@@ -1,4 +1,5 @@
 "use client";
+
 import React from "react";
 import { createFab } from "@gluestack-ui/fab";
 import { Pressable, Text } from "react-native";
@@ -148,6 +149,7 @@ const FabLabel = React.forwardRef<
     ref,
   ) => {
     const { size: parentSize } = useStyleContext(SCOPE);
+
     return (
       <UIFab.Label
         ref={ref}
@@ -201,6 +203,7 @@ const FabIcon = React.forwardRef<
       />
     );
   }
+
   return (
     <UIFab.Icon
       ref={ref}

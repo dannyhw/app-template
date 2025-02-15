@@ -1,6 +1,7 @@
 import React, { forwardRef, memo } from "react";
 import { headingStyle } from "./styles";
 import type { VariantProps } from "@gluestack-ui/nativewind-utils";
+
 type IHeadingProps = VariantProps<typeof headingStyle> &
   React.ComponentPropsWithoutRef<"h1"> & {
     as?: React.ElementType;
@@ -25,7 +26,9 @@ const MappedHeading = memo(
     ) => {
       switch (size) {
         case "5xl":
+
         case "4xl":
+
         case "3xl":
           return (
             <h1
@@ -44,6 +47,7 @@ const MappedHeading = memo(
               ref={ref}
             />
           );
+
         case "2xl":
           return (
             <h2
@@ -62,6 +66,7 @@ const MappedHeading = memo(
               ref={ref}
             />
           );
+
         case "xl":
           return (
             <h3
@@ -80,6 +85,7 @@ const MappedHeading = memo(
               ref={ref}
             />
           );
+
         case "lg":
           return (
             <h4
@@ -98,6 +104,7 @@ const MappedHeading = memo(
               ref={ref}
             />
           );
+
         case "md":
           return (
             <h5
@@ -116,7 +123,9 @@ const MappedHeading = memo(
               ref={ref}
             />
           );
+
         case "sm":
+
         case "xs":
           return (
             <h6
@@ -135,6 +144,7 @@ const MappedHeading = memo(
               ref={ref}
             />
           );
+
         default:
           return (
             <h4

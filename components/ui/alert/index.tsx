@@ -1,4 +1,5 @@
 "use client";
+
 import { createAlert } from "@gluestack-ui/alert";
 import { View, Text } from "react-native";
 import { tva } from "@gluestack-ui/nativewind-utils/tva";
@@ -166,6 +167,7 @@ const AlertText = React.forwardRef<
     ref,
   ) => {
     const { action: parentAction } = useStyleContext(SCOPE);
+
     return (
       <UIAlert.Text
         className={alertTextStyle({
@@ -222,6 +224,7 @@ const AlertIcon = React.forwardRef<
       />
     );
   }
+
   return (
     <UIAlert.Icon
       className={alertIconStyle({

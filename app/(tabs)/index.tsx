@@ -1,14 +1,14 @@
-import {
-  useToast,
-  Toast,
-  ToastTitle,
-  ToastDescription,
-} from "@/components/ui/toast";
 import { Button, ButtonText } from "@/components/ui/button";
 import { Text } from "@/components/ui/text";
+import {
+  Toast,
+  ToastDescription,
+  ToastTitle,
+  useToast,
+} from "@/components/ui/toast";
+import { useCallback } from "react";
 import { ScrollView } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { useCallback } from "react";
 
 // for some reason relative fetch isn't working on dev even though it should
 const fetchPath = __DEV__ ? "http://localhost:8081" : "";

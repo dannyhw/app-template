@@ -60,6 +60,7 @@ const Skeleton = forwardRef<
 
     if (!isLoaded) {
       Animated.loop(pulse).start();
+
       return (
         <Animated.View
           style={{ opacity: pulseAnim }}

@@ -1,4 +1,5 @@
 "use client";
+
 import React from "react";
 import { View, Pressable, ScrollView } from "react-native";
 import {
@@ -189,6 +190,7 @@ const PopoverArrow = React.forwardRef<
   IPopoverArrowProps
 >(({ className, ...props }, ref) => {
   const { placement } = useStyleContext(SCOPE);
+
   return (
     <UIPopover.Arrow
       ref={ref}

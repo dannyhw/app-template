@@ -546,6 +546,7 @@ const ActionsheetIcon = React.forwardRef<
       />
     );
   }
+
   return (
     <UIActionsheet.Icon
       className={actionsheetIconStyle({

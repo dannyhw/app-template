@@ -1,4 +1,5 @@
 "use client";
+
 import React from "react";
 import { createButton } from "@gluestack-ui/button";
 import { tva } from "@gluestack-ui/nativewind-utils/tva";
@@ -376,6 +377,7 @@ const ButtonIcon = React.forwardRef<
       />
     );
   }
+
   return (
     <UIButton.Icon
       {...props}

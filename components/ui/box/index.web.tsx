@@ -15,4 +15,5 @@ const Box = React.forwardRef<HTMLDivElement, IBoxProps>(
 );
 
 Box.displayName = "Box";
+
 export { Box };

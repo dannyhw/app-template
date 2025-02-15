@@ -1,4 +1,5 @@
 "use client";
+
 import React from "react";
 import { createImage } from "@gluestack-ui/image";
 import { Platform, Image as RNImage } from "react-native";
@@ -26,6 +27,7 @@ const UIImage = createImage({ Root: RNImage });
 
 type ImageProps = VariantProps<typeof imageStyle> &
   React.ComponentProps<typeof UIImage>;
+
 const Image = React.forwardRef<
   React.ElementRef<typeof UIImage>,
   ImageProps & { className?: string }
@@ -46,4 +48,5 @@ const Image = React.forwardRef<
 });
 
 Image.displayName = "Image";
+
 export { Image };

@@ -1,4 +1,5 @@
 "use client";
+
 import React from "react";
 import { createInput } from "@gluestack-ui/input";
 import { View, Pressable, TextInput } from "react-native";
@@ -103,6 +104,7 @@ const inputFieldStyle = tva({
 
 type IInputProps = React.ComponentProps<typeof UIInput> &
   VariantProps<typeof inputStyle> & { className?: string };
+
 const Input = React.forwardRef<React.ElementRef<typeof UIInput>, IInputProps>(
   ({ className, variant = "outline", size = "md", ...props }, ref) => {
     return (
@@ -150,6 +152,7 @@ const InputIcon = React.forwardRef<
       />
     );
   }
+
   return (
     <UIInput.Icon
       ref={ref}

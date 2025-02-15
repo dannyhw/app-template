@@ -1,4 +1,5 @@
 "use client";
+
 import React from "react";
 import { createAvatar } from "@gluestack-ui/avatar";
 import { View, Text, Image, Platform } from "react-native";
@@ -8,6 +9,7 @@ import {
   useStyleContext,
 } from "@gluestack-ui/nativewind-utils/withStyleContext";
 import type { VariantProps } from "@gluestack-ui/nativewind-utils";
+
 const SCOPE = "AVATAR";
 
 const UIAvatar = createAvatar({

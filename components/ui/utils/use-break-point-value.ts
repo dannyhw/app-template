@@ -26,6 +26,7 @@ export const getBreakPointValue = (values: BreakPointValue, width: number) => {
   if (typeof values !== "object") return values;
 
   let finalBreakPointResolvedValue: any;
+
   const mediaQueriesBreakpoints: any = [
     {
       key: "default",
@@ -33,6 +34,7 @@ export const getBreakPointValue = (values: BreakPointValue, width: number) => {
       isValid: true,
     },
   ];
+
   Object.keys(resolveScreenWidth).forEach((key) => {
     const isValid = isValidBreakpoint(resolveScreenWidth[key], width);
 
@@ -60,6 +62,7 @@ export const getBreakPointValue = (values: BreakPointValue, width: number) => {
   } else {
     finalBreakPointResolvedValue = lastValidObject?.value;
   }
+
   return finalBreakPointResolvedValue;
 };
 
@@ -73,6 +76,7 @@ export function useBreakpointValue(values: BreakPointValue): any {
   useEffect(() => {
     if (typeof values === "object") {
       const finalBreakPointResolvedValue = getBreakPointValue(values, width);
+
       setCurrentBreakPointValue(finalBreakPointResolvedValue);
     }
   }, [values, width]);
@@ -91,6 +95,7 @@ export function isValidBreakpoint(
   if (windowWidth >= breakPointWidth) {
     return true;
   }
+
   return false;
 }
 
@@ -100,5 +105,6 @@ function getLastValidObject(mediaQueries: any) {
       return mediaQueries[i];
     }
   }
+
   return null; // No valid object found
 }

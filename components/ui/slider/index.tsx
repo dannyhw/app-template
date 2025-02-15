@@ -1,4 +1,5 @@
 "use client";
+
 import { createSlider } from "@gluestack-ui/slider";
 import { Pressable } from "react-native";
 import { View } from "react-native";
@@ -13,6 +14,7 @@ import { cssInterop } from "nativewind";
 
 const SCOPE = "SLIDER";
 const Root = withStyleContext(View, SCOPE);
+
 export const UISlider = createSlider({
   Root: Root,
   Thumb: View,

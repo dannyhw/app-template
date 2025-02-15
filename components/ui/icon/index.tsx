@@ -1,4 +1,5 @@
 "use client";
+
 import React from "react";
 import { createIcon } from "@gluestack-ui/icon";
 import { Path } from "react-native-svg";
@@ -68,6 +69,7 @@ const Icon = React.forwardRef<React.ElementRef<typeof Svg>, IIConProps>(
         />
       );
     }
+
     return (
       <UIIcon
         ref={ref}
@@ -140,6 +142,7 @@ const AddIcon = createIcon({
 });
 
 AddIcon.displayName = "AddIcon";
+
 export { AddIcon };
 
 const AlertCircleIcon = createIcon({
@@ -170,6 +173,7 @@ const AlertCircleIcon = createIcon({
 });
 
 AlertCircleIcon.displayName = "AlertCircleIcon";
+
 export { AlertCircleIcon };
 
 const ArrowUpIcon = createIcon({
@@ -727,6 +731,7 @@ const DownloadIcon = createIcon({
 });
 
 DownloadIcon.displayName = "DownloadIcon";
+
 export { DownloadIcon };
 
 const EditIcon = createIcon({
@@ -751,6 +756,7 @@ const EditIcon = createIcon({
 });
 
 EditIcon.displayName = "EditIcon";
+
 export { EditIcon };
 
 const EyeIcon = createIcon({
@@ -810,6 +816,7 @@ const EyeOffIcon = createIcon({
 });
 
 EyeOffIcon.displayName = "EyeOffIcon";
+
 export { EyeIcon, EyeOffIcon };
 
 const FavouriteIcon = createIcon({
@@ -828,6 +835,7 @@ const FavouriteIcon = createIcon({
 });
 
 FavouriteIcon.displayName = "FavouriteIcon";
+
 export { FavouriteIcon };
 
 const GlobeIcon = createIcon({
@@ -858,6 +866,7 @@ const GlobeIcon = createIcon({
 });
 
 GlobeIcon.displayName = "GlobeIcon";
+
 export { GlobeIcon };
 
 const GripVerticalIcon = createIcon({
@@ -906,6 +915,7 @@ const GripVerticalIcon = createIcon({
 });
 
 GripVerticalIcon.displayName = "GripVerticalIcon";
+
 export { GripVerticalIcon };
 
 const HelpCircleIcon = createIcon({
@@ -936,6 +946,7 @@ const HelpCircleIcon = createIcon({
 });
 
 HelpCircleIcon.displayName = "HelpCircleIcon";
+
 export { HelpCircleIcon };
 
 const InfoIcon = createIcon({
@@ -966,6 +977,7 @@ const InfoIcon = createIcon({
 });
 
 InfoIcon.displayName = "InfoIcon";
+
 export { InfoIcon };
 
 const LinkIcon = createIcon({
@@ -1019,6 +1031,7 @@ const ExternalLinkIcon = createIcon({
 });
 
 ExternalLinkIcon.displayName = "ExternalLinkIcon";
+
 export { LinkIcon, ExternalLinkIcon };
 
 const LoaderIcon = createIcon({
@@ -1037,6 +1050,7 @@ const LoaderIcon = createIcon({
 });
 
 LoaderIcon.displayName = "LoaderIcon";
+
 export { LoaderIcon };
 
 const LockIcon = createIcon({
@@ -1061,6 +1075,7 @@ const LockIcon = createIcon({
 });
 
 LockIcon.displayName = "LockIcon";
+
 export { LockIcon };
 
 const MailIcon = createIcon({
@@ -1085,6 +1100,7 @@ const MailIcon = createIcon({
 });
 
 MailIcon.displayName = "MailIcon";
+
 export { MailIcon };
 
 const MenuIcon = createIcon({
@@ -1115,6 +1131,7 @@ const MenuIcon = createIcon({
 });
 
 MenuIcon.displayName = "MenuIcon";
+
 export { MenuIcon };
 
 const MessageCircleIcon = createIcon({
@@ -1152,6 +1169,7 @@ const MoonIcon = createIcon({
 });
 
 MoonIcon.displayName = "MoonIcon";
+
 export { MoonIcon };
 
 const PaperclipIcon = createIcon({
@@ -1170,6 +1188,7 @@ const PaperclipIcon = createIcon({
 });
 
 PaperclipIcon.displayName = "PaperclipIcon";
+
 export { PaperclipIcon };
 
 const PhoneIcon = createIcon({
@@ -1188,6 +1207,7 @@ const PhoneIcon = createIcon({
 });
 
 PhoneIcon.displayName = "PhoneIcon";
+
 export { PhoneIcon };
 
 const PlayIcon = createIcon({
@@ -1212,6 +1232,7 @@ const PlayIcon = createIcon({
 });
 
 PlayIcon.displayName = "PlayIcon";
+
 export { PlayIcon };
 
 const RemoveIcon = createIcon({
@@ -1230,6 +1251,7 @@ const RemoveIcon = createIcon({
 });
 
 RemoveIcon.displayName = "RemoveIcon";
+
 export { RemoveIcon };
 
 const RepeatIcon = createIcon({
@@ -1307,6 +1329,7 @@ const Repeat1Icon = createIcon({
 });
 
 Repeat1Icon.displayName = "Repeat1Icon";
+
 export { RepeatIcon, Repeat1Icon };
 
 const SearchIcon = createIcon({
@@ -1331,6 +1354,7 @@ const SearchIcon = createIcon({
 });
 
 SearchIcon.displayName = "SearchIcon";
+
 export { SearchIcon };
 
 const SettingsIcon = createIcon({
@@ -1355,6 +1379,7 @@ const SettingsIcon = createIcon({
 });
 
 SettingsIcon.displayName = "SettingsIcon";
+
 export { SettingsIcon };
 
 const ShareIcon = createIcon({
@@ -1397,6 +1422,7 @@ const ShareIcon = createIcon({
 });
 
 ShareIcon.displayName = "ShareIcon";
+
 export { ShareIcon };
 
 const SlashIcon = createIcon({
@@ -1421,6 +1447,7 @@ const SlashIcon = createIcon({
 });
 
 SlashIcon.displayName = "SlashIcon";
+
 export { SlashIcon };
 
 const StarIcon = createIcon({
@@ -1439,6 +1466,7 @@ const StarIcon = createIcon({
 });
 
 StarIcon.displayName = "StarIcon";
+
 export { StarIcon };
 
 const SunIcon = createIcon({
@@ -1505,6 +1533,7 @@ const SunIcon = createIcon({
 });
 
 SunIcon.displayName = "SunIcon";
+
 export { SunIcon };
 
 const ThreeDotsIcon = createIcon({
@@ -1535,6 +1564,7 @@ const ThreeDotsIcon = createIcon({
 });
 
 ThreeDotsIcon.displayName = "ThreeDotsIcon";
+
 export { ThreeDotsIcon };
 
 const TrashIcon = createIcon({
@@ -1565,6 +1595,7 @@ const TrashIcon = createIcon({
 });
 
 TrashIcon.displayName = "TrashIcon";
+
 export { TrashIcon };
 
 const UnlockIcon = createIcon({
@@ -1589,4 +1620,5 @@ const UnlockIcon = createIcon({
 });
 
 UnlockIcon.displayName = "UnlockIcon";
+
 export { UnlockIcon };

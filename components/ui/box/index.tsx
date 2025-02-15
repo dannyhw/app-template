@@ -16,4 +16,5 @@ const Box = React.forwardRef<React.ElementRef<typeof View>, IBoxProps>(
 );
 
 Box.displayName = "Box";
+
 export { Box };

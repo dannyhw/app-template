@@ -35,7 +35,9 @@ const MappedHeading = memo(
     ) => {
       switch (size) {
         case "5xl":
+
         case "4xl":
+
         case "3xl":
           return (
             <H1
@@ -55,6 +57,7 @@ const MappedHeading = memo(
               ref={ref}
             />
           );
+
         case "2xl":
           return (
             <H2
@@ -74,6 +77,7 @@ const MappedHeading = memo(
               ref={ref}
             />
           );
+
         case "xl":
           return (
             <H3
@@ -93,6 +97,7 @@ const MappedHeading = memo(
               ref={ref}
             />
           );
+
         case "lg":
           return (
             <H4
@@ -112,6 +117,7 @@ const MappedHeading = memo(
               ref={ref}
             />
           );
+
         case "md":
           return (
             <H5
@@ -131,7 +137,9 @@ const MappedHeading = memo(
               ref={ref}
             />
           );
+
         case "sm":
+
         case "xs":
           return (
             <H6
@@ -151,6 +159,7 @@ const MappedHeading = memo(
               ref={ref}
             />
           );
+
         default:
           return (
             <H4

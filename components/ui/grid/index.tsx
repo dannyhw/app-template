@@ -69,9 +69,11 @@ function generateResponsiveNumColumns({ gridClass }: { gridClass: string }) {
 
   numColumns.forEach((classname) => {
     const match = classname.match(regex);
+
     if (match) {
       const prefix = match[1] || "default";
       const value = parseInt(match[2], 10);
+
       result[prefix] = value;
     }
   });
@@ -97,9 +99,11 @@ function generateResponsiveColSpans({
 
   colSpan.forEach((classname: any) => {
     const match = classname.match(regex);
+
     if (match) {
       const prefix = match[1] || "default";
       const value = parseInt(match[2], 10);
+
       result[prefix] = value;
     }
   });

@@ -23,6 +23,7 @@ const Grid = React.forwardRef<HTMLDivElement, IGridProps>(
   ({ className, _extra, ...props }, ref) => {
     const gridClass = _extra?.className;
     const finalGridClass = gridClass ?? "";
+
     return (
       <div
         ref={ref}
@@ -42,11 +43,13 @@ type IGridItemProps = React.ComponentPropsWithoutRef<"div"> &
       className: string;
     };
   };
+
 const GridItem = React.forwardRef<HTMLDivElement, IGridItemProps>(
   ({ className, _extra, ...props }, ref) => {
     const gridItemClass = _extra?.className;
 
     const finalGridItemClass = gridItemClass ?? "";
+
     return (
       <div
         ref={ref}

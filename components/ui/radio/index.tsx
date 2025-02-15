@@ -1,4 +1,5 @@
 "use client";
+
 import React from "react";
 import { createRadio } from "@gluestack-ui/radio";
 import { Pressable, View, Platform, Text } from "react-native";
@@ -97,6 +98,7 @@ const radioLabelStyle = tva({
 
 type IRadioProps = Omit<React.ComponentProps<typeof UIRadio>, "context"> &
   VariantProps<typeof radioStyle>;
+
 const Radio = React.forwardRef<React.ElementRef<typeof UIRadio>, IRadioProps>(
   ({ className, size = "md", ...props }, ref) => {
     return (
@@ -112,6 +114,7 @@ const Radio = React.forwardRef<React.ElementRef<typeof UIRadio>, IRadioProps>(
 
 type IRadioGroupProps = React.ComponentProps<typeof UIRadio.Group> &
   VariantProps<typeof radioGroupStyle>;
+
 const RadioGroup = React.forwardRef<
   React.ElementRef<typeof UIRadio.Group>,
   IRadioGroupProps
@@ -127,11 +130,13 @@ const RadioGroup = React.forwardRef<
 
 type IRadioIndicatorProps = React.ComponentProps<typeof UIRadio.Indicator> &
   VariantProps<typeof radioIndicatorStyle>;
+
 const RadioIndicator = React.forwardRef<
   React.ElementRef<typeof UIRadio.Indicator>,
   IRadioIndicatorProps
 >(({ className, ...props }, ref) => {
   const { size } = useStyleContext(SCOPE);
+
   return (
     <UIRadio.Indicator
       className={radioIndicatorStyle({
@@ -146,11 +151,13 @@ const RadioIndicator = React.forwardRef<
 
 type IRadioLabelProps = React.ComponentProps<typeof UIRadio.Label> &
   VariantProps<typeof radioIndicatorStyle>;
+
 const RadioLabel = React.forwardRef<
   React.ElementRef<typeof UIRadio.Label>,
   IRadioLabelProps
 >(({ className, ...props }, ref) => {
   const { size } = useStyleContext(SCOPE);
+
   return (
     <UIRadio.Label
       className={radioLabelStyle({
@@ -168,6 +175,7 @@ type IRadioIconProps = React.ComponentProps<typeof UIRadio.Icon> &
     height?: number;
     width?: number;
   };
+
 const RadioIcon = React.forwardRef<
   React.ElementRef<typeof UIRadio.Icon>,
   IRadioIconProps

@@ -179,6 +179,7 @@ const SelectInput = React.forwardRef<
   ISelectInputProps
 >(({ className, ...props }, ref) => {
   const { size: parentSize, variant: parentVariant } = useStyleContext();
+
   return (
     <UISelect.Input
       className={selectInputStyle({
@@ -202,6 +203,7 @@ const SelectIcon = React.forwardRef<
   ISelectIcon
 >(({ className, size, ...props }, ref) => {
   const { size: parentSize } = useStyleContext();
+
   if (typeof size === "number") {
     return (
       <UISelect.Icon
@@ -224,6 +226,7 @@ const SelectIcon = React.forwardRef<
       />
     );
   }
+
   return (
     <UISelect.Icon
       className={selectIconStyle({

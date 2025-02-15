@@ -1,4 +1,5 @@
 "use client";
+
 import React from "react";
 import { createProgress } from "@gluestack-ui/progress";
 import { View } from "react-native";
@@ -11,6 +12,7 @@ import { cssInterop } from "nativewind";
 import type { VariantProps } from "@gluestack-ui/nativewind-utils";
 
 const SCOPE = "PROGRESS";
+
 export const UIProgress = createProgress({
   Root: withStyleContext(View, SCOPE),
   FilledTrack: View,
@@ -123,6 +125,7 @@ const progressFilledTrackStyle = tva({
 
 type IProgressProps = VariantProps<typeof progressStyle> &
   React.ComponentProps<typeof UIProgress>;
+
 type IProgressFilledTrackProps = VariantProps<typeof progressFilledTrackStyle> &
   React.ComponentProps<typeof UIProgress.FilledTrack>;
 

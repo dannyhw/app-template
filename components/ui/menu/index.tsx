@@ -1,4 +1,5 @@
 "use client";
+
 import React from "react";
 import { createMenu } from "@gluestack-ui/menu";
 import { tva } from "@gluestack-ui/nativewind-utils/tva";
@@ -132,6 +133,7 @@ cssInterop(Motion.View, { className: "style" });
 
 type IMenuProps = React.ComponentProps<typeof UIMenu> &
   VariantProps<typeof menuStyle> & { className?: string };
+
 type IMenuItemLabelProps = React.ComponentProps<typeof UIMenu.ItemLabel> &
   VariantProps<typeof menuItemLabelStyle> & { className?: string };
 
@@ -212,4 +214,5 @@ Menu.displayName = "Menu";
 MenuItem.displayName = "MenuItem";
 MenuItemLabel.displayName = "MenuItemLabel";
 MenuSeparator.displayName = "MenuSeparator";
+
 export { Menu, MenuItem, MenuItemLabel, MenuSeparator };

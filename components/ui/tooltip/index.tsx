@@ -1,4 +1,5 @@
 "use client";
+
 import React from "react";
 import { createTooltip } from "@gluestack-ui/tooltip";
 import { View, Text } from "react-native";
@@ -7,6 +8,7 @@ import { tva } from "@gluestack-ui/nativewind-utils/tva";
 import { withStyleContext } from "@gluestack-ui/nativewind-utils/withStyleContext";
 import { Motion, AnimatePresence } from "@legendapp/motion";
 import { cssInterop } from "nativewind";
+
 export const UITooltip = createTooltip({
   Root: withStyleContext(View),
   Content: Motion.View,
@@ -69,8 +71,10 @@ const tooltipTextStyle = tva({
 
 type ITooltipProps = React.ComponentProps<typeof UITooltip> &
   VariantProps<typeof tooltipStyle> & { className?: string };
+
 type ITooltipContentProps = React.ComponentProps<typeof UITooltip.Content> &
   VariantProps<typeof tooltipContentStyle> & { className?: string };
+
 type ITooltipTextProps = React.ComponentProps<typeof UITooltip.Text> &
   VariantProps<typeof tooltipTextStyle> & { className?: string };
 

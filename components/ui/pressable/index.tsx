@@ -1,4 +1,5 @@
 "use client";
+
 import React from "react";
 import { createPressable } from "@gluestack-ui/pressable";
 import { Pressable as RNPressable } from "react-native";
@@ -20,6 +21,7 @@ type IPressableProps = Omit<
   "context"
 > &
   VariantProps<typeof pressableStyle>;
+
 const Pressable = React.forwardRef<
   React.ElementRef<typeof UIPressable>,
   IPressableProps
@@ -36,4 +38,5 @@ const Pressable = React.forwardRef<
 });
 
 Pressable.displayName = "Pressable";
+
 export { Pressable };

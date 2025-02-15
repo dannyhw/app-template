@@ -1,4 +1,5 @@
 "use client";
+
 import React from "react";
 import { Switch as RNSwitch } from "react-native";
 import { createSwitch } from "@gluestack-ui/switch";
@@ -24,6 +25,7 @@ const switchStyle = tva({
 
 type ISwitchProps = React.ComponentProps<typeof UISwitch> &
   VariantProps<typeof switchStyle>;
+
 const Switch = React.forwardRef<
   React.ElementRef<typeof UISwitch>,
   ISwitchProps
@@ -38,4 +40,5 @@ const Switch = React.forwardRef<
 });
 
 Switch.displayName = "Switch";
+
 export { Switch };

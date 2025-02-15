@@ -1,4 +1,5 @@
 "use client";
+
 import React from "react";
 import { H4 } from "@expo/html-elements";
 import { createActionsheet } from "@gluestack-ui/actionsheet";
@@ -558,6 +559,7 @@ const ActionsheetIcon = React.forwardRef<
       />
     );
   }
+
   return (
     <UIActionsheet.Icon
       className={actionsheetIconStyle({

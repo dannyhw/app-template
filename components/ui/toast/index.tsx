@@ -1,4 +1,5 @@
 "use client";
+
 import React from "react";
 import { createToastHook } from "@gluestack-ui/toast";
 import { AccessibilityInfo, Text, View } from "react-native";
@@ -143,6 +144,7 @@ const toastDescriptionStyle = tva({
 });
 
 const Root = withStyleContext(View, SCOPE);
+
 type IToastProps = React.ComponentProps<typeof Root> & {
   className?: string;
 } & VariantProps<typeof toastStyle>;
@@ -172,6 +174,7 @@ const ToastTitle = React.forwardRef<
 >(({ className, size = "md", children, ...props }, ref) => {
   const { variant: parentVariant, action: parentAction } =
     useStyleContext(SCOPE);
+
   React.useEffect(() => {
     // Issue from react-native side
     // Hack for now, will fix this later
@@ -210,6 +213,7 @@ const ToastDescription = React.forwardRef<
   IToastDescriptionProps
 >(({ className, size = "md", ...props }, ref) => {
   const { variant: parentVariant } = useStyleContext(SCOPE);
+
   return (
     <Text
       ref={ref}

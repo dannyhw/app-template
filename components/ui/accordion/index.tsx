@@ -1,4 +1,5 @@
 "use client";
+
 import React from "react";
 import { createAccordion } from "@gluestack-ui/accordion";
 import { View, Pressable, Text, Platform, TextProps } from "react-native";
@@ -180,6 +181,7 @@ const AccordionItem = React.forwardRef<
   IAccordionItemProps
 >(({ className, ...props }, ref) => {
   const { variant } = useStyleContext(SCOPE);
+
   return (
     <UIAccordion.Item
       ref={ref}
@@ -212,6 +214,7 @@ const AccordionContentText = React.forwardRef<
   IAccordionContentTextProps
 >(({ className, ...props }, ref) => {
   const { size } = useStyleContext(SCOPE);
+
   return (
     <UIAccordion.ContentText
       ref={ref}
@@ -251,6 +254,7 @@ const AccordionIcon = React.forwardRef<
       />
     );
   }
+
   return (
     <UIAccordion.Icon
       ref={ref}
@@ -298,6 +302,7 @@ const AccordionTitleText = React.forwardRef<
   IAccordionTitleTextProps
 >(({ className, ...props }, ref) => {
   const { size } = useStyleContext(SCOPE);
+
   return (
     <UIAccordion.TitleText
       ref={ref}

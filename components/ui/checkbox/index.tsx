@@ -1,4 +1,5 @@
 "use client";
+
 import React from "react";
 import { createCheckbox } from "@gluestack-ui/checkbox";
 import { View, Pressable, Text, Platform } from "react-native";
@@ -162,11 +163,13 @@ type ICheckboxLabelProps = React.ComponentPropsWithoutRef<
   typeof UICheckbox.Label
 > &
   VariantProps<typeof checkboxLabelStyle>;
+
 const CheckboxLabel = React.forwardRef<
   React.ElementRef<typeof UICheckbox.Label>,
   ICheckboxLabelProps
 >(({ className, ...props }, ref) => {
   const { size: parentSize } = useStyleContext(SCOPE);
+
   return (
     <UICheckbox.Label
       className={checkboxLabelStyle({

@@ -1,4 +1,5 @@
 "use client";
+
 import { Text, View } from "react-native";
 import React from "react";
 import { createFormControl } from "@gluestack-ui/form-control";
@@ -301,6 +302,7 @@ const FormControlErrorText = React.forwardRef<
   IFormControlErrorTextProps
 >(({ className, size, ...props }, ref) => {
   const { size: parentSize } = useStyleContext(SCOPE);
+
   return (
     <UIFormControl.Error.Text
       className={formControlErrorTextStyle({
@@ -349,6 +351,7 @@ const FormControlErrorIcon = React.forwardRef<
       />
     );
   }
+
   return (
     <UIFormControl.Error.Icon
       className={formControlErrorIconStyle({

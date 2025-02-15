@@ -10,7 +10,7 @@ module.exports = {
       { blankLine: "any", prev: "expression", next: "expression" },
       { blankLine: "any", prev: "const", next: "const" },
       { blankLine: "any", prev: "let", next: "let" },
-      { blankLine: "any", prev: "var", next: "var" }
-    ]
-  }
+      { blankLine: "any", prev: "var", next: "var" },
+    ],
+  },
 };
