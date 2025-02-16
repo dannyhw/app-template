@@ -15,7 +15,7 @@ import { PrimitiveIcon, UIIcon } from "@gluestack-ui/icon";
 const SCOPE = "ALERT";
 
 const alertStyle = tva({
-  base: "items-center py-3 px-4 rounded-md flex-row gap-2 border-outline-100",
+  base: "flex-row items-center gap-2 rounded-md border-outline-100 px-4 py-3",
 
   variants: {
     action: {
@@ -34,7 +34,7 @@ const alertStyle = tva({
 });
 
 const alertTextStyle = tva({
-  base: "font-normal font-body",
+  base: "font-body font-normal",
 
   variants: {
     isTruncated: {

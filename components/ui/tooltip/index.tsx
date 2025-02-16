@@ -19,15 +19,15 @@ export const UITooltip = createTooltip({
 cssInterop(Motion.View, { className: "style" });
 
 const tooltipStyle = tva({
-  base: "w-full h-full web:pointer-events-none",
+  base: "h-full w-full web:pointer-events-none",
 });
 
 const tooltipContentStyle = tva({
-  base: "py-1 px-3 rounded-sm bg-background-900 web:pointer-events-auto",
+  base: "rounded-sm bg-background-900 px-3 py-1 web:pointer-events-auto",
 });
 
 const tooltipTextStyle = tva({
-  base: "font-normal tracking-normal web:select-none text-xs text-typography-50",
+  base: "text-xs font-normal tracking-normal text-typography-50 web:select-none",
 
   variants: {
     isTruncated: {

@@ -1,1 +1,2 @@
 1. always use bun as the package manager and to run scripts from package json
+2. whenever possible use gluestack components from `@/components/ui` instead of react native components directly, for example the text components

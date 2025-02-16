@@ -9,7 +9,7 @@ const dividerStyle = tva({
   base: "bg-background-200",
   variants: {
     orientation: {
-      vertical: "w-px h-full",
+      vertical: "h-full w-px",
       horizontal: "h-px w-full",
     },
   },

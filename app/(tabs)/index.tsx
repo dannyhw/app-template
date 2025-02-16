@@ -11,7 +11,7 @@ import { ScrollView } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 // for some reason relative fetch isn't working on dev even though it should
-const fetchPath = __DEV__ ? "http://localhost:8081" : "";
+const fetchPath = __DEV__ ? "http://localhost:8081/api" : "/api";
 
 function useFetchHello() {
   const toast = useToast();
@@ -48,7 +48,9 @@ export default function HomeScreen() {
 
   const fetchHello = useFetchHello();
 
-  logjam("hello");
+  useLogjam("hello");
+
+  useLogjam({ example: "hello" });
 
   return (
     <ScrollView style={{ padding: insets.top }}>

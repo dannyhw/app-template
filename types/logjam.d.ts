@@ -17,13 +17,13 @@ export type LoggableRecord = Record<string, LoggableValue>;
 /**
  * Function signature for the logjam logger
  */
-export interface LogjamFunction {
-  (message: string): void;
-  (vars: LoggableRecord): void;
-}
+export type LogjamFunction = (vars: string | LoggableRecord) => void;
+
+export type UseLogger = (vars: string | LoggableRecord) => void;
 
 declare global {
   var logjam: LogjamFunction;
+  var useLogjam: UseLogger;
 }
 
 export {};
