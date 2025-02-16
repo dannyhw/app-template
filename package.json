@@ -10,16 +10,16 @@
     "test": "bun jest --watchAll",
     "lint": "bun eslint . --cache --max-warnings 0 && bun prettier --check \"**/*.{js,jsx,ts,tsx,json,md,css,scss}\"",
     "format": "bun prettier --write \"**/*.{js,jsx,ts,tsx,json,md,css,scss}\" && bun eslint . --fix --cache",
-    "check": "bun tsc --noEmit --skipLibCheck",
+    "check": "tsc --noEmit --skipLibCheck",
     "validate": "bun run format && bun run lint",
     "validate:strict": "bun run validate && bun run check",
     "index-images": "bun ./util/indexImages.ts",
     "dump-modules": "rm -rf node_modules android ios dist web-build",
     "reboot-emulator": "adb -e reboot",
     "reset-simulator": "xcrun simctl erase all && sudo xcode-select --reset && watchman watch-del-all",
-    "expo-doctor": "bun x expo-doctor",
-    "fingerprint": "bun x @expo/fingerprint . > fingerprint.json",
-    "regenerate-nativewind-styles": "bun x tailwindcss -i ./global.css -o ./node_modules/.cache/nativewind/global.css"
+    "expo-doctor": "bunx expo-doctor",
+    "expo-fingerprint": "bunx @expo/fingerprint . > fingerprint.json",
+    "regenerate-nativewind-styles": "bunx tailwindcss -i ./global.css -o ./node_modules/.cache/nativewind/global.css"
   },
   "jest": {
     "preset": "jest-expo",
