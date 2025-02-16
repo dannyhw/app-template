@@ -17,10 +17,10 @@
     "dump-modules": "rm -rf node_modules android ios dist web-build",
     "reboot-emulator": "adb -e reboot",
     "reset-simulator": "xcrun simctl erase all && sudo xcode-select --reset && watchman watch-del-all",
-    "expo-doctor": "bunx expo-doctor",
-    "expo-fingerprint": "bunx @expo/fingerprint . > fingerprint.json",
-    "regenerate-nativewind-styles": "bunx tailwindcss -i ./global.css -o ./node_modules/.cache/nativewind/global.css",
-    "fix-versions": "bunx expo@latest install --fix"
+    "expo-doctor": "bun x expo-doctor",
+    "expo-fingerprint": "bun x @expo/fingerprint . > fingerprint.json",
+    "regenerate-nativewind-styles": "bun x tailwindcss -i ./global.css -o ./node_modules/.cache/nativewind/global.css",
+    "fix-versions": "bun x expo@latest install --fix"
   },
   "jest": {
     "preset": "jest-expo",
