@@ -1,3 +1,4 @@
+import "react-native-url-polyfill/auto";
 import { supabase } from "@/auth/supabase";
 import { GluestackUIProvider } from "@/components/ui/gluestack-ui-provider";
 import "@/global.css";
@@ -22,6 +23,8 @@ SplashScreen.preventAutoHideAsync();
 export default function RootLayout() {
   const [session, setSession] = useState<Session | null>(null);
 
+  useLogjam({ user: session?.user.email });
+
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
@@ -31,8 +34,6 @@ export default function RootLayout() {
       setSession(session);
     });
   }, []);
-
-  useLogjam(session?.user?.id ?? "");
 
   const colorScheme = useColorScheme();
 

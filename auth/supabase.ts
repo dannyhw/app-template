@@ -1,7 +1,7 @@
+import "react-native-url-polyfill/auto";
 import { AppState } from "react-native";
-// import "react-native-url-polyfill/auto";
 import { createClient } from "@supabase/supabase-js";
-import { storage } from "@/util/localStorage";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 if (!process.env.EXPO_PUBLIC_SUPABASE_URL) {
   throw new Error("EXPO_PUBLIC_SUPABASE_URL is not set");
@@ -17,13 +17,7 @@ const supabaseAnonKey = process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY;
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
   auth: {
-    storage: {
-      getItem: (key: string) => {
-        return storage.getString(key) ?? "";
-      },
-      setItem: storage.set,
-      removeItem: storage.delete,
-    },
+    storage: AsyncStorage,
     autoRefreshToken: true,
     persistSession: true,
     detectSessionInUrl: false,

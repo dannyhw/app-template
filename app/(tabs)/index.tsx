@@ -56,10 +56,6 @@ export default function HomeScreen() {
 
   const fetchHello = useFetchHello();
 
-  useLogjam("hello");
-
-  useLogjam({ example: "hello" });
-
   const [email, setEmail] = useState("");
 
   const [password, setPassword] = useState("");
@@ -80,13 +76,28 @@ export default function HomeScreen() {
       toast.show({
         placement: "bottom",
         duration: 3000,
-        id: "hello-toast",
+        id: "login-error-toast",
         render() {
           return (
             <Toast action="muted" variant="solid" className="min-w-40">
               <ToastTitle>error</ToastTitle>
 
               <ToastDescription>{error.message}</ToastDescription>
+            </Toast>
+          );
+        },
+      });
+    } else {
+      toast.show({
+        placement: "bottom",
+        duration: 3000,
+        id: "loggedin-toast",
+        render() {
+          return (
+            <Toast action="muted" variant="solid" className="min-w-40">
+              <ToastTitle>logged in</ToastTitle>
+
+              <ToastDescription>you loggedin</ToastDescription>
             </Toast>
           );
         },
@@ -99,44 +110,62 @@ export default function HomeScreen() {
   async function signUpWithEmail() {
     setLoading(true);
 
-    const {
-      data: { session },
-      error,
-    } = await supabase.auth.signUp({
-      email: email,
-      password: password,
-    });
+    try {
+      const { data, error } = await supabase.auth.signUp({
+        email: email,
+        password: password,
+      });
 
-    if (error) {
+      logjam(data);
+
+      if (error) {
+        toast.show({
+          placement: "bottom",
+          duration: 3000,
+          id: "signup-error-toast1",
+          render() {
+            return (
+              <Toast action="muted" variant="solid" className="min-w-40">
+                <ToastTitle>error</ToastTitle>
+
+                <ToastDescription>{error.message}</ToastDescription>
+              </Toast>
+            );
+          },
+        });
+      }
+
+      if (!data.session) {
+        logjam(data);
+
+        toast.show({
+          placement: "bottom",
+          duration: 3000,
+          id: "signup-error-toast2",
+          render() {
+            return (
+              <Toast action="muted" variant="solid" className="min-w-40">
+                <ToastTitle>No session</ToastTitle>
+
+                <ToastDescription>
+                  Please check your inbox for email verification!
+                </ToastDescription>
+              </Toast>
+            );
+          },
+        });
+      }
+    } catch (error: any) {
       toast.show({
         placement: "bottom",
         duration: 3000,
-        id: "hello-toast",
+        id: "signup-error-toast3",
         render() {
           return (
             <Toast action="muted" variant="solid" className="min-w-40">
               <ToastTitle>error</ToastTitle>
 
               <ToastDescription>{error.message}</ToastDescription>
-            </Toast>
-          );
-        },
-      });
-    }
-
-    if (!session) {
-      toast.show({
-        placement: "bottom",
-        duration: 3000,
-        id: "hello-toast",
-        render() {
-          return (
-            <Toast action="muted" variant="solid" className="min-w-40">
-              <ToastTitle>No session</ToastTitle>
-
-              <ToastDescription>
-                Please check your inbox for email verification!
-              </ToastDescription>
             </Toast>
           );
         },
@@ -158,7 +187,14 @@ export default function HomeScreen() {
         <Text className="text-typography-500">Email</Text>
 
         <Input>
-          <InputField value={email} type="text" onChangeText={setEmail} />
+          <InputField
+            autoComplete="email"
+            autoCapitalize={"none"}
+            autoCorrect={false}
+            value={email}
+            type="text"
+            onChangeText={setEmail}
+          />
         </Input>
       </VStack>
 
@@ -170,6 +206,9 @@ export default function HomeScreen() {
             type={showPassword ? "text" : "password"}
             value={password}
             onChangeText={setPassword}
+            autoComplete="password"
+            autoCapitalize={"none"}
+            autoCorrect={false}
           />
 
           <InputSlot
