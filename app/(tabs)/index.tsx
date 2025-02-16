@@ -116,7 +116,7 @@ export default function HomeScreen() {
         password: password,
       });
 
-      logjam(data);
+      log(data);
 
       if (error) {
         toast.show({
@@ -136,7 +136,7 @@ export default function HomeScreen() {
       }
 
       if (!data.session) {
-        logjam(data);
+        log(data);
 
         toast.show({
           placement: "bottom",
