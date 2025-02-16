@@ -123,5 +123,12 @@
     "typescript": "^5.3.3",
     "supabase": "^2.12.1"
   },
+  "expo": {
+    "doctor": {
+      "reactNativeDirectoryCheck": {
+        "listUnknownPackages": false
+      }
+    }
+  },
   "private": true
 }
