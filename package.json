@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "scripts": {
     "start": "expo start --dev-client",
+    "prebuild": "expo prebuild",
     "android": "DARK_MODE=media expo run:android",
     "ios": "DARK_MODE=media expo run:ios",
     "web": "DARK_MODE=media expo start --web",
@@ -23,9 +24,9 @@
     "expo-fingerprint": "bun x @expo/fingerprint . > fingerprint.json",
     "regenerate-nativewind-styles": "bun x tailwindcss -i ./global.css -o ./node_modules/.cache/nativewind/global.css",
     "fix-versions": "bun x expo@latest install --fix",
-    "db:generate": "bunx drizzle-kit generate --config=./database/drizzle.config.ts",
-    "db:drop-migration": "bunx drizzle-kit drop --config=./database/drizzle.config.ts",
-    "db:studio": "bunx drizzle-kit studio --config=./database/drizzle.config.ts"
+    "db:update-schema": "bunx drizzle-kit pull --config=./database/drizzle.config.ts",
+    "db:start": "supabase start",
+    "db:stop": "supabase stop"
   },
   "jest": {
     "preset": "jest-expo",
@@ -68,6 +69,8 @@
     "@legendapp/motion": "^2.4.0",
     "@react-navigation/bottom-tabs": "^7.2.0",
     "@react-navigation/native": "^7.0.14",
+    "@rneui/themed": "^4.0.0-rc.8",
+    "@supabase/supabase-js": "^2.48.1",
     "babel-plugin-module-resolver": "^5.0.2",
     "drizzle-orm": "^0.39.3",
     "expo": "~52.0.35",
@@ -89,10 +92,12 @@
     "react-native": "0.76.7",
     "react-native-css-interop": "^0.1.22",
     "react-native-gesture-handler": "~2.20.2",
+    "react-native-mmkv": "^3.2.0",
     "react-native-reanimated": "^3.16.7",
     "react-native-safe-area-context": "4.12.0",
     "react-native-screens": "~4.4.0",
     "react-native-svg": "15.8.0",
+    "react-native-url-polyfill": "^2.0.0",
     "react-native-web": "~0.19.13",
     "react-native-webview": "13.12.5",
     "tailwindcss": "3.4.17"
@@ -114,7 +119,8 @@
     "prettier": "^3.5.1",
     "prettier-plugin-tailwindcss": "^0.6.11",
     "react-test-renderer": "18.3.1",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "supabase": "^2.12.1"
   },
   "private": true
 }
