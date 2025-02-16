@@ -48,9 +48,10 @@ export default function HomeScreen() {
 
   const fetchHello = useFetchHello();
 
-  useLogjam("hello");
+  useLog("hello");
 
-  useLogjam({ example: "hello" });
+  // Example with object
+  useLog({ example: "hello" });
 
   return (
     <ScrollView style={{ padding: insets.top }}>
