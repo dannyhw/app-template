@@ -22,7 +22,10 @@
     "expo-doctor": "bun x expo-doctor",
     "expo-fingerprint": "bun x @expo/fingerprint . > fingerprint.json",
     "regenerate-nativewind-styles": "bun x tailwindcss -i ./global.css -o ./node_modules/.cache/nativewind/global.css",
-    "fix-versions": "bun x expo@latest install --fix"
+    "fix-versions": "bun x expo@latest install --fix",
+    "db:generate": "bunx drizzle-kit generate --config=./database/drizzle.config.ts",
+    "db:drop-migration": "bunx drizzle-kit drop --config=./database/drizzle.config.ts",
+    "db:studio": "bunx drizzle-kit studio --config=./database/drizzle.config.ts"
   },
   "jest": {
     "preset": "jest-expo",
@@ -66,6 +69,7 @@
     "@react-navigation/bottom-tabs": "^7.2.0",
     "@react-navigation/native": "^7.0.14",
     "babel-plugin-module-resolver": "^5.0.2",
+    "drizzle-orm": "^0.39.3",
     "expo": "~52.0.35",
     "expo-blur": "~14.0.3",
     "expo-constants": "~17.0.6",
@@ -79,6 +83,7 @@
     "expo-system-ui": "~4.0.8",
     "expo-web-browser": "~14.0.2",
     "nativewind": "^4.1.23",
+    "postgres": "^3.4.5",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "react-native": "0.76.7",
@@ -98,6 +103,7 @@
     "@types/jest": "^29.5.12",
     "@types/react": "~18.3.12",
     "@types/react-test-renderer": "^18.3.0",
+    "drizzle-kit": "^0.30.4",
     "eslint": "^8.57.0",
     "eslint-config-expo": "~8.0.1",
     "eslint-plugin-react": "^7.37.4",
