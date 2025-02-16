@@ -1,10 +1,4 @@
-import { useEffect } from "react";
-import type {
-  LoggableRecord,
-  LoggableValue,
-  UseLogger,
-  LogjamFunction,
-} from "../types/logjam";
+import type { Log, LoggableRecord, LoggableValue } from "../types/log";
 
 const logWithDivider = (key: string, value: LoggableValue) => {
   console.log("..................................");
@@ -16,7 +10,7 @@ const logWithDivider = (key: string, value: LoggableValue) => {
   }
 };
 
-export const logger: LogjamFunction = (vars: string | LoggableRecord) => {
+export const log: Log = (vars: string | LoggableRecord) => {
   if (typeof vars === "string") {
     console.log("..................................");
 
@@ -30,24 +24,15 @@ export const logger: LogjamFunction = (vars: string | LoggableRecord) => {
   console.log("..................................");
 };
 
-export const useLogger: UseLogger = (vars: string | LoggableRecord) => {
-  useEffect(() => {
-    logger(vars);
-  }, [vars]);
-};
-
-// Augment globalThis type to include our logjam function
+// Augment globalThis type to include our log function
 declare global {
   interface GlobalThis {
-    logjam: LogjamFunction;
-    useLogjam: UseLogger;
+    log: Log;
   }
 }
 
 // Ensure we're in a JS environment with globalThis
 if (typeof globalThis !== "undefined") {
-  // Define the global logjam function
-  globalThis.logjam = logger;
-
-  globalThis.useLogjam = useLogger;
+  // Define the global log function
+  globalThis.log = log;
 }
