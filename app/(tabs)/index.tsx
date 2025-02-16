@@ -209,6 +209,7 @@ export default function HomeScreen() {
             autoComplete="password"
             autoCapitalize={"none"}
             autoCorrect={false}
+            onSubmitEditing={() => signInWithEmail()}
           />
 
           <InputSlot
