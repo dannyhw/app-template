@@ -48,6 +48,8 @@ export default function HomeScreen() {
 
   const fetchHello = useFetchHello();
 
+  logjam("hello");
+
   return (
     <ScrollView style={{ padding: insets.top }}>
       <Text className="text-blue-800">Tab1</Text>
