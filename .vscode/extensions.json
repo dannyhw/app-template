@@ -1,0 +1,10 @@
+{
+  "recommendations": [
+    "expo.vscode-expo-tools",
+    "bradlc.vscode-tailwindcss",
+    "dbaeumer.vscode-eslint",
+    "github.vscode-pull-request-github",
+    "esbenp.prettier-vscode",
+    "wayou.vscode-todo-highlight"
+  ]
+}
