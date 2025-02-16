@@ -449,13 +449,21 @@ const FormControlHelperText = React.forwardRef<
 });
 
 FormControl.displayName = "FormControl";
+
 FormControlError.displayName = "FormControlError";
+
 FormControlErrorText.displayName = "FormControlErrorText";
+
 FormControlErrorIcon.displayName = "FormControlErrorIcon";
+
 FormControlLabel.displayName = "FormControlLabel";
+
 FormControlLabelText.displayName = "FormControlLabelText";
+
 FormControlLabelAstrick.displayName = "FormControlLabelAstrick";
+
 FormControlHelper.displayName = "FormControlHelper";
+
 FormControlHelperText.displayName = "FormControlHelperText";
 
 export {

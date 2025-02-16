@@ -13,6 +13,7 @@ import {
 import type { VariantProps } from "@gluestack-ui/nativewind-utils";
 
 const useToast = createToastHook(Motion.View, AnimatePresence);
+
 const SCOPE = "TOAST";
 
 cssInterop(Motion.View, { className: "style" });

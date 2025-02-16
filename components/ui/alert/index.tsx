@@ -241,7 +241,9 @@ const AlertIcon = React.forwardRef<
 });
 
 Alert.displayName = "Alert";
+
 AlertText.displayName = "AlertText";
+
 AlertIcon.displayName = "AlertIcon";
 
 export { Alert, AlertText, AlertIcon };

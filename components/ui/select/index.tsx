@@ -114,9 +114,11 @@ const UISelect = createSelect(
 );
 
 cssInterop(UISelect, { className: "style" });
+
 cssInterop(UISelect.Input, {
   className: { target: "style", nativeStyleToProp: { textAlign: true } },
 });
+
 cssInterop(SelectTriggerWrapper, { className: "style" });
 
 cssInterop(PrimitiveIcon, {
@@ -243,21 +245,34 @@ const SelectIcon = React.forwardRef<
 });
 
 Select.displayName = "Select";
+
 SelectTrigger.displayName = "SelectTrigger";
+
 SelectInput.displayName = "SelectInput";
+
 SelectIcon.displayName = "SelectIcon";
 
 // Actionsheet Components
 const SelectPortal = UISelect.Portal;
+
 const SelectBackdrop = UISelect.Backdrop;
+
 const SelectContent = UISelect.Content;
+
 const SelectDragIndicator = UISelect.DragIndicator;
+
 const SelectDragIndicatorWrapper = UISelect.DragIndicatorWrapper;
+
 const SelectItem = UISelect.Item;
+
 const SelectScrollView = UISelect.ScrollView;
+
 const SelectVirtualizedList = UISelect.VirtualizedList;
+
 const SelectFlatList = UISelect.FlatList;
+
 const SelectSectionList = UISelect.SectionList;
+
 const SelectSectionHeaderText = UISelect.SectionHeaderText;
 
 export {

@@ -13,6 +13,7 @@ import type { VariantProps } from "@gluestack-ui/nativewind-utils";
 import { cssInterop } from "nativewind";
 
 const SCOPE = "SLIDER";
+
 const Root = withStyleContext(View, SCOPE);
 
 export const UISlider = createSlider({

@@ -17,6 +17,7 @@ import { cssInterop } from "nativewind";
 import type { VariantProps } from "@gluestack-ui/nativewind-utils";
 
 const AnimatedPressable = createMotionAnimatedComponent(Pressable);
+
 const SCOPE = "POPOVER";
 
 const UIPopover = createPopover({
@@ -32,6 +33,7 @@ const UIPopover = createPopover({
 });
 
 cssInterop(Motion.View, { className: "style" });
+
 cssInterop(AnimatedPressable, { className: "style" });
 
 const popoverStyle = tva({
@@ -310,12 +312,19 @@ const PopoverHeader = React.forwardRef<
 });
 
 Popover.displayName = "Popover";
+
 PopoverArrow.displayName = "PopoverArrow";
+
 PopoverBackdrop.displayName = "PopoverBackdrop";
+
 PopoverContent.displayName = "PopoverContent";
+
 PopoverHeader.displayName = "PopoverHeader";
+
 PopoverFooter.displayName = "PopoverFooter";
+
 PopoverBody.displayName = "PopoverBody";
+
 PopoverCloseButton.displayName = "PopoverCloseButton";
 
 export {

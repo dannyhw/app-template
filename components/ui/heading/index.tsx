@@ -10,10 +10,15 @@ type IHeadingProps = VariantProps<typeof headingStyle> &
   };
 
 cssInterop(H1, { className: "style" });
+
 cssInterop(H2, { className: "style" });
+
 cssInterop(H3, { className: "style" });
+
 cssInterop(H4, { className: "style" });
+
 cssInterop(H5, { className: "style" });
+
 cssInterop(H6, { className: "style" });
 
 const MappedHeading = memo(

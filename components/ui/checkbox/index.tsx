@@ -40,6 +40,7 @@ const IconWrapper = React.forwardRef<
 IconWrapper.displayName = "IconWrapper";
 
 const SCOPE = "CHECKBOX";
+
 const UICheckbox = createCheckbox({
   // @ts-expect-error
   Root:
@@ -233,8 +234,11 @@ const CheckboxIcon = React.forwardRef<
 });
 
 Checkbox.displayName = "Checkbox";
+
 CheckboxIndicator.displayName = "CheckboxIndicator";
+
 CheckboxLabel.displayName = "CheckboxLabel";
+
 CheckboxIcon.displayName = "CheckboxIcon";
 
 export {

@@ -33,6 +33,7 @@ const UIAccessibleAlertDialog = createAlertDialog({
 });
 
 cssInterop(Motion.View, { className: "style" });
+
 cssInterop(AnimatedPressable, { className: "style" });
 
 const alertDialogStyle = tva({
@@ -266,11 +267,17 @@ const AlertDialogBackdrop = React.forwardRef<
 });
 
 AlertDialog.displayName = "AlertDialog";
+
 AlertDialogContent.displayName = "AlertDialogContent";
+
 AlertDialogCloseButton.displayName = "AlertDialogCloseButton";
+
 AlertDialogHeader.displayName = "AlertDialogHeader";
+
 AlertDialogFooter.displayName = "AlertDialogFooter";
+
 AlertDialogBody.displayName = "AlertDialogBody";
+
 AlertDialogBackdrop.displayName = "AlertDialogBackdrop";
 
 export {

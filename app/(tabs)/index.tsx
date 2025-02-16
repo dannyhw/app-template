@@ -29,6 +29,7 @@ function useFetchHello() {
           return (
             <Toast action="muted" variant="solid" className="min-w-40">
               <ToastTitle>Hello!</ToastTitle>
+
               <ToastDescription>{data.hello}</ToastDescription>
             </Toast>
           );
@@ -46,6 +47,8 @@ export default function HomeScreen() {
   const insets = useSafeAreaInsets();
 
   const fetchHello = useFetchHello();
+
+  logjam("hello");
 
   return (
     <ScrollView style={{ padding: insets.top }}>

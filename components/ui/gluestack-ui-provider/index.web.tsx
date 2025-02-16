@@ -8,10 +8,12 @@ import { setFlushStyles } from "@gluestack-ui/nativewind-utils/flush";
 import { script } from "./script";
 
 const variableStyleTagId = "nativewind-style";
+
 const createStyle = (styleTagId: string) => {
   const style = document.createElement("style");
 
   style.id = styleTagId;
+
   style.appendChild(document.createTextNode(""));
 
   return style;
@@ -56,7 +58,9 @@ export function GluestackUIProvider({
 
       if (documentElement) {
         documentElement.classList.add(mode);
+
         documentElement.classList.remove(mode === "light" ? "dark" : "light");
+
         documentElement.style.colorScheme = mode;
       }
     }
@@ -83,6 +87,7 @@ export function GluestackUIProvider({
 
         if (!style) {
           style = createStyle(variableStyleTagId);
+
           style.innerHTML = cssVariablesWithMode;
 
           if (head) head.appendChild(style);
@@ -99,6 +104,7 @@ export function GluestackUIProvider({
           __html: `(${script.toString()})('${mode}')`,
         }}
       />
+
       <OverlayProvider>
         <ToastProvider>{props.children}</ToastProvider>
       </OverlayProvider>

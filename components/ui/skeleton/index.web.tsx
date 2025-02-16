@@ -98,6 +98,7 @@ const SkeletonText = React.forwardRef<HTMLDivElement, ISkeletonTextProps>(
 );
 
 Skeleton.displayName = "Skeleton";
+
 SkeletonText.displayName = "SkeletonText";
 
 export { Skeleton, SkeletonText };

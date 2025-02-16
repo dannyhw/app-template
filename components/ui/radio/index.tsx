@@ -220,9 +220,13 @@ const RadioIcon = React.forwardRef<
 });
 
 Radio.displayName = "Radio";
+
 RadioGroup.displayName = "RadioGroup";
+
 RadioIndicator.displayName = "RadioIndicator";
+
 RadioLabel.displayName = "RadioLabel";
+
 RadioIcon.displayName = "RadioIcon";
 
 export { Radio, RadioGroup, RadioIndicator, RadioLabel, RadioIcon };

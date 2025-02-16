@@ -19,6 +19,7 @@ export const UIProgress = createProgress({
 });
 
 cssInterop(UIProgress, { className: "style" });
+
 cssInterop(UIProgress.FilledTrack, { className: "style" });
 
 const progressStyle = tva({

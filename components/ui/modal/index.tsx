@@ -17,6 +17,7 @@ import { cssInterop } from "nativewind";
 import type { VariantProps } from "@gluestack-ui/nativewind-utils";
 
 const AnimatedPressable = createMotionAnimatedComponent(Pressable);
+
 const SCOPE = "MODAL";
 
 const UIModal = createModal({
@@ -31,6 +32,7 @@ const UIModal = createModal({
 });
 
 cssInterop(AnimatedPressable, { className: "style" });
+
 cssInterop(Motion.View, { className: "style" });
 
 const modalStyle = tva({
@@ -249,11 +251,17 @@ const ModalCloseButton = React.forwardRef<
 
 // Assign display names
 Modal.displayName = "Modal";
+
 ModalBackdrop.displayName = "ModalBackdrop";
+
 ModalContent.displayName = "ModalContent";
+
 ModalHeader.displayName = "ModalHeader";
+
 ModalBody.displayName = "ModalBody";
+
 ModalFooter.displayName = "ModalFooter";
+
 ModalCloseButton.displayName = "ModalCloseButton";
 
 export {

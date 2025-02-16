@@ -13,7 +13,9 @@ import type { VariantProps } from "@gluestack-ui/nativewind-utils";
 import { PrimitiveIcon, UIIcon } from "@gluestack-ui/icon";
 
 const SCOPE = "FAB";
+
 const Root = withStyleContext(Pressable, SCOPE);
+
 const UIFab = createFab({
   Root: Root,
   Label: Text,
@@ -220,7 +222,9 @@ const FabIcon = React.forwardRef<
 });
 
 Fab.displayName = "Fab";
+
 FabLabel.displayName = "FabLabel";
+
 FabIcon.displayName = "FabIcon";
 
 export { Fab, FabLabel, FabIcon };
