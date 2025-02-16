@@ -19,7 +19,8 @@
     "reset-simulator": "xcrun simctl erase all && sudo xcode-select --reset && watchman watch-del-all",
     "expo-doctor": "bunx expo-doctor",
     "expo-fingerprint": "bunx @expo/fingerprint . > fingerprint.json",
-    "regenerate-nativewind-styles": "bunx tailwindcss -i ./global.css -o ./node_modules/.cache/nativewind/global.css"
+    "regenerate-nativewind-styles": "bunx tailwindcss -i ./global.css -o ./node_modules/.cache/nativewind/global.css",
+    "fix-versions": "bunx expo@latest install --fix"
   },
   "jest": {
     "preset": "jest-expo",
