@@ -154,11 +154,11 @@ export default function HomeScreen() {
         <ButtonText>Fetch Hello</ButtonText>
       </Button>
 
-      <VStack space="xs">
+      <VStack space="xs" className="mt-8">
         <Text className="text-typography-500">Email</Text>
 
         <Input>
-          <InputField value={email} type="text" />
+          <InputField value={email} type="text" onChangeText={setEmail} />
         </Input>
       </VStack>
 
@@ -169,6 +169,7 @@ export default function HomeScreen() {
           <InputField
             type={showPassword ? "text" : "password"}
             value={password}
+            onChangeText={setPassword}
           />
 
           <InputSlot
