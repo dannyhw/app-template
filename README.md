@@ -54,6 +54,11 @@ This project uses a modern React Native stack with the following key technologie
 
 - [NativeWind](https://www.nativewind.dev/): Tailwind CSS for React Native, allowing you to use Tailwind classes in your mobile app.
 
+### Database and ORM
+
+- [Supabase](https://supabase.com/docs): Our database and authentication solution, providing:
+- [Drizzle ORM](https://orm.drizzle.team/docs/overview): A TypeScript ORM for SQL databases that we will use typesafe queries
+
 ### Development Tools
 
 - [Bun](https://bun.sh/): A fast all-in-one JavaScript runtime and package manager
