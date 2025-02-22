@@ -15,7 +15,7 @@ bun install
 2. Start the app
 
 ```bash
-   bun expo start
+bun run start
 ```
 
 You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
@@ -101,3 +101,83 @@ All scripts should be run using `bun` as the package manager. Here are all the a
 - `bun expo-fingerprint`: Generates a fingerprint of the project
 - `bun regenerate-nativewind-styles`: Regenerates NativeWind styles from Tailwind CSS
 - `bun fix-versions`: Updates and fixes Expo package versions
+
+## Running Supabase Locally
+
+This project uses Supabase for the database and authentication. Here's how to work with it locally:
+
+### Prerequisites
+
+- Make sure you have Docker installed and running
+- Install the Supabase CLI if you haven't already: `brew install supabase/tap/supabase`
+
+### Available Commands
+
+- `bun db:start`: Starts the local Supabase instance (includes database, auth, and other services)
+- `bun db:stop`: Stops the local Supabase instance
+- `bun db:reset`: Resets the database to a clean state and runs migrations + seed data
+- `bun db:migrate:local`: Runs any pending migrations on your local database
+- `bun db:init`: Initializes a new Supabase project (only needed when setting up the project for the first time)
+
+### Getting Started with Local Development
+
+1. Start the local Supabase instance:
+
+```bash
+bun db:start
+```
+
+2. To get the latest migrations and seed data, run:
+
+```bash
+bun db:reset
+```
+
+3. Your local Supabase instance will be running with:
+
+   - Studio Dashboard: http://localhost:54323
+   - Database URL: postgresql://postgres:postgres@localhost:54322/postgres
+   - Supabase API URL: http://localhost:54321
+   - Supabase Anonymous Key: should print to the console
+
+4. When you're done developing, stop the instance:
+
+```bash
+bun db:stop
+```
+
+### Database Changes
+
+- All database changes should be made through migrations
+- Migrations are stored in `supabase/migrations`
+- To get the latest migrations, always use `bun db:reset` (recommended) rather than `db:migrate:local`
+  - This ensures a clean state
+  - Applies all migrations in order
+  - Runs the seed file automatically
+  - Prevents potential issues with migration state
+- The seed file in `supabase/seed.sql` will automatically run after migrations when using `db:reset`
+
+## Test Data
+
+When running the local development environment, the database is seeded with test data for easy testing:
+
+### Test Users
+
+The database is seeded with 10 test users with the following credentials:
+
+- Emails: `user1@example.com` through `user10@example.com`
+- Password: `password` (same for all test users)
+
+Each test user has:
+
+- A confirmed email address
+- An associated profile with name "User X Example" (where X is their number)
+- Full authentication setup
+
+To use a test account:
+
+1. Start the local development environment with `bun db:start`
+2. Sign in with any of the test emails (e.g., `user1@example.com`) and password `password`
+3. You can also create new accounts using the sign-up form
+
+Note: The test data is reset whenever you run `bun db:reset`.
