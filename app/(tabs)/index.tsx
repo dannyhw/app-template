@@ -1,4 +1,4 @@
-import { supabase } from "@/auth/supabase";
+import { supabase } from "@/database/supabase.client";
 import { Box } from "@/components/ui/box";
 import { Button, ButtonText } from "@/components/ui/button";
 import { EyeIcon, EyeOffIcon } from "@/components/ui/icon";
@@ -23,9 +23,25 @@ function useFetchHello() {
 
   const fetchHello = useCallback(async () => {
     try {
-      const response = await fetch(`${fetchPath}/hello`);
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+
+      if (!session?.access_token) {
+        throw new Error("Not authenticated");
+      }
+
+      const response = await fetch(`${fetchPath}/hello`, {
+        headers: {
+          "x-supabase-auth": session.access_token,
+        },
+      });
 
       const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to fetch");
+      }
 
       toast.show({
         placement: "bottom",
@@ -36,13 +52,38 @@ function useFetchHello() {
             <Toast action="muted" variant="solid" className="min-w-40">
               <ToastTitle>Hello!</ToastTitle>
 
-              <ToastDescription>{data.hello}</ToastDescription>
+              <ToastDescription>
+                {data.hello}
+
+                {data.profile && (
+                  <>
+                    {`\nProfile: ${data.profile.first_name} ${data.profile.last_name}`}
+                  </>
+                )}
+              </ToastDescription>
             </Toast>
           );
         },
       });
     } catch (error) {
       console.error(error);
+
+      toast.show({
+        placement: "bottom",
+        duration: 3000,
+        id: "error-toast",
+        render() {
+          return (
+            <Toast action="error" variant="solid" className="min-w-40">
+              <ToastTitle>Error</ToastTitle>
+
+              <ToastDescription>
+                {error instanceof Error ? error.message : "An error occurred"}
+              </ToastDescription>
+            </Toast>
+          );
+        },
+      });
     }
   }, [toast]);
 
@@ -180,7 +221,61 @@ export default function HomeScreen() {
       <Text className="text-blue-800">Tab1</Text>
 
       <Button onPress={() => fetchHello()}>
-        <ButtonText>Fetch Hello</ButtonText>
+        <ButtonText>Fetch from server</ButtonText>
+      </Button>
+
+      <Button
+        className="my-4"
+        onPress={async () => {
+          try {
+            const { data, error } = await supabase
+              .from("profiles")
+              .select()
+              .maybeSingle();
+
+            if (error) {
+              throw error;
+            }
+
+            toast.show({
+              placement: "bottom",
+              duration: 3000,
+              id: "profiles-toast",
+              render() {
+                return (
+                  <Toast action="muted" variant="solid" className="min-w-40">
+                    <ToastTitle>Profiles</ToastTitle>
+
+                    <ToastDescription>{data?.first_name}</ToastDescription>
+                  </Toast>
+                );
+              },
+            });
+
+            log({ data });
+          } catch (error) {
+            toast.show({
+              placement: "bottom",
+              duration: 3000,
+              id: "profiles-error-toast",
+              render() {
+                return (
+                  <Toast action="error" variant="solid" className="min-w-40">
+                    <ToastTitle>Error</ToastTitle>
+
+                    <ToastDescription>
+                      {error instanceof Error
+                        ? error.message
+                        : "Failed to fetch profiles"}
+                    </ToastDescription>
+                  </Toast>
+                );
+              },
+            });
+          }
+        }}
+      >
+        <ButtonText>Fetch client side</ButtonText>
       </Button>
 
       <VStack space="xs" className="mt-8">
