@@ -221,18 +221,61 @@ export default function HomeScreen() {
       <Text className="text-blue-800">Tab1</Text>
 
       <Button onPress={() => fetchHello()}>
-        <ButtonText>Fetch Hello</ButtonText>
+        <ButtonText>Fetch from server</ButtonText>
       </Button>
 
       <Button
         className="my-4"
         onPress={async () => {
-          const { data } = await supabase.from("profiles").select();
+          try {
+            const { data, error } = await supabase
+              .from("profiles")
+              .select()
+              .maybeSingle();
 
-          log({ data });
+            if (error) {
+              throw error;
+            }
+
+            toast.show({
+              placement: "bottom",
+              duration: 3000,
+              id: "profiles-toast",
+              render() {
+                return (
+                  <Toast action="muted" variant="solid" className="min-w-40">
+                    <ToastTitle>Profiles</ToastTitle>
+
+                    <ToastDescription>{data?.first_name}</ToastDescription>
+                  </Toast>
+                );
+              },
+            });
+
+            log({ data });
+          } catch (error) {
+            toast.show({
+              placement: "bottom",
+              duration: 3000,
+              id: "profiles-error-toast",
+              render() {
+                return (
+                  <Toast action="error" variant="solid" className="min-w-40">
+                    <ToastTitle>Error</ToastTitle>
+
+                    <ToastDescription>
+                      {error instanceof Error
+                        ? error.message
+                        : "Failed to fetch profiles"}
+                    </ToastDescription>
+                  </Toast>
+                );
+              },
+            });
+          }
         }}
       >
-        <ButtonText>Fetch Profiles</ButtonText>
+        <ButtonText>Fetch client side</ButtonText>
       </Button>
 
       <VStack space="xs" className="mt-8">
