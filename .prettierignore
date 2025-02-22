@@ -43,3 +43,4 @@ android/
 ios/
 .env
 database/drizzle/meta/
+database/database.types.ts
