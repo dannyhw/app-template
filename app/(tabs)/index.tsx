@@ -57,9 +57,7 @@ function useFetchHello() {
 
                 {data.profile && (
                   <>
-                    {"\n"}
-
-                    {`Profile: ${data.profile.first_name} ${data.profile.last_name}`}
+                    {`\nProfile: ${data.profile.first_name} ${data.profile.last_name}`}
                   </>
                 )}
               </ToastDescription>

@@ -27,7 +27,9 @@
     "db:generate-types": "supabase gen types typescript --local > database/database.types.ts",
     "db:start": "supabase start",
     "db:stop": "supabase stop",
-    "db:init": "supabase init"
+    "db:init": "supabase init",
+    "db:migrate:local": "supabase migration up --local",
+    "db:reset": "supabase db reset"
   },
   "jest": {
     "preset": "jest-expo",
