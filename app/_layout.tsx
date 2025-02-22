@@ -1,5 +1,5 @@
 import "react-native-url-polyfill/auto";
-import { supabase } from "@/auth/supabase";
+import { supabase } from "@/database/supabase.client";
 import { GluestackUIProvider } from "@/components/ui/gluestack-ui-provider";
 import "@/global.css";
 import { useColorScheme } from "@/hooks/useColorScheme";

@@ -1,4 +1,4 @@
-import { supabase } from "@/auth/supabase";
+import { supabase } from "@/database/supabase.client";
 import { Box } from "@/components/ui/box";
 import { Button, ButtonText } from "@/components/ui/button";
 import { EyeIcon, EyeOffIcon } from "@/components/ui/icon";
@@ -23,9 +23,25 @@ function useFetchHello() {
 
   const fetchHello = useCallback(async () => {
     try {
-      const response = await fetch(`${fetchPath}/hello`);
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+
+      if (!session?.access_token) {
+        throw new Error("Not authenticated");
+      }
+
+      const response = await fetch(`${fetchPath}/hello`, {
+        headers: {
+          "x-supabase-auth": session.access_token,
+        },
+      });
 
       const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to fetch");
+      }
 
       toast.show({
         placement: "bottom",
@@ -36,13 +52,40 @@ function useFetchHello() {
             <Toast action="muted" variant="solid" className="min-w-40">
               <ToastTitle>Hello!</ToastTitle>
 
-              <ToastDescription>{data.hello}</ToastDescription>
+              <ToastDescription>
+                {data.hello}
+
+                {data.profile && (
+                  <>
+                    {"\n"}
+
+                    {`Profile: ${data.profile.first_name} ${data.profile.last_name}`}
+                  </>
+                )}
+              </ToastDescription>
             </Toast>
           );
         },
       });
     } catch (error) {
       console.error(error);
+
+      toast.show({
+        placement: "bottom",
+        duration: 3000,
+        id: "error-toast",
+        render() {
+          return (
+            <Toast action="error" variant="solid" className="min-w-40">
+              <ToastTitle>Error</ToastTitle>
+
+              <ToastDescription>
+                {error instanceof Error ? error.message : "An error occurred"}
+              </ToastDescription>
+            </Toast>
+          );
+        },
+      });
     }
   }, [toast]);
 
@@ -181,6 +224,17 @@ export default function HomeScreen() {
 
       <Button onPress={() => fetchHello()}>
         <ButtonText>Fetch Hello</ButtonText>
+      </Button>
+
+      <Button
+        className="my-4"
+        onPress={async () => {
+          const { data } = await supabase.from("profiles").select();
+
+          log({ data });
+        }}
+      >
+        <ButtonText>Fetch Profiles</ButtonText>
       </Button>
 
       <VStack space="xs" className="mt-8">
