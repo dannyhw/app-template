@@ -34,6 +34,7 @@ function useFetchHello() {
       const response = await fetch(`${fetchPath}/hello`, {
         headers: {
           "x-supabase-auth": session.access_token,
+          "x-supabase-refresh": session.refresh_token,
         },
       });
 

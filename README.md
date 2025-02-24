@@ -57,7 +57,6 @@ This project uses a modern React Native stack with the following key technologie
 ### Database and ORM
 
 - [Supabase](https://supabase.com/docs): Our database and authentication solution, providing:
-- [Drizzle ORM](https://orm.drizzle.team/docs/overview): A TypeScript ORM for SQL databases that we will use typesafe queries
 
 ### Development Tools
 
