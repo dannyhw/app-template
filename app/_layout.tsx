@@ -79,12 +79,16 @@ const HasAuth = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
 
   useEffect(() => {
+    if (segments.at(0) !== "+not-found") {
+      return;
+    }
+
     if (!session && segments.at(0) !== "public") {
       console.log("redirecting to sign-in");
 
-      return router.replace("/public/sign-in");
+      router.replace("/public/sign-in");
     } else if (session && segments.at(0) === "public") {
-      return router.replace("/authenticated");
+      router.replace("/authenticated");
     }
   }, [session, segments, router]);
 
