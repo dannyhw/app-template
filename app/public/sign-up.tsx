@@ -1,4 +1,3 @@
-import { Box } from "@/components/ui/box";
 import { Button, ButtonText } from "@/components/ui/button";
 import { EyeIcon, EyeOffIcon } from "@/components/ui/icon";
 import { Input, InputField, InputIcon, InputSlot } from "@/components/ui/input";
@@ -37,8 +36,6 @@ export default function SignInScreen() {
         password: password,
       });
 
-      log(data);
-
       if (error) {
         toast.show({
           placement: "bottom",
@@ -57,8 +54,6 @@ export default function SignInScreen() {
       }
 
       if (!data.session) {
-        log(data);
-
         toast.show({
           placement: "bottom",
           duration: 3000,
@@ -97,11 +92,14 @@ export default function SignInScreen() {
   }
 
   return (
-    <ScrollView style={{ padding: insets.top }}>
+    <ScrollView
+      style={{ padding: insets.top }}
+      contentContainerClassName="gap-4"
+    >
       <VStack space="xs" className="mt-8">
-        <Text className="text-typography-500">Email</Text>
+        <Text className="text-typography-900">Email</Text>
 
-        <Input>
+        <Input className="bg-white">
           <InputField
             autoComplete="email"
             autoCapitalize={"none"}
@@ -114,9 +112,9 @@ export default function SignInScreen() {
       </VStack>
 
       <VStack space="xs">
-        <Text className="text-typography-500">Password</Text>
+        <Text className="text-typography-900">Password</Text>
 
-        <Input className="text-center">
+        <Input className="bg-white">
           <InputField
             type={showPassword ? "text" : "password"}
             value={password}
@@ -136,11 +134,13 @@ export default function SignInScreen() {
         </Input>
       </VStack>
 
-      <Box className="py-4">
-        <Button disabled={loading} onPress={() => signUpWithEmail()}>
-          <ButtonText>Sign up</ButtonText>
-        </Button>
-      </Box>
+      <Button
+        className="mt-4"
+        disabled={loading}
+        onPress={() => signUpWithEmail()}
+      >
+        <ButtonText>Sign up</ButtonText>
+      </Button>
     </ScrollView>
   );
 }
