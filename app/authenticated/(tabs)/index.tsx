@@ -14,6 +14,8 @@ import { VStack } from "@/components/ui/vstack";
 import { useCallback, useState } from "react";
 import { ScrollView } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { sessionAtom } from "@/state/auth";
+import { useAtomValue } from "jotai";
 
 // for some reason relative fetch isn't working on dev even though it should
 const fetchPath = __DEV__ ? "http://localhost:8081/api" : "/api";
@@ -92,130 +94,13 @@ function useFetchHello() {
 }
 
 export default function HomeScreen() {
+  const session = useAtomValue(sessionAtom);
+
   const toast = useToast();
 
   const insets = useSafeAreaInsets();
 
   const fetchHello = useFetchHello();
-
-  const [email, setEmail] = useState("");
-
-  const [password, setPassword] = useState("");
-
-  const [showPassword, setShowPassword] = useState(false);
-
-  const [loading, setLoading] = useState(false);
-
-  async function signInWithEmail() {
-    setLoading(true);
-
-    const { error } = await supabase.auth.signInWithPassword({
-      email: email,
-      password: password,
-    });
-
-    if (error) {
-      toast.show({
-        placement: "bottom",
-        duration: 3000,
-        id: "login-error-toast",
-        render() {
-          return (
-            <Toast action="muted" variant="solid" className="min-w-40">
-              <ToastTitle>error</ToastTitle>
-
-              <ToastDescription>{error.message}</ToastDescription>
-            </Toast>
-          );
-        },
-      });
-    } else {
-      toast.show({
-        placement: "bottom",
-        duration: 3000,
-        id: "loggedin-toast",
-        render() {
-          return (
-            <Toast action="muted" variant="solid" className="min-w-40">
-              <ToastTitle>logged in</ToastTitle>
-
-              <ToastDescription>you loggedin</ToastDescription>
-            </Toast>
-          );
-        },
-      });
-    }
-
-    setLoading(false);
-  }
-
-  async function signUpWithEmail() {
-    setLoading(true);
-
-    try {
-      const { data, error } = await supabase.auth.signUp({
-        email: email,
-        password: password,
-      });
-
-      log(data);
-
-      if (error) {
-        toast.show({
-          placement: "bottom",
-          duration: 3000,
-          id: "signup-error-toast1",
-          render() {
-            return (
-              <Toast action="muted" variant="solid" className="min-w-40">
-                <ToastTitle>error</ToastTitle>
-
-                <ToastDescription>{error.message}</ToastDescription>
-              </Toast>
-            );
-          },
-        });
-      }
-
-      if (!data.session) {
-        log(data);
-
-        toast.show({
-          placement: "bottom",
-          duration: 3000,
-          id: "signup-error-toast2",
-          render() {
-            return (
-              <Toast action="muted" variant="solid" className="min-w-40">
-                <ToastTitle>No session</ToastTitle>
-
-                <ToastDescription>
-                  Please check your inbox for email verification!
-                </ToastDescription>
-              </Toast>
-            );
-          },
-        });
-      }
-    } catch (error: any) {
-      toast.show({
-        placement: "bottom",
-        duration: 3000,
-        id: "signup-error-toast3",
-        render() {
-          return (
-            <Toast action="muted" variant="solid" className="min-w-40">
-              <ToastTitle>error</ToastTitle>
-
-              <ToastDescription>{error.message}</ToastDescription>
-            </Toast>
-          );
-        },
-      });
-    }
-
-    setLoading(false);
-  }
 
   return (
     <ScrollView style={{ padding: insets.top }}>
@@ -279,55 +164,11 @@ export default function HomeScreen() {
         <ButtonText>Fetch client side</ButtonText>
       </Button>
 
-      <VStack space="xs" className="mt-8">
-        <Text className="text-typography-500">Email</Text>
+      <Text>authenticated with: {session?.user.email}</Text>
 
-        <Input>
-          <InputField
-            autoComplete="email"
-            autoCapitalize={"none"}
-            autoCorrect={false}
-            value={email}
-            type="text"
-            onChangeText={setEmail}
-          />
-        </Input>
-      </VStack>
-
-      <VStack space="xs">
-        <Text className="text-typography-500">Password</Text>
-
-        <Input className="text-center">
-          <InputField
-            type={showPassword ? "text" : "password"}
-            value={password}
-            onChangeText={setPassword}
-            autoComplete="password"
-            autoCapitalize={"none"}
-            autoCorrect={false}
-            onSubmitEditing={() => signInWithEmail()}
-          />
-
-          <InputSlot
-            className="pr-3"
-            onPress={() => setShowPassword((cur) => !cur)}
-          >
-            <InputIcon as={showPassword ? EyeIcon : EyeOffIcon} />
-          </InputSlot>
-        </Input>
-      </VStack>
-
-      <Box className="py-4">
-        <Button disabled={loading} onPress={() => signInWithEmail()}>
-          <ButtonText>Sign in</ButtonText>
-        </Button>
-      </Box>
-
-      <Box className="py-4">
-        <Button disabled={loading} onPress={() => signUpWithEmail()}>
-          <ButtonText>Sign up</ButtonText>
-        </Button>
-      </Box>
+      <Button onPress={() => supabase.auth.signOut()}>
+        <ButtonText>Sign out</ButtonText>
+      </Button>
     </ScrollView>
   );
 }
