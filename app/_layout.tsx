@@ -54,7 +54,7 @@ export default function RootLayout() {
   return (
     <GluestackUIProvider mode={colorScheme === "dark" ? "dark" : "light"}>
       <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-        <HasAuth>
+        <AuthHandler>
           <Stack>
             <Stack.Screen
               name="authenticated/(tabs)"
@@ -65,13 +65,13 @@ export default function RootLayout() {
           </Stack>
 
           <StatusBar style="auto" />
-        </HasAuth>
+        </AuthHandler>
       </ThemeProvider>
     </GluestackUIProvider>
   );
 }
 
-const HasAuth = ({ children }: { children: React.ReactNode }) => {
+const AuthHandler = ({ children }: { children: React.ReactNode }) => {
   const session = useAtomValue(sessionAtom);
 
   const segments = useSegments();
