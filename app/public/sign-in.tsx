@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/toast";
 import { VStack } from "@/components/ui/vstack";
 import { supabase } from "@/database/supabase.client";
+import { Link } from "expo-router";
 import { useState } from "react";
 import { ScrollView } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -73,8 +74,6 @@ export default function SignInScreen() {
 
   return (
     <ScrollView style={{ padding: insets.top }}>
-      <Text className="text-blue-800">Sign in</Text>
-
       <VStack space="xs" className="mt-8">
         <Text className="text-typography-500">Email</Text>
 
@@ -117,6 +116,14 @@ export default function SignInScreen() {
         <Button disabled={loading} onPress={() => signInWithEmail()}>
           <ButtonText>Sign in</ButtonText>
         </Button>
+      </Box>
+
+      <Box className="py-4">
+        <Link href="/public/sign-up" asChild>
+          <Button variant="link">
+            <ButtonText>create account</ButtonText>
+          </Button>
+        </Link>
       </Box>
     </ScrollView>
   );

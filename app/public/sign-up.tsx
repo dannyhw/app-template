@@ -98,8 +98,6 @@ export default function SignInScreen() {
 
   return (
     <ScrollView style={{ padding: insets.top }}>
-      <Text className="text-blue-800">Sign in</Text>
-
       <VStack space="xs" className="mt-8">
         <Text className="text-typography-500">Email</Text>
 

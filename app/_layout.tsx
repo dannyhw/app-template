@@ -83,6 +83,8 @@ const HasAuth = ({ children }: { children: React.ReactNode }) => {
       console.log("redirecting to sign-in");
 
       return router.replace("/public/sign-in");
+    } else if (session && segments.at(0) === "public") {
+      return router.replace("/authenticated");
     }
   }, [session, segments, router]);
 
