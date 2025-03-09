@@ -17,15 +17,13 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 const fetchPath = __DEV__ ? "http://localhost:8081/api" : "/api";
 
 function useFetchHello() {
+  const session = useAtomValue(sessionAtom);
+
   const toast = useToast();
 
   const fetchHello = useCallback(async () => {
     try {
-      const {
-        data: { session },
-      } = await supabase.auth.getSession();
-
-      if (!session?.access_token) {
+      if (!session) {
         throw new Error("Not authenticated");
       }
 
@@ -84,7 +82,7 @@ function useFetchHello() {
         },
       });
     }
-  }, [toast]);
+  }, [session, toast]);
 
   return fetchHello;
 }
