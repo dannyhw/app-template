@@ -1,8 +1,4 @@
-import { supabase } from "@/database/supabase.client";
-import { Box } from "@/components/ui/box";
 import { Button, ButtonText } from "@/components/ui/button";
-import { EyeIcon, EyeOffIcon } from "@/components/ui/icon";
-import { Input, InputField, InputIcon, InputSlot } from "@/components/ui/input";
 import { Text } from "@/components/ui/text";
 import {
   Toast,
@@ -10,12 +6,12 @@ import {
   ToastTitle,
   useToast,
 } from "@/components/ui/toast";
-import { VStack } from "@/components/ui/vstack";
-import { useCallback, useState } from "react";
-import { ScrollView } from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { supabase } from "@/database/supabase.client";
 import { sessionAtom } from "@/state/auth";
 import { useAtomValue } from "jotai";
+import { useCallback } from "react";
+import { ScrollView } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 // for some reason relative fetch isn't working on dev even though it should
 const fetchPath = __DEV__ ? "http://localhost:8081/api" : "/api";
