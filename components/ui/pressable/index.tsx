@@ -23,9 +23,9 @@ type IPressableProps = Omit<
   VariantProps<typeof pressableStyle>;
 
 const Pressable = React.forwardRef<
-  React.ElementRef<typeof UIPressable>,
+  React.ComponentRef<typeof UIPressable>,
   IPressableProps
->(({ className, ...props }, ref) => {
+>(function Pressable({ className, ...props }, ref) {
   return (
     <UIPressable
       {...props}

@@ -1,8 +1,7 @@
 "use client";
 
 import { createLink } from "@gluestack-ui/link";
-import { Pressable } from "react-native";
-import { Text } from "react-native";
+import { Pressable, Text } from "react-native";
 
 import { tva } from "@gluestack-ui/nativewind-utils/tva";
 import { withStyleContext } from "@gluestack-ui/nativewind-utils/withStyleContext";
@@ -10,7 +9,6 @@ import { cssInterop } from "nativewind";
 import type { VariantProps } from "@gluestack-ui/nativewind-utils";
 
 import React from "react";
-
 export const UILink = createLink({
   Root: withStyleContext(Pressable),
   Text: Text,
@@ -68,8 +66,8 @@ const linkTextStyle = tva({
 type ILinkProps = React.ComponentProps<typeof UILink> &
   VariantProps<typeof linkStyle> & { className?: string };
 
-const Link = React.forwardRef<React.ElementRef<typeof UILink>, ILinkProps>(
-  ({ className, ...props }, ref) => {
+const Link = React.forwardRef<React.ComponentRef<typeof UILink>, ILinkProps>(
+  function Link({ className, ...props }, ref) {
     return (
       <UILink
         ref={ref}
@@ -84,9 +82,9 @@ type ILinkTextProps = React.ComponentProps<typeof UILink.Text> &
   VariantProps<typeof linkTextStyle> & { className?: string };
 
 const LinkText = React.forwardRef<
-  React.ElementRef<typeof UILink.Text>,
+  React.ComponentRef<typeof UILink.Text>,
   ILinkTextProps
->(({ className, size = "md", ...props }, ref) => {
+>(function LinkText({ className, size = "md", ...props }, ref) {
   return (
     <UILink.Text
       ref={ref}

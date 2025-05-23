@@ -27,9 +27,9 @@ type ISwitchProps = React.ComponentProps<typeof UISwitch> &
   VariantProps<typeof switchStyle>;
 
 const Switch = React.forwardRef<
-  React.ElementRef<typeof UISwitch>,
+  React.ComponentRef<typeof UISwitch>,
   ISwitchProps
->(({ className, size = "md", ...props }, ref) => {
+>(function Switch({ className, size = "md", ...props }, ref) {
   return (
     <UISwitch
       ref={ref}
