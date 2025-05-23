@@ -1,0 +1,11 @@
+diff --git a/tva/index.ts b/tva/index.ts
+index b2a988fa374ccdf92cfbe6d4b56556604035adec..96b341e085f3284a86101ec2cb9cfe85ec49e0d8 100644
+--- a/tva/index.ts
++++ b/tva/index.ts
+@@ -1,5 +1,5 @@
+ import type { TVA } from '../types';
+-import type { TVConfig } from 'tailwind-variants/dist/config';
++import type { TVConfig } from 'tailwind-variants/dist/config.d.ts';
+ import { deepMergeObjects } from '../utils/deepMerge';
+ // @ts-ignore
+ import { tv } from 'tailwind-variants';

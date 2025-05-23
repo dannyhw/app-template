@@ -133,5 +133,8 @@
       }
     }
   },
-  "private": true
+  "private": true,
+  "patchedDependencies": {
+    "@gluestack-ui/nativewind-utils@1.0.26": "patches/@gluestack-ui%2Fnativewind-utils@1.0.26.patch"
+  }
 }
