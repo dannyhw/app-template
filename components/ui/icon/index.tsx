@@ -14,8 +14,8 @@ import { VariantProps } from "@gluestack-ui/nativewind-utils";
 
 export const UIIcon = createIcon({
   Root: PrimitiveIcon,
-}) as React.ForwardRefExoticComponent<
-  React.ComponentPropsWithoutRef<typeof PrimitiveIcon> &
+}) as React.ExoticComponent<
+  React.ComponentProps<typeof PrimitiveIcon> &
     React.RefAttributes<React.ComponentRef<typeof Svg>>
 >;
 
@@ -48,41 +48,44 @@ cssInterop(UIIcon, {
 
 type IIConProps = IPrimitiveIcon &
   VariantProps<typeof iconStyle> &
-  React.ComponentPropsWithoutRef<typeof UIIcon>;
+  React.ComponentProps<typeof UIIcon>;
 
-const Icon = React.forwardRef<React.ComponentRef<typeof UIIcon>, IIConProps>(
-  function Icon({ size = "md", className, ...props }, ref) {
-    if (typeof size === "number") {
-      return (
-        <UIIcon
-          ref={ref}
-          {...props}
-          className={iconStyle({ class: className })}
-          size={size}
-        />
-      );
-    } else if (
-      (props.height !== undefined || props.width !== undefined) &&
-      size === undefined
-    ) {
-      return (
-        <UIIcon
-          ref={ref}
-          {...props}
-          className={iconStyle({ class: className })}
-        />
-      );
-    }
-
+const Icon = function Icon({
+  size = "md",
+  className,
+  ref,
+  ...props
+}: IIConProps) {
+  if (typeof size === "number") {
     return (
       <UIIcon
         ref={ref}
         {...props}
-        className={iconStyle({ size, class: className })}
+        className={iconStyle({ class: className })}
+        size={size}
       />
     );
-  },
-);
+  } else if (
+    (props.height !== undefined || props.width !== undefined) &&
+    size === undefined
+  ) {
+    return (
+      <UIIcon
+        ref={ref}
+        {...props}
+        className={iconStyle({ class: className })}
+      />
+    );
+  }
+
+  return (
+    <UIIcon
+      ref={ref}
+      {...props}
+      className={iconStyle({ size, class: className })}
+    />
+  );
+};
 
 export { Icon };
 
@@ -92,20 +95,18 @@ const createIconUI = ({ ...props }: ParameterTypes) => {
   const UIIconCreateIcon = createIcon({
     Root: Svg,
     ...props,
-  }) as React.ForwardRefExoticComponent<
-    React.ComponentPropsWithoutRef<typeof PrimitiveIcon> &
+  }) as React.ExoticComponent<
+    React.ComponentProps<typeof PrimitiveIcon> &
       React.RefAttributes<React.ComponentRef<typeof Svg>>
   >;
 
-  return React.forwardRef<React.ComponentRef<typeof Svg>>(function UIIcon(
-    {
-      className,
-      size,
-      ...inComingProps
-    }: VariantProps<typeof iconStyle> &
-      React.ComponentPropsWithoutRef<typeof UIIconCreateIcon>,
+  return function UIIcon({
+    className,
+    size,
     ref,
-  ) {
+    ...inComingProps
+  }: VariantProps<typeof iconStyle> &
+    React.ComponentProps<typeof UIIconCreateIcon>) {
     return (
       <UIIconCreateIcon
         ref={ref}
@@ -113,7 +114,7 @@ const createIconUI = ({ ...props }: ParameterTypes) => {
         className={iconStyle({ size, class: className })}
       />
     );
-  });
+  };
 };
 
 export { createIconUI as createIcon };
