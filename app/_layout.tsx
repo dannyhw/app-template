@@ -9,10 +9,10 @@ import {
   ThemeProvider,
 } from "@react-navigation/native";
 import { useFonts } from "expo-font";
-import { Stack, useRouter, useSegments } from "expo-router";
+import { Stack, useRouter } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
-import { useAtomValue, useSetAtom } from "jotai";
+import { useAtom } from "jotai";
 import { useEffect } from "react";
 import "react-native-reanimated";
 import "react-native-url-polyfill/auto";
@@ -23,17 +23,28 @@ import "../util/log"; // relative path for reliable module resolution
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-  const setSession = useSetAtom(sessionAtom);
+  const router = useRouter();
+
+  const [session, setSession] = useAtom(sessionAtom);
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-    });
+    supabase.auth
+      .getSession()
+      .then(({ data: { session: newSession } }) => {
+        setSession(newSession);
 
-    supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session);
+        if (newSession) {
+          router.replace("/authenticated/(tabs)");
+        }
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+
+    supabase.auth.onAuthStateChange((_event, newSession) => {
+      setSession(newSession);
     });
-  }, [setSession]);
+  }, [setSession, router]);
 
   const colorScheme = useColorScheme();
 
@@ -54,43 +65,25 @@ export default function RootLayout() {
   return (
     <GluestackUIProvider mode={colorScheme === "dark" ? "dark" : "light"}>
       <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-        <AuthHandler>
-          <Stack>
+        <Stack>
+          <Stack.Protected guard={Boolean(session)}>
             <Stack.Screen
               name="authenticated/(tabs)"
               options={{ headerShown: false }}
             />
+          </Stack.Protected>
 
-            <Stack.Screen name="+not-found" />
-          </Stack>
+          <Stack.Protected guard={!session}>
+            <Stack.Screen name="public/sign-in" />
 
-          <StatusBar style="auto" />
-        </AuthHandler>
+            <Stack.Screen name="public/sign-up" />
+          </Stack.Protected>
+
+          <Stack.Screen name="+not-found" />
+        </Stack>
+
+        <StatusBar style="auto" />
       </ThemeProvider>
     </GluestackUIProvider>
   );
 }
-
-const AuthHandler = ({ children }: { children: React.ReactNode }) => {
-  const session = useAtomValue(sessionAtom);
-
-  const segments = useSegments();
-
-  const router = useRouter();
-
-  useEffect(() => {
-    if (segments.at(0) !== "+not-found") {
-      return;
-    }
-
-    if (!session && segments.at(0) !== "public") {
-      console.log("redirecting to sign-in");
-
-      router.replace("/public/sign-in");
-    } else if (session && segments.at(0) === "public") {
-      router.replace("/authenticated");
-    }
-  }, [session, segments, router]);
-
-  return <>{children}</>;
-};

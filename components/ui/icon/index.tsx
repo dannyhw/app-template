@@ -1,18 +1,22 @@
 "use client";
 
 import React from "react";
-import { createIcon } from "@gluestack-ui/icon";
+import {
+  createIcon,
+  PrimitiveIcon,
+  IPrimitiveIcon,
+  Svg,
+} from "@gluestack-ui/icon";
 import { Path } from "react-native-svg";
 import { tva } from "@gluestack-ui/nativewind-utils/tva";
 import { cssInterop } from "nativewind";
 import { VariantProps } from "@gluestack-ui/nativewind-utils";
-import { PrimitiveIcon, IPrimitiveIcon, Svg } from "@gluestack-ui/icon";
 
 export const UIIcon = createIcon({
   Root: PrimitiveIcon,
-}) as React.ForwardRefExoticComponent<
-  React.ComponentPropsWithoutRef<typeof PrimitiveIcon> &
-    React.RefAttributes<React.ElementRef<typeof Svg>>
+}) as React.ExoticComponent<
+  React.ComponentProps<typeof PrimitiveIcon> &
+    React.RefAttributes<React.ComponentRef<typeof Svg>>
 >;
 
 const iconStyle = tva({
@@ -44,43 +48,44 @@ cssInterop(UIIcon, {
 
 type IIConProps = IPrimitiveIcon &
   VariantProps<typeof iconStyle> &
-  React.ComponentPropsWithoutRef<typeof UIIcon>;
+  React.ComponentProps<typeof UIIcon>;
 
-const Icon = React.forwardRef<React.ElementRef<typeof Svg>, IIConProps>(
-  ({ size = "md", className, ...props }, ref) => {
-    if (typeof size === "number") {
-      return (
-        <UIIcon
-          ref={ref}
-          {...props}
-          className={iconStyle({ class: className })}
-          size={size}
-        />
-      );
-    } else if (
-      (props.height !== undefined || props.width !== undefined) &&
-      size === undefined
-    ) {
-      return (
-        <UIIcon
-          ref={ref}
-          {...props}
-          className={iconStyle({ class: className })}
-        />
-      );
-    }
-
+const Icon = function Icon({
+  size = "md",
+  className,
+  ref,
+  ...props
+}: IIConProps) {
+  if (typeof size === "number") {
     return (
       <UIIcon
         ref={ref}
         {...props}
-        className={iconStyle({ size, class: className })}
+        className={iconStyle({ class: className })}
+        size={size}
       />
     );
-  },
-);
+  } else if (
+    (props.height !== undefined || props.width !== undefined) &&
+    size === undefined
+  ) {
+    return (
+      <UIIcon
+        ref={ref}
+        {...props}
+        className={iconStyle({ class: className })}
+      />
+    );
+  }
 
-Icon.displayName = "Icon";
+  return (
+    <UIIcon
+      ref={ref}
+      {...props}
+      className={iconStyle({ size, class: className })}
+    />
+  );
+};
 
 export { Icon };
 
@@ -90,35 +95,29 @@ const createIconUI = ({ ...props }: ParameterTypes) => {
   const UIIconCreateIcon = createIcon({
     Root: Svg,
     ...props,
-  }) as React.ForwardRefExoticComponent<
-    React.ComponentPropsWithoutRef<typeof PrimitiveIcon> &
-      React.RefAttributes<React.ElementRef<typeof Svg>>
+  }) as React.ExoticComponent<
+    React.ComponentProps<typeof PrimitiveIcon> &
+      React.RefAttributes<React.ComponentRef<typeof Svg>>
   >;
 
-  // eslint-disable-next-line react/display-name
-  return React.forwardRef<React.ElementRef<typeof Svg>>(
-    (
-      {
-        className,
-        size,
-        ...inComingProps
-      }: VariantProps<typeof iconStyle> &
-        React.ComponentPropsWithoutRef<typeof UIIconCreateIcon>,
-      ref,
-    ) => {
-      return (
-        <UIIconCreateIcon
-          ref={ref}
-          {...inComingProps}
-          className={iconStyle({ size, class: className })}
-        />
-      );
-    },
-  );
+  return function UIIcon({
+    className,
+    size,
+    ref,
+    ...inComingProps
+  }: VariantProps<typeof iconStyle> &
+    React.ComponentProps<typeof UIIconCreateIcon>) {
+    return (
+      <UIIconCreateIcon
+        ref={ref}
+        {...inComingProps}
+        className={iconStyle({ size, class: className })}
+      />
+    );
+  };
 };
 
 export { createIconUI as createIcon };
-
 // All Icons
 const AddIcon = createIcon({
   Root: Svg,

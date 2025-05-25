@@ -22,77 +22,89 @@ const TableFooterContext = createContext<{
   isFooterRow: false,
 });
 
-const Table = React.forwardRef(({ className, ...props }: any, ref?: any) => {
+const Table = function Table({
+  className,
+  ref,
+  ...props
+}: React.ComponentProps<"table">) {
   return (
     <table ref={ref} className={tableStyle({ class: className })} {...props} />
   );
-});
+};
 
-const TableHeader = React.forwardRef(
-  ({ className, ...props }: any, ref?: any) => {
-    const contextValue = useMemo(() => {
-      return {
-        isHeaderRow: true,
-      };
-    }, []);
+const TableHeader = function TableHeader({
+  className,
+  ref,
+  ...props
+}: React.ComponentProps<"thead">) {
+  const contextValue = useMemo(() => {
+    return {
+      isHeaderRow: true,
+    };
+  }, []);
 
-    return (
-      <TableHeaderContext.Provider value={contextValue}>
-        <thead
-          ref={ref}
-          className={tableHeaderStyle({ class: className })}
-          {...props}
-        />
-      </TableHeaderContext.Provider>
-    );
-  },
-);
-
-const TableBody = React.forwardRef(
-  ({ className, ...props }: any, ref?: any) => {
-    return (
-      <tbody
+  return (
+    <TableHeaderContext.Provider value={contextValue}>
+      <thead
         ref={ref}
-        className={tableBodyStyle({ class: className })}
+        className={tableHeaderStyle({ class: className })}
         {...props}
       />
-    );
-  },
-);
+    </TableHeaderContext.Provider>
+  );
+};
 
-const TableFooter = React.forwardRef(
-  ({ className, ...props }: any, ref?: any) => {
-    const contextValue = useMemo(() => {
-      return {
-        isFooterRow: true,
-      };
-    }, []);
+const TableBody = function TableBody({
+  className,
+  ref,
+  ...props
+}: React.ComponentProps<"tbody">) {
+  return (
+    <tbody
+      ref={ref}
+      className={tableBodyStyle({ class: className })}
+      {...props}
+    />
+  );
+};
 
-    return (
-      <TableFooterContext.Provider value={contextValue}>
-        <tfoot
-          ref={ref}
-          className={tableFooterStyle({ class: className })}
-          {...props}
-        />
-      </TableFooterContext.Provider>
-    );
-  },
-);
+const TableFooter = function TableFooter({
+  className,
+  ref,
+  ...props
+}: React.ComponentProps<"tfoot">) {
+  const contextValue = useMemo(() => {
+    return {
+      isFooterRow: true,
+    };
+  }, []);
 
-const TableHead = React.forwardRef(
-  ({ className, ...props }: any, ref?: any) => {
-    return (
-      <th
+  return (
+    <TableFooterContext.Provider value={contextValue}>
+      <tfoot
         ref={ref}
-        className={tableHeadStyle({ class: className })}
+        className={tableFooterStyle({ class: className })}
         {...props}
       />
-    );
-  },
-);
+    </TableFooterContext.Provider>
+  );
+};
 
-const TableRow = React.forwardRef(({ className, ...props }: any, ref?: any) => {
+const TableHead = function TableHead({
+  className,
+  ref,
+  ...props
+}: React.ComponentProps<"th">) {
+  return (
+    <th ref={ref} className={tableHeadStyle({ class: className })} {...props} />
+  );
+};
+
+const TableRow = function TableRow({
+  className,
+  ref,
+  ...props
+}: React.ComponentProps<"tr">) {
   const { isHeaderRow } = useContext(TableHeaderContext);
 
   const { isFooterRow } = useContext(TableFooterContext);
@@ -108,31 +120,31 @@ const TableRow = React.forwardRef(({ className, ...props }: any, ref?: any) => {
       {...props}
     />
   );
-});
+};
 
-const TableData = React.forwardRef(
-  ({ className, ...props }: any, ref?: any) => {
-    return (
-      <td
-        ref={ref}
-        className={tableDataStyle({ class: className })}
-        {...props}
-      />
-    );
-  },
-);
+const TableData = function TableData({
+  className,
+  ref,
+  ...props
+}: React.ComponentProps<"td">) {
+  return (
+    <td ref={ref} className={tableDataStyle({ class: className })} {...props} />
+  );
+};
 
-const TableCaption = React.forwardRef(
-  ({ className, ...props }: any, ref?: any) => {
-    return (
-      <caption
-        ref={ref}
-        className={tableCaptionStyle({ class: className })}
-        {...props}
-      />
-    );
-  },
-);
+const TableCaption = function TableCaption({
+  className,
+  ref,
+  ...props
+}: React.ComponentProps<"caption">) {
+  return (
+    <caption
+      ref={ref}
+      className={tableCaptionStyle({ class: className })}
+      {...props}
+    />
+  );
+};
 
 Table.displayName = "Table";
 

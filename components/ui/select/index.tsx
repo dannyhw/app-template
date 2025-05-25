@@ -26,14 +26,12 @@ import {
 } from "./select-actionsheet";
 import { Pressable, View, TextInput } from "react-native";
 
-const SelectTriggerWrapper = React.forwardRef<
-  React.ElementRef<typeof Pressable>,
-  React.ComponentProps<typeof Pressable>
->(({ ...props }, ref) => {
+const SelectTriggerWrapper = function SelectTriggerWrapper({
+  ref,
+  ...props
+}: React.ComponentProps<typeof Pressable>) {
   return <Pressable {...props} ref={ref} />;
-});
-
-SelectTriggerWrapper.displayName = "SelectTriggerWrapper";
+};
 
 const selectIconStyle = tva({
   base: "fill-none text-background-500",
@@ -137,10 +135,7 @@ cssInterop(PrimitiveIcon, {
 type ISelectProps = VariantProps<typeof selectStyle> &
   React.ComponentProps<typeof UISelect> & { className?: string };
 
-const Select = React.forwardRef<
-  React.ElementRef<typeof UISelect>,
-  ISelectProps
->(({ className, ...props }, ref) => {
+const Select = function Select({ className, ref, ...props }: ISelectProps) {
   return (
     <UISelect
       className={selectStyle({
@@ -150,15 +145,18 @@ const Select = React.forwardRef<
       {...props}
     />
   );
-});
+};
 
 type ISelectTriggerProps = VariantProps<typeof selectTriggerStyle> &
   React.ComponentProps<typeof UISelect.Trigger> & { className?: string };
 
-const SelectTrigger = React.forwardRef<
-  React.ElementRef<typeof UISelect.Trigger>,
-  ISelectTriggerProps
->(({ className, size = "md", variant = "outline", ...props }, ref) => {
+const SelectTrigger = function SelectTrigger({
+  className,
+  size = "md",
+  variant = "outline",
+  ref,
+  ...props
+}: ISelectTriggerProps) {
   return (
     <UISelect.Trigger
       className={selectTriggerStyle({
@@ -171,15 +169,16 @@ const SelectTrigger = React.forwardRef<
       {...props}
     />
   );
-});
+};
 
 type ISelectInputProps = VariantProps<typeof selectInputStyle> &
   React.ComponentProps<typeof UISelect.Input> & { className?: string };
 
-const SelectInput = React.forwardRef<
-  React.ElementRef<typeof UISelect.Input>,
-  ISelectInputProps
->(({ className, ...props }, ref) => {
+const SelectInput = function SelectInput({
+  className,
+  ref,
+  ...props
+}: ISelectInputProps) {
   const { size: parentSize, variant: parentVariant } = useStyleContext();
 
   return (
@@ -195,15 +194,17 @@ const SelectInput = React.forwardRef<
       {...props}
     />
   );
-});
+};
 
 type ISelectIcon = VariantProps<typeof selectIconStyle> &
   React.ComponentProps<typeof UISelect.Icon> & { className?: string };
 
-const SelectIcon = React.forwardRef<
-  React.ElementRef<typeof UISelect.Icon>,
-  ISelectIcon
->(({ className, size, ...props }, ref) => {
+const SelectIcon = function SelectIcon({
+  className,
+  size,
+  ref,
+  ...props
+}: ISelectIcon) {
   const { size: parentSize } = useStyleContext();
 
   if (typeof size === "number") {
@@ -216,7 +217,7 @@ const SelectIcon = React.forwardRef<
       />
     );
   } else if (
-    //@ts-expect-error
+    //@ts-expect-error : web only
     (props?.height !== undefined || props?.width !== undefined) &&
     size === undefined
   ) {
@@ -242,7 +243,7 @@ const SelectIcon = React.forwardRef<
       {...props}
     />
   );
-});
+};
 
 Select.displayName = "Select";
 

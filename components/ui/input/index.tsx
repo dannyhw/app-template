@@ -1,16 +1,16 @@
 "use client";
 
-import React from "react";
+import { PrimitiveIcon, UIIcon } from "@gluestack-ui/icon";
 import { createInput } from "@gluestack-ui/input";
-import { View, Pressable, TextInput } from "react-native";
+import type { VariantProps } from "@gluestack-ui/nativewind-utils";
 import { tva } from "@gluestack-ui/nativewind-utils/tva";
 import {
-  withStyleContext,
   useStyleContext,
+  withStyleContext,
 } from "@gluestack-ui/nativewind-utils/withStyleContext";
 import { cssInterop } from "nativewind";
-import type { VariantProps } from "@gluestack-ui/nativewind-utils";
-import { PrimitiveIcon, UIIcon } from "@gluestack-ui/icon";
+import React from "react";
+import { Pressable, TextInput, View } from "react-native";
 
 const SCOPE = "INPUT";
 
@@ -105,18 +105,22 @@ const inputFieldStyle = tva({
 type IInputProps = React.ComponentProps<typeof UIInput> &
   VariantProps<typeof inputStyle> & { className?: string };
 
-const Input = React.forwardRef<React.ElementRef<typeof UIInput>, IInputProps>(
-  ({ className, variant = "outline", size = "md", ...props }, ref) => {
-    return (
-      <UIInput
-        ref={ref}
-        {...props}
-        className={inputStyle({ variant, size, class: className })}
-        context={{ variant, size }}
-      />
-    );
-  },
-);
+const Input = function Input({
+  className,
+  variant = "outline",
+  size = "md",
+  ref,
+  ...props
+}: IInputProps) {
+  return (
+    <UIInput
+      ref={ref}
+      {...props}
+      className={inputStyle({ variant, size, class: className })}
+      context={{ variant, size }}
+    />
+  );
+};
 
 type IInputIconProps = React.ComponentProps<typeof UIInput.Icon> &
   VariantProps<typeof inputIconStyle> & {
@@ -125,10 +129,12 @@ type IInputIconProps = React.ComponentProps<typeof UIInput.Icon> &
     width?: number;
   };
 
-const InputIcon = React.forwardRef<
-  React.ElementRef<typeof UIInput.Icon>,
-  IInputIconProps
->(({ className, size, ...props }, ref) => {
+const InputIcon = function InputIcon({
+  className,
+  size,
+  ref,
+  ...props
+}: IInputIconProps) {
   const { size: parentSize } = useStyleContext(SCOPE);
 
   if (typeof size === "number") {
@@ -165,15 +171,16 @@ const InputIcon = React.forwardRef<
       })}
     />
   );
-});
+};
 
 type IInputSlotProps = React.ComponentProps<typeof UIInput.Slot> &
   VariantProps<typeof inputSlotStyle> & { className?: string };
 
-const InputSlot = React.forwardRef<
-  React.ElementRef<typeof UIInput.Slot>,
-  IInputSlotProps
->(({ className, ...props }, ref) => {
+const InputSlot = function InputSlot({
+  className,
+  ref,
+  ...props
+}: IInputSlotProps) {
   return (
     <UIInput.Slot
       ref={ref}
@@ -183,15 +190,16 @@ const InputSlot = React.forwardRef<
       })}
     />
   );
-});
+};
 
 type IInputFieldProps = React.ComponentProps<typeof UIInput.Input> &
   VariantProps<typeof inputFieldStyle> & { className?: string };
 
-const InputField = React.forwardRef<
-  React.ElementRef<typeof UIInput.Input>,
-  IInputFieldProps
->(({ className, ...props }, ref) => {
+const InputField = function InputField({
+  className,
+  ref,
+  ...props
+}: IInputFieldProps) {
   const { variant: parentVariant, size: parentSize } = useStyleContext(SCOPE);
 
   return (
@@ -207,7 +215,7 @@ const InputField = React.forwardRef<
       })}
     />
   );
-});
+};
 
 Input.displayName = "Input";
 

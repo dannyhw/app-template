@@ -16,7 +16,6 @@ export const skeletonStyle = tva({
     },
   },
 });
-
 export const skeletonTextStyle = tva({
   base: "w-full rounded-sm",
   variants: {

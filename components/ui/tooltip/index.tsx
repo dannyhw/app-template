@@ -2,21 +2,30 @@
 
 import React from "react";
 import { createTooltip } from "@gluestack-ui/tooltip";
-import { View, Text } from "react-native";
+import { View, Text, ViewStyle } from "react-native";
 import type { VariantProps } from "@gluestack-ui/nativewind-utils";
 import { tva } from "@gluestack-ui/nativewind-utils/tva";
 import { withStyleContext } from "@gluestack-ui/nativewind-utils/withStyleContext";
-import { Motion, AnimatePresence } from "@legendapp/motion";
+import {
+  Motion,
+  AnimatePresence,
+  MotionComponentProps,
+} from "@legendapp/motion";
 import { cssInterop } from "nativewind";
+
+type IMotionViewProps = React.ComponentProps<typeof View> &
+  MotionComponentProps<typeof View, ViewStyle, unknown, unknown, unknown>;
+
+const MotionView = Motion.View as React.ComponentType<IMotionViewProps>;
 
 export const UITooltip = createTooltip({
   Root: withStyleContext(View),
-  Content: Motion.View,
+  Content: MotionView,
   Text: Text,
   AnimatePresence: AnimatePresence,
 });
 
-cssInterop(Motion.View, { className: "style" });
+cssInterop(MotionView, { className: "style" });
 
 const tooltipStyle = tva({
   base: "h-full w-full web:pointer-events-none",
@@ -78,10 +87,7 @@ type ITooltipContentProps = React.ComponentProps<typeof UITooltip.Content> &
 type ITooltipTextProps = React.ComponentProps<typeof UITooltip.Text> &
   VariantProps<typeof tooltipTextStyle> & { className?: string };
 
-const Tooltip = React.forwardRef<
-  React.ElementRef<typeof UITooltip>,
-  ITooltipProps
->(({ className, ...props }, ref) => {
+const Tooltip = function Tooltip({ className, ref, ...props }: ITooltipProps) {
   return (
     <UITooltip
       ref={ref}
@@ -89,14 +95,13 @@ const Tooltip = React.forwardRef<
       {...props}
     />
   );
-});
+};
 
-Tooltip.displayName = "Tooltip";
-
-const TooltipContent = React.forwardRef<
-  React.ElementRef<typeof UITooltip.Content>,
-  ITooltipContentProps & { className?: string }
->(({ className, ...props }, ref) => {
+const TooltipContent = function TooltipContent({
+  className,
+  ref,
+  ...props
+}: ITooltipContentProps & { className?: string }) {
   return (
     <UITooltip.Content
       ref={ref}
@@ -107,14 +112,14 @@ const TooltipContent = React.forwardRef<
       pointerEvents="auto"
     />
   );
-});
+};
 
-TooltipContent.displayName = "TooltipContent";
-
-const TooltipText = React.forwardRef<
-  React.ElementRef<typeof UITooltip.Text>,
-  ITooltipTextProps & { className?: string }
->(({ size, className, ...props }, ref) => {
+const TooltipText = function TooltipText({
+  size,
+  className,
+  ref,
+  ...props
+}: ITooltipTextProps & { className?: string }) {
   return (
     <UITooltip.Text
       ref={ref}
@@ -122,7 +127,11 @@ const TooltipText = React.forwardRef<
       {...props}
     />
   );
-});
+};
+
+Tooltip.displayName = "Tooltip";
+
+TooltipContent.displayName = "TooltipContent";
 
 TooltipText.displayName = "TooltipText";
 

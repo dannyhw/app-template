@@ -4,20 +4,24 @@ import { View } from "react-native";
 
 import { vstackStyle } from "./styles";
 
-type IVStackProps = React.ComponentProps<typeof View> &
+type IVStackProps = React.ComponentPropsWithRef<typeof View> &
   VariantProps<typeof vstackStyle>;
 
-const VStack = React.forwardRef<React.ElementRef<typeof View>, IVStackProps>(
-  ({ className, space, reversed, ...props }, ref) => {
-    return (
-      <View
-        className={vstackStyle({ space, reversed, class: className })}
-        {...props}
-        ref={ref}
-      />
-    );
-  },
-);
+const VStack = function VStack({
+  className,
+  space,
+  reversed,
+  ref,
+  ...props
+}: IVStackProps) {
+  return (
+    <View
+      className={vstackStyle({ space, reversed, class: className })}
+      {...props}
+      ref={ref}
+    />
+  );
+};
 
 VStack.displayName = "VStack";
 

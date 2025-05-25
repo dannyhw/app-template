@@ -125,82 +125,78 @@ cssInterop(PrimitiveIcon, {
   },
 });
 
-type IAlertProps = Omit<
-  React.ComponentPropsWithoutRef<typeof UIAlert>,
-  "context"
-> &
+type IAlertProps = Omit<React.ComponentProps<typeof UIAlert>, "context"> &
   VariantProps<typeof alertStyle>;
 
-const Alert = React.forwardRef<React.ElementRef<typeof UIAlert>, IAlertProps>(
-  ({ className, variant = "solid", action = "muted", ...props }, ref) => {
-    return (
-      <UIAlert
-        className={alertStyle({ action, variant, class: className })}
-        context={{ variant, action }}
-        ref={ref}
-        {...props}
-      />
-    );
-  },
-);
+const Alert = function Alert({
+  className,
+  variant = "solid",
+  action = "muted",
+  ref,
+  ...props
+}: IAlertProps) {
+  return (
+    <UIAlert
+      className={alertStyle({ action, variant, class: className })}
+      context={{ variant, action }}
+      ref={ref}
+      {...props}
+    />
+  );
+};
 
-type IAlertTextProps = React.ComponentPropsWithoutRef<typeof UIAlert.Text> &
+type IAlertTextProps = React.ComponentProps<typeof UIAlert.Text> &
   VariantProps<typeof alertTextStyle>;
 
-const AlertText = React.forwardRef<
-  React.ElementRef<typeof UIAlert.Text>,
-  IAlertTextProps
->(
-  (
-    {
-      className,
-      isTruncated,
-      bold,
-      underline,
-      strikeThrough,
-      size = "md",
-      sub,
-      italic,
-      highlight,
-      ...props
-    },
-    ref,
-  ) => {
-    const { action: parentAction } = useStyleContext(SCOPE);
+const AlertText = function AlertText({
+  className,
+  isTruncated,
+  bold,
+  underline,
+  strikeThrough,
+  size = "md",
+  sub,
+  italic,
+  highlight,
+  ref,
+  ...props
+}: IAlertTextProps) {
+  const { action: parentAction } = useStyleContext(SCOPE);
 
-    return (
-      <UIAlert.Text
-        className={alertTextStyle({
-          isTruncated,
-          bold,
-          underline,
-          strikeThrough,
-          size,
-          sub,
-          italic,
-          highlight,
-          class: className,
-          parentVariants: {
-            action: parentAction,
-          },
-        })}
-        {...props}
-        ref={ref}
-      />
-    );
-  },
-);
+  return (
+    <UIAlert.Text
+      className={alertTextStyle({
+        isTruncated,
+        bold,
+        underline,
+        strikeThrough,
+        size,
+        sub,
+        italic,
+        highlight,
+        class: className,
+        parentVariants: {
+          action: parentAction,
+        },
+      })}
+      {...props}
+      ref={ref}
+    />
+  );
+};
 
-type IAlertIconProps = React.ComponentPropsWithoutRef<typeof UIAlert.Icon> &
+type IAlertIconProps = React.ComponentProps<typeof UIAlert.Icon> &
   VariantProps<typeof alertIconStyle> & {
     height?: number;
     width?: number;
   };
 
-const AlertIcon = React.forwardRef<
-  React.ElementRef<typeof UIAlert.Icon>,
-  IAlertIconProps
->(({ className, size = "md", ...props }, ref) => {
+const AlertIcon = function AlertIcon({
+  className,
+  size = "md",
+  ref,
+  ...props
+}: IAlertIconProps) {
   const { action: parentAction } = useStyleContext(SCOPE);
 
   if (typeof size === "number") {
@@ -238,7 +234,7 @@ const AlertIcon = React.forwardRef<
       ref={ref}
     />
   );
-});
+};
 
 Alert.displayName = "Alert";
 

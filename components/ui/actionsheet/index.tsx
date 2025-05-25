@@ -12,6 +12,7 @@ import {
   FlatList,
   SectionList,
   PressableProps,
+  ViewStyle,
 } from "react-native";
 import { PrimitiveIcon, UIIcon } from "@gluestack-ui/icon";
 import { tva } from "@gluestack-ui/nativewind-utils/tva";
@@ -21,22 +22,28 @@ import {
   Motion,
   AnimatePresence,
   createMotionAnimatedComponent,
+  MotionComponentProps,
 } from "@legendapp/motion";
 
-const ItemWrapper = React.forwardRef<
-  React.ElementRef<typeof Pressable>,
-  PressableProps
->(({ ...props }, ref) => {
-  return <Pressable {...props} ref={ref} />;
-});
+const ItemWrapper = function ItemWrapper({ ...props }: PressableProps) {
+  return <Pressable {...props} />;
+};
 
-ItemWrapper.displayName = "ItemWrapper";
+type IMotionViewProps = React.ComponentProps<typeof View> &
+  MotionComponentProps<typeof View, ViewStyle, unknown, unknown, unknown>;
 
-const AnimatedPressable = createMotionAnimatedComponent(Pressable);
+const MotionView = Motion.View as React.ComponentType<IMotionViewProps>;
+
+type IAnimatedPressableProps = React.ComponentProps<typeof Pressable> &
+  MotionComponentProps<typeof Pressable, ViewStyle, unknown, unknown, unknown>;
+
+const AnimatedPressable = createMotionAnimatedComponent(
+  Pressable,
+) as React.ComponentType<IAnimatedPressableProps>;
 
 export const UIActionsheet = createActionsheet({
   Root: View,
-  Content: Motion.View,
+  Content: MotionView,
   Item: ItemWrapper,
   ItemText: Text,
   DragIndicator: View,
@@ -231,189 +238,165 @@ const actionsheetIconStyle = tva({
 });
 
 type IActionsheetProps = VariantProps<typeof actionsheetStyle> &
-  React.ComponentPropsWithoutRef<typeof UIActionsheet>;
+  React.ComponentProps<typeof UIActionsheet>;
 
 type IActionsheetContentProps = VariantProps<typeof actionsheetContentStyle> &
-  React.ComponentPropsWithoutRef<typeof UIActionsheet.Content> & {
+  React.ComponentProps<typeof UIActionsheet.Content> & {
     className?: string;
   };
 
 type IActionsheetItemProps = VariantProps<typeof actionsheetItemStyle> &
-  React.ComponentPropsWithoutRef<typeof UIActionsheet.Item>;
+  React.ComponentProps<typeof UIActionsheet.Item>;
 
 type IActionsheetItemTextProps = VariantProps<typeof actionsheetItemTextStyle> &
-  React.ComponentPropsWithoutRef<typeof UIActionsheet.ItemText>;
+  React.ComponentProps<typeof UIActionsheet.ItemText>;
 
 type IActionsheetDragIndicatorProps = VariantProps<
   typeof actionsheetDragIndicatorStyle
 > &
-  React.ComponentPropsWithoutRef<typeof UIActionsheet.DragIndicator>;
+  React.ComponentProps<typeof UIActionsheet.DragIndicator>;
 
 type IActionsheetDragIndicatorWrapperProps = VariantProps<
   typeof actionsheetDragIndicatorWrapperStyle
 > &
-  React.ComponentPropsWithoutRef<typeof UIActionsheet.DragIndicatorWrapper>;
+  React.ComponentProps<typeof UIActionsheet.DragIndicatorWrapper>;
 
 type IActionsheetBackdropProps = VariantProps<typeof actionsheetBackdropStyle> &
-  React.ComponentPropsWithoutRef<typeof UIActionsheet.Backdrop> & {
+  React.ComponentProps<typeof UIActionsheet.Backdrop> & {
     className?: string;
   };
 
 type IActionsheetScrollViewProps = VariantProps<
   typeof actionsheetScrollViewStyle
 > &
-  React.ComponentPropsWithoutRef<typeof UIActionsheet.ScrollView>;
+  React.ComponentProps<typeof UIActionsheet.ScrollView>;
 
 type IActionsheetVirtualizedListProps = VariantProps<
   typeof actionsheetVirtualizedListStyle
 > &
-  React.ComponentPropsWithoutRef<typeof UIActionsheet.VirtualizedList>;
+  React.ComponentProps<typeof UIActionsheet.VirtualizedList>;
 
 type IActionsheetFlatListProps = VariantProps<typeof actionsheetFlatListStyle> &
-  React.ComponentPropsWithoutRef<typeof UIActionsheet.FlatList>;
+  React.ComponentProps<typeof UIActionsheet.FlatList>;
 
 type IActionsheetSectionListProps = VariantProps<
   typeof actionsheetSectionListStyle
 > &
-  React.ComponentPropsWithoutRef<typeof UIActionsheet.SectionList>;
+  React.ComponentProps<typeof UIActionsheet.SectionList>;
 
 type IActionsheetSectionHeaderTextProps = VariantProps<
   typeof actionsheetSectionHeaderTextStyle
 > &
-  React.ComponentPropsWithoutRef<typeof UIActionsheet.SectionHeaderText>;
+  React.ComponentProps<typeof UIActionsheet.SectionHeaderText>;
 
 type IActionsheetIconProps = VariantProps<typeof actionsheetIconStyle> &
-  React.ComponentPropsWithoutRef<typeof UIActionsheet.Icon> & {
+  React.ComponentProps<typeof UIActionsheet.Icon> & {
     className?: string;
     as?: React.ElementType;
     height?: number;
     width?: number;
   };
 
-const Actionsheet = React.forwardRef<
-  React.ElementRef<typeof UIActionsheet>,
-  IActionsheetProps
->(({ className, ...props }, ref) => {
+const Actionsheet = function Actionsheet({
+  className,
+  ...props
+}: IActionsheetProps) {
   return (
     <UIActionsheet
       className={actionsheetStyle({
         class: className,
       })}
-      ref={ref}
       {...props}
     />
   );
-});
+};
 
-Actionsheet.displayName = "Actionsheet";
-
-const ActionsheetContent = React.forwardRef<
-  React.ElementRef<typeof UIActionsheet.Content>,
-  IActionsheetContentProps
->(({ className, ...props }, ref) => {
+const ActionsheetContent = function ActionsheetContent({
+  className,
+  ...props
+}: IActionsheetContentProps) {
   return (
     <UIActionsheet.Content
       className={actionsheetContentStyle({
         class: className,
       })}
-      ref={ref}
       {...props}
     />
   );
-});
+};
 
-ActionsheetContent.displayName = "ActionsheetContent";
-
-const ActionsheetItem = React.forwardRef<
-  React.ElementRef<typeof UIActionsheet.Item>,
-  IActionsheetItemProps
->(({ className, ...props }, ref) => {
+const ActionsheetItem = function ActionsheetItem({
+  className,
+  ...props
+}: IActionsheetItemProps) {
   return (
     <UIActionsheet.Item
       className={actionsheetItemStyle({
         class: className,
       })}
-      ref={ref}
       {...props}
     />
   );
-});
+};
 
-ActionsheetItem.displayName = "ActionsheetItem";
+const ActionsheetItemText = function ActionsheetItemText({
+  isTruncated,
+  bold,
+  underline,
+  strikeThrough,
+  size = "sm",
+  className,
+  ...props
+}: IActionsheetItemTextProps) {
+  return (
+    <UIActionsheet.ItemText
+      className={actionsheetItemTextStyle({
+        class: className,
+        isTruncated,
+        bold,
+        underline,
+        strikeThrough,
+        size,
+      })}
+      {...props}
+    />
+  );
+};
 
-const ActionsheetItemText = React.forwardRef<
-  React.ElementRef<typeof UIActionsheet.ItemText>,
-  IActionsheetItemTextProps
->(
-  (
-    {
-      isTruncated,
-      bold,
-      underline,
-      strikeThrough,
-      size = "sm",
-      className,
-      ...props
-    },
-    ref,
-  ) => {
-    return (
-      <UIActionsheet.ItemText
-        className={actionsheetItemTextStyle({
-          class: className,
-          isTruncated,
-          bold,
-          underline,
-          strikeThrough,
-          size,
-        })}
-        ref={ref}
-        {...props}
-      />
-    );
-  },
-);
-
-ActionsheetItemText.displayName = "ActionsheetItemText";
-
-const ActionsheetDragIndicator = React.forwardRef<
-  React.ElementRef<typeof UIActionsheet.DragIndicator>,
-  IActionsheetDragIndicatorProps
->(({ className, ...props }, ref) => {
+const ActionsheetDragIndicator = function ActionsheetDragIndicator({
+  className,
+  ...props
+}: IActionsheetDragIndicatorProps) {
   return (
     <UIActionsheet.DragIndicator
       className={actionsheetDragIndicatorStyle({
         class: className,
       })}
-      ref={ref}
       {...props}
     />
   );
-});
+};
 
-ActionsheetDragIndicator.displayName = "ActionsheetDragIndicator";
+const ActionsheetDragIndicatorWrapper =
+  function ActionsheetDragIndicatorWrapper({
+    className,
+    ...props
+  }: IActionsheetDragIndicatorWrapperProps) {
+    return (
+      <UIActionsheet.DragIndicatorWrapper
+        className={actionsheetDragIndicatorWrapperStyle({
+          class: className,
+        })}
+        {...props}
+      />
+    );
+  };
 
-const ActionsheetDragIndicatorWrapper = React.forwardRef<
-  React.ElementRef<typeof UIActionsheet.DragIndicatorWrapper>,
-  IActionsheetDragIndicatorWrapperProps
->(({ className, ...props }, ref) => {
-  return (
-    <UIActionsheet.DragIndicatorWrapper
-      className={actionsheetDragIndicatorWrapperStyle({
-        class: className,
-      })}
-      ref={ref}
-      {...props}
-    />
-  );
-});
-
-ActionsheetDragIndicatorWrapper.displayName = "ActionsheetDragIndicatorWrapper";
-
-const ActionsheetBackdrop = React.forwardRef<
-  React.ElementRef<typeof UIActionsheet.Backdrop>,
-  IActionsheetBackdropProps
->(({ className, ...props }, ref) => {
+const ActionsheetBackdrop = function ActionsheetBackdrop({
+  className,
+  ref,
+  ...props
+}: IActionsheetBackdropProps) {
   return (
     <UIActionsheet.Backdrop
       initial={{
@@ -432,127 +415,102 @@ const ActionsheetBackdrop = React.forwardRef<
       ref={ref}
     />
   );
-});
+};
 
-ActionsheetBackdrop.displayName = "ActionsheetBackdrop";
-
-const ActionsheetScrollView = React.forwardRef<
-  React.ElementRef<typeof UIActionsheet.ScrollView>,
-  IActionsheetScrollViewProps
->(({ className, ...props }, ref) => {
+const ActionsheetScrollView = function ActionsheetScrollView({
+  className,
+  ...props
+}: IActionsheetScrollViewProps) {
   return (
     <UIActionsheet.ScrollView
       className={actionsheetScrollViewStyle({
         class: className,
       })}
-      ref={ref}
       {...props}
     />
   );
-});
+};
 
-ActionsheetScrollView.displayName = "ActionsheetScrollView";
-
-const ActionsheetVirtualizedList = React.forwardRef<
-  React.ElementRef<typeof UIActionsheet.VirtualizedList>,
-  IActionsheetVirtualizedListProps
->(({ className, ...props }, ref) => {
+const ActionsheetVirtualizedList = function ActionsheetVirtualizedList({
+  className,
+  ...props
+}: IActionsheetVirtualizedListProps) {
   return (
     <UIActionsheet.VirtualizedList
       className={actionsheetVirtualizedListStyle({
         class: className,
       })}
-      ref={ref}
       {...props}
     />
   );
-});
+};
 
-ActionsheetVirtualizedList.displayName = "ActionsheetVirtualizedList";
-
-const ActionsheetFlatList = React.forwardRef<
-  React.ElementRef<typeof UIActionsheet.FlatList>,
-  IActionsheetFlatListProps
->(({ className, ...props }, ref) => {
+const ActionsheetFlatList = function ActionsheetFlatList({
+  className,
+  ...props
+}: IActionsheetFlatListProps) {
   return (
     <UIActionsheet.FlatList
       className={actionsheetFlatListStyle({
         class: className,
       })}
-      ref={ref}
       {...props}
     />
   );
-});
+};
 
-ActionsheetFlatList.displayName = "ActionsheetFlatList";
-
-const ActionsheetSectionList = React.forwardRef<
-  React.ElementRef<typeof UIActionsheet.SectionList>,
-  IActionsheetSectionListProps
->(({ className, ...props }, ref) => {
+const ActionsheetSectionList = function ActionsheetSectionList({
+  className,
+  ...props
+}: IActionsheetSectionListProps) {
   return (
     <UIActionsheet.SectionList
       className={actionsheetSectionListStyle({
         class: className,
       })}
-      ref={ref}
       {...props}
     />
   );
-});
+};
 
-ActionsheetSectionList.displayName = "ActionsheetSectionList";
+const ActionsheetSectionHeaderText = function ActionsheetSectionHeaderText({
+  className,
+  isTruncated,
+  bold,
+  underline,
+  strikeThrough,
+  size,
+  sub,
+  italic,
+  highlight,
+  ...props
+}: IActionsheetSectionHeaderTextProps) {
+  return (
+    <UIActionsheet.SectionHeaderText
+      className={actionsheetSectionHeaderTextStyle({
+        class: className,
+        isTruncated,
+        bold,
+        underline,
+        strikeThrough,
+        size,
+        sub,
+        italic,
+        highlight,
+      })}
+      {...props}
+    />
+  );
+};
 
-const ActionsheetSectionHeaderText = React.forwardRef<
-  React.ElementRef<typeof UIActionsheet.SectionHeaderText>,
-  IActionsheetSectionHeaderTextProps
->(
-  (
-    {
-      className,
-      isTruncated,
-      bold,
-      underline,
-      strikeThrough,
-      size,
-      sub,
-      italic,
-      highlight,
-      ...props
-    },
-    ref,
-  ) => {
-    return (
-      <UIActionsheet.SectionHeaderText
-        className={actionsheetSectionHeaderTextStyle({
-          class: className,
-          isTruncated,
-          bold,
-          underline,
-          strikeThrough,
-          size,
-          sub,
-          italic,
-          highlight,
-        })}
-        ref={ref}
-        {...props}
-      />
-    );
-  },
-);
-
-ActionsheetSectionHeaderText.displayName = "ActionsheetSectionHeaderText";
-
-const ActionsheetIcon = React.forwardRef<
-  React.ElementRef<typeof UIActionsheet.Icon>,
-  IActionsheetIconProps
->(({ className, size = "sm", ...props }, ref) => {
+const ActionsheetIcon = function ActionsheetIcon({
+  className,
+  size = "sm",
+  ...props
+}: IActionsheetIconProps) {
   if (typeof size === "number") {
     return (
       <UIActionsheet.Icon
-        ref={ref}
         {...props}
         className={actionsheetIconStyle({ class: className })}
         size={size}
@@ -564,7 +522,6 @@ const ActionsheetIcon = React.forwardRef<
   ) {
     return (
       <UIActionsheet.Icon
-        ref={ref}
         {...props}
         className={actionsheetIconStyle({ class: className })}
       />
@@ -577,13 +534,10 @@ const ActionsheetIcon = React.forwardRef<
         class: className,
         size,
       })}
-      ref={ref}
       {...props}
     />
   );
-});
-
-ActionsheetIcon.displayName = "ActionsheetIcon";
+};
 
 export {
   Actionsheet,

@@ -1,10 +1,9 @@
 "use client";
 
-import React from "react";
-import { createIcon } from "@gluestack-ui/icon";
+import React, { ComponentProps } from "react";
+import { createIcon, PrimitiveIcon, Svg } from "@gluestack-ui/icon";
 import { tva } from "@gluestack-ui/nativewind-utils/tva";
 import { VariantProps } from "@gluestack-ui/nativewind-utils";
-import { PrimitiveIcon, Svg } from "@gluestack-ui/icon";
 
 export const UIIcon = createIcon({
   Root: PrimitiveIcon,
@@ -24,14 +23,16 @@ const iconStyle = tva({
   },
 });
 
-export const Icon = React.forwardRef<
-  React.ElementRef<typeof UIIcon>,
-  React.ComponentPropsWithoutRef<typeof UIIcon> &
-    VariantProps<typeof iconStyle> & {
-      height?: number | string;
-      width?: number | string;
-    }
->(({ size = "md", className, ...props }, ref) => {
+export const Icon = function Icon({
+  size = "md",
+  className,
+  ref,
+  ...props
+}: React.ComponentProps<typeof UIIcon> &
+  VariantProps<typeof iconStyle> & {
+    height?: number | string;
+    width?: number | string;
+  }) {
   if (typeof size === "number") {
     return (
       <UIIcon
@@ -61,9 +62,7 @@ export const Icon = React.forwardRef<
       className={iconStyle({ size, class: className })}
     />
   );
-});
-
-Icon.displayName = "Icon";
+};
 
 type ParameterTypes = Omit<Parameters<typeof createIcon>[0], "Root">;
 
@@ -78,14 +77,15 @@ const accessClassName = (style: any) => {
 const createIconUI = ({ ...props }: ParameterTypes) => {
   const NewUIIcon = createIcon({ Root: Svg, ...props });
 
-  const IconUIComponent = React.forwardRef<
-    React.ElementRef<typeof UIIcon>,
-    React.ComponentPropsWithoutRef<typeof UIIcon> &
-      VariantProps<typeof iconStyle> & {
-        height?: number | string;
-        width?: number | string;
-      }
-  >(({ className, ...inComingprops }, ref) => {
+  return function UIIcon({
+    className,
+    ref,
+    ...inComingprops
+  }: ComponentProps<typeof NewUIIcon> &
+    VariantProps<typeof iconStyle> & {
+      height?: number | string;
+      width?: number | string;
+    }) {
     const calculateClassName = React.useMemo(() => {
       return className === undefined
         ? accessClassName(inComingprops?.style)
@@ -95,11 +95,7 @@ const createIconUI = ({ ...props }: ParameterTypes) => {
     return (
       <NewUIIcon ref={ref} {...inComingprops} className={calculateClassName} />
     );
-  });
-
-  IconUIComponent.displayName = "IconUIComponent";
-
-  return IconUIComponent;
+  };
 };
 
 export { createIconUI as createIcon };
