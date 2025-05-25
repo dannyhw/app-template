@@ -28,10 +28,12 @@ const UIImage = createImage({ Root: RNImage });
 type ImageProps = VariantProps<typeof imageStyle> &
   React.ComponentProps<typeof UIImage>;
 
-const Image = React.forwardRef<
-  React.ComponentRef<typeof UIImage>,
-  ImageProps & { className?: string }
->(function Image({ size = "md", className, ...props }, ref) {
+const Image = function Image({
+  size = "md",
+  className,
+  ref,
+  ...props
+}: ImageProps & { className?: string }) {
   return (
     <UIImage
       className={imageStyle({ size, class: className })}
@@ -45,7 +47,7 @@ const Image = React.forwardRef<
       }
     />
   );
-});
+};
 
 Image.displayName = "Image";
 
