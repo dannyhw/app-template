@@ -1,36 +1,31 @@
-import React, { forwardRef } from "react";
+import React from "react";
 import type { VariantProps } from "@gluestack-ui/nativewind-utils";
 import { Animated, Easing, Platform, View } from "react-native";
 import { skeletonStyle, skeletonTextStyle } from "./styles";
 
-type ISkeletonProps = React.ComponentProps<typeof View> &
+type ISkeletonProps = React.ComponentPropsWithRef<typeof View> &
   VariantProps<typeof skeletonStyle> & {
     isLoaded?: boolean;
     startColor?: string;
   };
 
-type ISkeletonTextProps = React.ComponentProps<typeof View> &
+type ISkeletonTextProps = React.ComponentPropsWithRef<typeof View> &
   VariantProps<typeof skeletonTextStyle> & {
     _lines?: number;
     isLoaded?: boolean;
     startColor?: string;
   };
 
-const Skeleton = forwardRef<
-  React.ComponentRef<typeof Animated.View>,
-  ISkeletonProps
->(function Skeleton(
-  {
-    className,
-    variant,
-    children,
-    startColor = "bg-background-200",
-    isLoaded = false,
-    speed = 2,
-    ...props
-  },
+const Skeleton = function Skeleton({
+  className,
+  variant,
+  children,
+  startColor = "bg-background-200",
+  isLoaded = false,
+  speed = 2,
   ref,
-) {
+  ...props
+}: ISkeletonProps) {
   const pulseAnim = new Animated.Value(1);
 
   const customTimingFunction = Easing.bezier(0.4, 0, 0.6, 1);
@@ -79,23 +74,18 @@ const Skeleton = forwardRef<
 
     return children;
   }
-});
+};
 
-const SkeletonText = forwardRef<
-  React.ComponentRef<typeof View>,
-  ISkeletonTextProps
->(function SkeletonText(
-  {
-    className,
-    _lines,
-    isLoaded = false,
-    startColor = "bg-background-200",
-    gap = 2,
-    children,
-    ...props
-  },
+const SkeletonText = function SkeletonText({
+  className,
+  _lines,
+  isLoaded = false,
+  startColor = "bg-background-200",
+  gap = 2,
+  children,
   ref,
-) {
+  ...props
+}: ISkeletonTextProps) {
   if (!isLoaded) {
     if (_lines) {
       return (
@@ -130,7 +120,7 @@ const SkeletonText = forwardRef<
   } else {
     return children;
   }
-});
+};
 
 Skeleton.displayName = "Skeleton";
 
