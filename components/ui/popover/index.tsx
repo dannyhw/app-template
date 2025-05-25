@@ -149,13 +149,13 @@ type IPopoverCloseButtonProps = React.ComponentProps<
 > &
   VariantProps<typeof popoverCloseButtonStyle> & { className?: string };
 
-const Popover = React.forwardRef<
-  React.ComponentRef<typeof UIPopover>,
-  IPopoverProps
->(function Popover(
-  { className, size = "md", placement = "bottom", ...props },
+const Popover = function Popover({
+  className,
+  size = "md",
+  placement = "bottom",
   ref,
-) {
+  ...props
+}: IPopoverProps) {
   return (
     <UIPopover
       ref={ref}
@@ -166,12 +166,14 @@ const Popover = React.forwardRef<
       pointerEvents="box-none"
     />
   );
-});
+};
 
-const PopoverContent = React.forwardRef<
-  React.ComponentRef<typeof UIPopover.Content>,
-  IPopoverContentProps
->(function PopoverContent({ className, size, ...props }, ref) {
+const PopoverContent = function PopoverContent({
+  className,
+  size,
+  ref,
+  ...props
+}: IPopoverContentProps) {
   const { size: parentSize } = useStyleContext(SCOPE);
 
   return (
@@ -199,12 +201,13 @@ const PopoverContent = React.forwardRef<
       pointerEvents="auto"
     />
   );
-});
+};
 
-const PopoverArrow = React.forwardRef<
-  React.ComponentRef<typeof UIPopover.Arrow>,
-  IPopoverArrowProps
->(function PopoverArrow({ className, ...props }, ref) {
+const PopoverArrow = function PopoverArrow({
+  className,
+  ref,
+  ...props
+}: IPopoverArrowProps) {
   const { placement } = useStyleContext(SCOPE);
 
   return (
@@ -228,12 +231,13 @@ const PopoverArrow = React.forwardRef<
       })}
     />
   );
-});
+};
 
-const PopoverBackdrop = React.forwardRef<
-  React.ComponentRef<typeof UIPopover.Backdrop>,
-  IPopoverBackdropProps
->(function PopoverBackdrop({ className, ...props }, ref) {
+const PopoverBackdrop = function PopoverBackdrop({
+  className,
+  ref,
+  ...props
+}: IPopoverBackdropProps) {
   return (
     <UIPopover.Backdrop
       ref={ref}
@@ -263,12 +267,13 @@ const PopoverBackdrop = React.forwardRef<
       })}
     />
   );
-});
+};
 
-const PopoverBody = React.forwardRef<
-  React.ComponentRef<typeof UIPopover.Body>,
-  IPopoverBodyProps
->(function PopoverBody({ className, ...props }, ref) {
+const PopoverBody = function PopoverBody({
+  className,
+  ref,
+  ...props
+}: IPopoverBodyProps) {
   return (
     <UIPopover.Body
       ref={ref}
@@ -278,12 +283,13 @@ const PopoverBody = React.forwardRef<
       })}
     />
   );
-});
+};
 
-const PopoverCloseButton = React.forwardRef<
-  React.ComponentRef<typeof UIPopover.CloseButton>,
-  IPopoverCloseButtonProps
->(function PopoverCloseButton({ className, ...props }, ref) {
+const PopoverCloseButton = function PopoverCloseButton({
+  className,
+  ref,
+  ...props
+}: IPopoverCloseButtonProps) {
   return (
     <UIPopover.CloseButton
       ref={ref}
@@ -293,12 +299,13 @@ const PopoverCloseButton = React.forwardRef<
       })}
     />
   );
-});
+};
 
-const PopoverFooter = React.forwardRef<
-  React.ComponentRef<typeof UIPopover.Footer>,
-  IPopoverFooterProps
->(function PopoverFooter({ className, ...props }, ref) {
+const PopoverFooter = function PopoverFooter({
+  className,
+  ref,
+  ...props
+}: IPopoverFooterProps) {
   return (
     <UIPopover.Footer
       ref={ref}
@@ -308,12 +315,13 @@ const PopoverFooter = React.forwardRef<
       })}
     />
   );
-});
+};
 
-const PopoverHeader = React.forwardRef<
-  React.ComponentRef<typeof UIPopover.Header>,
-  IPopoverHeaderProps
->(function PopoverHeader({ className, ...props }, ref) {
+const PopoverHeader = function PopoverHeader({
+  className,
+  ref,
+  ...props
+}: IPopoverHeaderProps) {
   return (
     <UIPopover.Header
       ref={ref}
@@ -323,7 +331,7 @@ const PopoverHeader = React.forwardRef<
       })}
     />
   );
-});
+};
 
 Popover.displayName = "Popover";
 

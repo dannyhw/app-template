@@ -6,12 +6,12 @@ import { cssInterop } from "nativewind";
 
 cssInterop(Overlay, { className: "style" });
 
-const Portal = React.forwardRef<
-  React.ComponentRef<typeof Overlay>,
-  React.ComponentProps<typeof Overlay>
->(function Portal({ ...props }, ref) {
+const Portal = function Portal({
+  ref,
+  ...props
+}: React.ComponentProps<typeof Overlay>) {
   return <Overlay {...props} ref={ref} />;
-});
+};
 
 Portal.displayName = "Portal";
 

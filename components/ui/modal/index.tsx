@@ -113,22 +113,21 @@ type IModalFooterProps = React.ComponentProps<typeof UIModal.Footer> &
 type IModalCloseButtonProps = React.ComponentProps<typeof UIModal.CloseButton> &
   VariantProps<typeof modalCloseButtonStyle> & { className?: string };
 
-const Modal = React.forwardRef<React.ComponentRef<typeof UIModal>, IModalProps>(
-  ({ className, size = "md", ...props }, ref) => (
-    <UIModal
-      ref={ref}
-      {...props}
-      pointerEvents="box-none"
-      className={modalStyle({ size, class: className })}
-      context={{ size }}
-    />
-  ),
+const Modal = ({ className, size = "md", ref, ...props }: IModalProps) => (
+  <UIModal
+    ref={ref}
+    {...props}
+    pointerEvents="box-none"
+    className={modalStyle({ size, class: className })}
+    context={{ size }}
+  />
 );
 
-const ModalBackdrop = React.forwardRef<
-  React.ComponentRef<typeof UIModal.Backdrop>,
-  IModalBackdropProps
->(function ModalBackdrop({ className, ...props }, ref) {
+const ModalBackdrop = function ModalBackdrop({
+  className,
+  ref,
+  ...props
+}: IModalBackdropProps) {
   return (
     <UIModal.Backdrop
       ref={ref}
@@ -156,12 +155,14 @@ const ModalBackdrop = React.forwardRef<
       })}
     />
   );
-});
+};
 
-const ModalContent = React.forwardRef<
-  React.ComponentRef<typeof UIModal.Content>,
-  IModalContentProps
->(function ModalContent({ className, size, ...props }, ref) {
+const ModalContent = function ModalContent({
+  className,
+  size,
+  ref,
+  ...props
+}: IModalContentProps) {
   const { size: parentSize } = useStyleContext(SCOPE);
 
   return (
@@ -198,12 +199,13 @@ const ModalContent = React.forwardRef<
       pointerEvents="auto"
     />
   );
-});
+};
 
-const ModalHeader = React.forwardRef<
-  React.ComponentRef<typeof UIModal.Header>,
-  IModalHeaderProps
->(function ModalHeader({ className, ...props }, ref) {
+const ModalHeader = function ModalHeader({
+  className,
+  ref,
+  ...props
+}: IModalHeaderProps) {
   return (
     <UIModal.Header
       ref={ref}
@@ -213,12 +215,13 @@ const ModalHeader = React.forwardRef<
       })}
     />
   );
-});
+};
 
-const ModalBody = React.forwardRef<
-  React.ComponentRef<typeof UIModal.Body>,
-  IModalBodyProps
->(function ModalBody({ className, ...props }, ref) {
+const ModalBody = function ModalBody({
+  className,
+  ref,
+  ...props
+}: IModalBodyProps) {
   return (
     <UIModal.Body
       ref={ref}
@@ -228,12 +231,13 @@ const ModalBody = React.forwardRef<
       })}
     />
   );
-});
+};
 
-const ModalFooter = React.forwardRef<
-  React.ComponentRef<typeof UIModal.Footer>,
-  IModalFooterProps
->(function ModalFooter({ className, ...props }, ref) {
+const ModalFooter = function ModalFooter({
+  className,
+  ref,
+  ...props
+}: IModalFooterProps) {
   return (
     <UIModal.Footer
       ref={ref}
@@ -243,12 +247,13 @@ const ModalFooter = React.forwardRef<
       })}
     />
   );
-});
+};
 
-const ModalCloseButton = React.forwardRef<
-  React.ComponentRef<typeof UIModal.CloseButton>,
-  IModalCloseButtonProps
->(function ModalCloseButton({ className, ...props }, ref) {
+const ModalCloseButton = function ModalCloseButton({
+  className,
+  ref,
+  ...props
+}: IModalCloseButtonProps) {
   return (
     <UIModal.CloseButton
       ref={ref}
@@ -258,7 +263,7 @@ const ModalCloseButton = React.forwardRef<
       })}
     />
   );
-});
+};
 
 Modal.displayName = "Modal";
 
