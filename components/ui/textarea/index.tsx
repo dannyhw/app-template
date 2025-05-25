@@ -49,13 +49,13 @@ const textareaInputStyle = tva({
 type ITextareaProps = React.ComponentProps<typeof UITextarea> &
   VariantProps<typeof textareaStyle>;
 
-const Textarea = React.forwardRef<
-  React.ComponentRef<typeof UITextarea>,
-  ITextareaProps
->(function Textarea(
-  { className, variant = "default", size = "md", ...props },
+const Textarea = function Textarea({
+  className,
+  variant = "default",
+  size = "md",
   ref,
-) {
+  ...props
+}: ITextareaProps) {
   return (
     <UITextarea
       ref={ref}
@@ -64,15 +64,16 @@ const Textarea = React.forwardRef<
       context={{ size }}
     />
   );
-});
+};
 
 type ITextareaInputProps = React.ComponentProps<typeof UITextarea.Input> &
   VariantProps<typeof textareaInputStyle>;
 
-const TextareaInput = React.forwardRef<
-  React.ComponentRef<typeof UITextarea.Input>,
-  ITextareaInputProps
->(function TextareaInput({ className, ...props }, ref) {
+const TextareaInput = function TextareaInput({
+  className,
+  ref,
+  ...props
+}: ITextareaInputProps) {
   const { size: parentSize } = useStyleContext(SCOPE);
 
   return (
@@ -87,7 +88,7 @@ const TextareaInput = React.forwardRef<
       })}
     />
   );
-});
+};
 
 Textarea.displayName = "Textarea";
 

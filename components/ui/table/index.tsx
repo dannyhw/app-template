@@ -203,19 +203,15 @@ const TableData = function TableData({
   }
 };
 
-const TableCaption = React.forwardRef<
-  React.ComponentRef<typeof ExpoTCaption>,
-  ITableCaptionProps
->(({ className, ...props }, ref) => {
+const TableCaption = ({ className, ref, ...props }: ITableCaptionProps) => {
   return (
     <ExpoTCaption
-      // @ts-expect-error : ref type changed
       ref={ref}
       className={tableCaptionStyle({ class: className })}
       {...props}
     />
   );
-});
+};
 
 Table.displayName = "Table";
 

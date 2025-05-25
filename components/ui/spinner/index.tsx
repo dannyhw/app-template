@@ -11,19 +11,14 @@ cssInterop(ActivityIndicator, {
 
 const spinnerStyle = tva({});
 
-const Spinner = React.forwardRef<
-  React.ComponentRef<typeof ActivityIndicator>,
-  React.ComponentProps<typeof ActivityIndicator>
->(function Spinner(
-  {
-    className,
-    color,
-    focusable = false,
-    "aria-label": ariaLabel = "loading",
-    ...props
-  },
+const Spinner = function Spinner({
+  className,
+  color,
+  focusable = false,
+  "aria-label": ariaLabel = "loading",
   ref,
-) {
+  ...props
+}: React.ComponentPropsWithRef<typeof ActivityIndicator>) {
   return (
     <ActivityIndicator
       ref={ref}
@@ -34,7 +29,7 @@ const Spinner = React.forwardRef<
       className={spinnerStyle({ class: className })}
     />
   );
-});
+};
 
 Spinner.displayName = "Spinner";
 

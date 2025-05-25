@@ -159,30 +159,34 @@ type IToastProps = React.ComponentProps<typeof Root> & {
   className?: string;
 } & VariantProps<typeof toastStyle>;
 
-const Toast = React.forwardRef<React.ComponentRef<typeof Root>, IToastProps>(
-  function Toast(
-    { className, variant = "solid", action = "muted", ...props },
-    ref,
-  ) {
-    return (
-      <Root
-        ref={ref}
-        className={toastStyle({ variant, action, class: className })}
-        context={{ variant, action }}
-        {...props}
-      />
-    );
-  },
-);
+const Toast = function Toast({
+  className,
+  variant = "solid",
+  action = "muted",
+  ref,
+  ...props
+}: IToastProps) {
+  return (
+    <Root
+      ref={ref}
+      className={toastStyle({ variant, action, class: className })}
+      context={{ variant, action }}
+      {...props}
+    />
+  );
+};
 
-type IToastTitleProps = React.ComponentProps<typeof Text> & {
+type IToastTitleProps = React.ComponentPropsWithRef<typeof Text> & {
   className?: string;
 } & VariantProps<typeof toastTitleStyle>;
 
-const ToastTitle = React.forwardRef<
-  React.ComponentRef<typeof Text>,
-  IToastTitleProps
->(function ToastTitle({ className, size = "md", children, ...props }, ref) {
+const ToastTitle = function ToastTitle({
+  className,
+  size = "md",
+  children,
+  ref,
+  ...props
+}: IToastTitleProps) {
   const { variant: parentVariant, action: parentAction } =
     useStyleContext(SCOPE);
 
@@ -211,16 +215,18 @@ const ToastTitle = React.forwardRef<
       {children}
     </Text>
   );
-});
+};
 
-type IToastDescriptionProps = React.ComponentProps<typeof Text> & {
+type IToastDescriptionProps = React.ComponentPropsWithRef<typeof Text> & {
   className?: string;
 } & VariantProps<typeof toastDescriptionStyle>;
 
-const ToastDescription = React.forwardRef<
-  React.ComponentRef<typeof Text>,
-  IToastDescriptionProps
->(function ToastDescription({ className, size = "md", ...props }, ref) {
+const ToastDescription = function ToastDescription({
+  className,
+  size = "md",
+  ref,
+  ...props
+}: IToastDescriptionProps) {
   const { variant: parentVariant } = useStyleContext(SCOPE);
 
   return (
@@ -236,7 +242,7 @@ const ToastDescription = React.forwardRef<
       })}
     />
   );
-});
+};
 
 Toast.displayName = "Toast";
 
