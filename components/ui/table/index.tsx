@@ -1,4 +1,11 @@
-import React, { createContext, useMemo, useContext } from "react";
+import React, {
+  createContext,
+  useMemo,
+  useContext,
+  ComponentProps,
+  ComponentPropsWithRef,
+  Ref,
+} from "react";
 import {
   Table as ExpoTable,
   THead as ExpoTHead,
@@ -18,7 +25,7 @@ import {
   tableDataStyle,
   tableCaptionStyle,
 } from "./styles";
-import { Text, View } from "react-native";
+import { Text, TextProps, View, ViewProps } from "react-native";
 
 const TableHeaderContext = createContext<{
   isHeaderRow: boolean;
@@ -32,44 +39,45 @@ const TableFooterContext = createContext<{
   isFooterRow: false,
 });
 
-type ITableProps = React.ComponentProps<typeof ExpoTable>;
+type ITableProps = ComponentProps<typeof ExpoTable>;
 
-type ITableHeaderProps = React.ComponentProps<typeof ExpoTHead>;
+type ITableHeaderProps = ComponentProps<typeof ExpoTHead>;
 
-type ITableBodyProps = React.ComponentProps<typeof ExpoTBody>;
+type ITableBodyProps = ComponentProps<typeof ExpoTBody>;
 
-type ITableFooterProps = React.ComponentProps<typeof ExpoTFoot>;
+type ITableFooterProps = ComponentProps<typeof ExpoTFoot>;
 
-type ITableHeadProps = React.ComponentProps<typeof View | typeof Text> & {
-  useRNView?: boolean;
-};
+type ViewWithProp = {
+  useRNView: true;
+} & ComponentPropsWithRef<typeof View>;
 
-type ITableRowProps = React.ComponentProps<typeof ExpoTR>;
+type TextWithProp = {
+  useRNView: false;
+} & ComponentPropsWithRef<typeof Text>;
 
-type ITableDataProps = React.ComponentProps<typeof View | typeof Text> & {
-  useRNView?: boolean;
-};
+type ITableHeadProps = ViewWithProp | TextWithProp;
 
-type ITableCaptionProps = React.ComponentProps<typeof ExpoTCaption>;
+type ITableRowProps = ComponentProps<typeof ExpoTR>;
 
-const Table = React.forwardRef<
-  React.ComponentRef<typeof ExpoTable>,
-  ITableProps
->(({ className, ...props }, ref) => {
+type ITableDataProps = ViewWithProp | TextWithProp;
+
+type ITableCaptionProps = ComponentProps<typeof ExpoTCaption>;
+
+const Table = ({ className, ref, ...props }: ITableProps) => {
   return (
     <ExpoTable
-      // @ts-expect-error : ref type changed
       ref={ref}
       className={tableStyle({ class: className })}
       {...props}
     />
   );
-});
+};
 
-const TableHeader = React.forwardRef<
-  React.ComponentRef<typeof ExpoTHead>,
-  ITableHeaderProps
->(function TableHeader({ className, ...props }, ref) {
+const TableHeader = function TableHeader({
+  className,
+  ref,
+  ...props
+}: ITableHeaderProps) {
   const contextValue = useMemo(() => {
     return {
       isHeaderRow: true,
@@ -79,33 +87,33 @@ const TableHeader = React.forwardRef<
   return (
     <TableHeaderContext.Provider value={contextValue}>
       <ExpoTHead
-        // @ts-expect-error : ref type changed
         ref={ref}
         className={tableHeaderStyle({ class: className })}
         {...props}
       />
     </TableHeaderContext.Provider>
   );
-});
+};
 
-const TableBody = React.forwardRef<
-  React.ComponentRef<typeof ExpoTBody>,
-  ITableBodyProps
->(function TableBody({ className, ...props }, ref) {
+const TableBody = function TableBody({
+  className,
+  ref,
+  ...props
+}: ITableBodyProps) {
   return (
     <ExpoTBody
-      // @ts-expect-error : ref type changed
       ref={ref}
       className={tableBodyStyle({ class: className })}
       {...props}
     />
   );
-});
+};
 
-const TableFooter = React.forwardRef<
-  React.ComponentRef<typeof ExpoTFoot>,
-  ITableFooterProps
->(function TableFooter({ className, ...props }, ref) {
+const TableFooter = function TableFooter({
+  className,
+  ref,
+  ...props
+}: ITableFooterProps) {
   const contextValue = useMemo(() => {
     return {
       isFooterRow: true,
@@ -115,51 +123,50 @@ const TableFooter = React.forwardRef<
   return (
     <TableFooterContext.Provider value={contextValue}>
       <ExpoTFoot
-        // @ts-expect-error : ref type changed
         ref={ref}
         className={tableFooterStyle({ class: className })}
         {...props}
       />
     </TableFooterContext.Provider>
   );
-});
+};
 
-const TableHead = React.forwardRef<
-  React.ComponentRef<typeof View | typeof Text>,
-  ITableHeadProps
->(function TableHead({ useRNView = false, className, ...props }, ref) {
+const TableHead = function TableHead({
+  useRNView = false,
+  className,
+  ref,
+  ...props
+}: ITableHeadProps) {
   if (useRNView) {
     return (
       <View
-        // @ts-expect-error : ref type changed
-        ref={ref}
+        ref={ref as Ref<View>}
         className={tableHeadStyle({ class: className })}
-        {...props}
+        {...(props as ViewProps)}
       />
     );
   } else {
     return (
       <Text
-        // @ts-expect-error : ref type changed
-        ref={ref}
+        ref={ref as Ref<Text>}
         className={tableHeadStyle({ class: className })}
-        {...props}
+        {...(props as TextProps)}
       />
     );
   }
-});
+};
 
-const TableRow = React.forwardRef<
-  React.ComponentRef<typeof ExpoTR>,
-  ITableRowProps
->(function TableRow({ className, ...props }, ref) {
+const TableRow = function TableRow({
+  className,
+  ref,
+  ...props
+}: ITableRowProps) {
   const { isHeaderRow } = useContext(TableHeaderContext);
 
   const { isFooterRow } = useContext(TableFooterContext);
 
   return (
     <ExpoTR
-      // @ts-expect-error : ref type changed
       ref={ref}
       className={tableRowStyleStyle({
         isHeaderRow,
@@ -169,32 +176,32 @@ const TableRow = React.forwardRef<
       {...props}
     />
   );
-});
+};
 
-const TableData = React.forwardRef<
-  React.ComponentRef<typeof View | typeof Text>,
-  ITableDataProps
->(function TableData({ useRNView = false, className, ...props }, ref) {
+const TableData = function TableData({
+  useRNView = false,
+  ref,
+  className,
+  ...props
+}: ITableDataProps) {
   if (useRNView) {
     return (
       <View
-        // @ts-expect-error : ref type changed
-        ref={ref}
+        ref={ref as Ref<View>}
         className={tableDataStyle({ class: className })}
-        {...props}
+        {...(props as ViewProps)}
       />
     );
   } else {
     return (
       <Text
-        // @ts-expect-error : ref type changed
-        ref={ref}
+        ref={ref as Ref<Text>}
         className={tableDataStyle({ class: className })}
-        {...props}
+        {...(props as TextProps)}
       />
     );
   }
-});
+};
 
 const TableCaption = React.forwardRef<
   React.ComponentRef<typeof ExpoTCaption>,
