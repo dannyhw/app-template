@@ -126,52 +126,47 @@ cssInterop(H3, {
   },
 });
 
-type IAccordionProps = React.ComponentPropsWithoutRef<typeof UIAccordion> &
+type IAccordionProps = React.ComponentProps<typeof UIAccordion> &
   VariantProps<typeof accordionStyle>;
 
-type IAccordionItemProps = React.ComponentPropsWithoutRef<
-  typeof UIAccordion.Item
-> &
+type IAccordionItemProps = React.ComponentProps<typeof UIAccordion.Item> &
   VariantProps<typeof accordionItemStyle>;
 
-type IAccordionContentProps = React.ComponentPropsWithoutRef<
-  typeof UIAccordion.Content
-> &
+type IAccordionContentProps = React.ComponentProps<typeof UIAccordion.Content> &
   VariantProps<typeof accordionContentStyle>;
 
-type IAccordionContentTextProps = React.ComponentPropsWithoutRef<
+type IAccordionContentTextProps = React.ComponentProps<
   typeof UIAccordion.ContentText
 > &
   VariantProps<typeof accordionContentTextStyle>;
 
 type IAccordionIconProps = VariantProps<typeof accordionIconStyle> &
-  React.ComponentPropsWithoutRef<typeof UIAccordion.Icon> & {
+  React.ComponentProps<typeof UIAccordion.Icon> & {
     as?: React.ElementType;
     height?: number;
     width?: number;
   };
 
-type IAccordionHeaderProps = React.ComponentPropsWithoutRef<
-  typeof UIAccordion.Header
-> &
+type IAccordionHeaderProps = React.ComponentProps<typeof UIAccordion.Header> &
   VariantProps<typeof accordionHeaderStyle>;
 
-type IAccordionTriggerProps = React.ComponentPropsWithoutRef<
-  typeof UIAccordion.Trigger
-> &
+type IAccordionTriggerProps = React.ComponentProps<typeof UIAccordion.Trigger> &
   VariantProps<typeof accordionTriggerStyle>;
 
-type IAccordionTitleTextProps = React.ComponentPropsWithoutRef<
+type IAccordionTitleTextProps = React.ComponentProps<
   typeof UIAccordion.TitleText
 > &
   VariantProps<typeof accordionTitleTextStyle>;
 
 /** Components */
 
-const Accordion = React.forwardRef<
-  React.ComponentRef<typeof UIAccordion>,
-  IAccordionProps
->(({ className, variant = "filled", size = "md", ...props }, ref) => {
+const Accordion = ({
+  className,
+  variant = "filled",
+  size = "md",
+  ref,
+  ...props
+}: IAccordionProps) => {
   return (
     <UIAccordion
       ref={ref}
@@ -180,12 +175,9 @@ const Accordion = React.forwardRef<
       context={{ variant, size }}
     />
   );
-});
+};
 
-const AccordionItem = React.forwardRef<
-  React.ComponentRef<typeof UIAccordion.Item>,
-  IAccordionItemProps
->(({ className, ...props }, ref) => {
+const AccordionItem = ({ className, ref, ...props }: IAccordionItemProps) => {
   const { variant } = useStyleContext(SCOPE);
 
   return (
@@ -198,12 +190,13 @@ const AccordionItem = React.forwardRef<
       })}
     />
   );
-});
+};
 
-const AccordionContent = React.forwardRef<
-  React.ComponentRef<typeof UIAccordion.Content>,
-  IAccordionContentProps
->(function AccordionContent({ className, ...props }, ref) {
+const AccordionContent = ({
+  className,
+  ref,
+  ...props
+}: IAccordionContentProps) => {
   return (
     <UIAccordion.Content
       ref={ref}
@@ -213,12 +206,13 @@ const AccordionContent = React.forwardRef<
       })}
     />
   );
-});
+};
 
-const AccordionContentText = React.forwardRef<
-  React.ComponentRef<typeof UIAccordion.ContentText>,
-  IAccordionContentTextProps
->(function AccordionContentText({ className, ...props }, ref) {
+const AccordionContentText = ({
+  className,
+  ref,
+  ...props
+}: IAccordionContentTextProps) => {
   const { size } = useStyleContext(SCOPE);
 
   return (
@@ -231,12 +225,14 @@ const AccordionContentText = React.forwardRef<
       })}
     />
   );
-});
+};
 
-const AccordionIcon = React.forwardRef<
-  React.ComponentRef<typeof UIAccordion.Icon>,
-  IAccordionIconProps
->(function AccordionIcon({ size, className, ...props }, ref) {
+const AccordionIcon = ({
+  size,
+  className,
+  ref,
+  ...props
+}: IAccordionIconProps) => {
   const { size: parentSize } = useStyleContext(SCOPE);
 
   if (typeof size === "number") {
@@ -272,12 +268,13 @@ const AccordionIcon = React.forwardRef<
       })}
     />
   );
-});
+};
 
-const AccordionHeader = React.forwardRef<
-  React.ComponentRef<typeof UIAccordion.Header>,
-  IAccordionHeaderProps
->(function AccordionHeader({ className, ...props }, ref) {
+const AccordionHeader = ({
+  className,
+  ref,
+  ...props
+}: IAccordionHeaderProps) => {
   return (
     <UIAccordion.Header
       ref={ref}
@@ -287,12 +284,13 @@ const AccordionHeader = React.forwardRef<
       })}
     />
   );
-});
+};
 
-const AccordionTrigger = React.forwardRef<
-  React.ComponentRef<typeof UIAccordion.Trigger>,
-  IAccordionTriggerProps
->(function AccordionTrigger({ className, ...props }, ref) {
+const AccordionTrigger = ({
+  className,
+  ref,
+  ...props
+}: IAccordionTriggerProps) => {
   return (
     <UIAccordion.Trigger
       ref={ref}
@@ -302,12 +300,13 @@ const AccordionTrigger = React.forwardRef<
       })}
     />
   );
-});
+};
 
-const AccordionTitleText = React.forwardRef<
-  React.ComponentRef<typeof UIAccordion.TitleText>,
-  IAccordionTitleTextProps
->(function AccordionTitleText({ className, ...props }, ref) {
+const AccordionTitleText = ({
+  className,
+  ref,
+  ...props
+}: IAccordionTitleTextProps) => {
   const { size } = useStyleContext(SCOPE);
 
   return (
@@ -320,7 +319,7 @@ const AccordionTitleText = React.forwardRef<
       })}
     />
   );
-});
+};
 
 Accordion.displayName = "Accordion";
 

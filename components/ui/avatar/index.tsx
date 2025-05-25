@@ -72,16 +72,15 @@ const avatarImageStyle = tva({
   base: "absolute h-full w-full rounded-full",
 });
 
-type IAvatarProps = Omit<
-  React.ComponentPropsWithoutRef<typeof UIAvatar>,
-  "context"
-> &
+type IAvatarProps = Omit<React.ComponentProps<typeof UIAvatar>, "context"> &
   VariantProps<typeof avatarStyle>;
 
-const Avatar = React.forwardRef<
-  React.ComponentRef<typeof UIAvatar>,
-  IAvatarProps
->(function Avatar({ className, size = "md", ...props }, ref) {
+const Avatar = function Avatar({
+  className,
+  size = "md",
+  ref,
+  ...props
+}: IAvatarProps) {
   return (
     <UIAvatar
       ref={ref}
@@ -90,15 +89,17 @@ const Avatar = React.forwardRef<
       context={{ size }}
     />
   );
-});
+};
 
-type IAvatarBadgeProps = React.ComponentPropsWithoutRef<typeof UIAvatar.Badge> &
+type IAvatarBadgeProps = React.ComponentProps<typeof UIAvatar.Badge> &
   VariantProps<typeof avatarBadgeStyle>;
 
-const AvatarBadge = React.forwardRef<
-  React.ComponentRef<typeof UIAvatar.Badge>,
-  IAvatarBadgeProps
->(function AvatarBadge({ className, size, ...props }, ref) {
+const AvatarBadge = function AvatarBadge({
+  className,
+  size,
+  ref,
+  ...props
+}: IAvatarBadgeProps) {
   const { size: parentSize } = useStyleContext(SCOPE);
 
   return (
@@ -114,17 +115,19 @@ const AvatarBadge = React.forwardRef<
       })}
     />
   );
-});
+};
 
-type IAvatarFallbackTextProps = React.ComponentPropsWithoutRef<
+type IAvatarFallbackTextProps = React.ComponentProps<
   typeof UIAvatar.FallbackText
 > &
   VariantProps<typeof avatarFallbackTextStyle>;
 
-const AvatarFallbackText = React.forwardRef<
-  React.ComponentRef<typeof UIAvatar.FallbackText>,
-  IAvatarFallbackTextProps
->(function AvatarFallbackText({ className, size, ...props }, ref) {
+const AvatarFallbackText = function AvatarFallbackText({
+  className,
+  size,
+  ref,
+  ...props
+}: IAvatarFallbackTextProps) {
   const { size: parentSize } = useStyleContext(SCOPE);
 
   return (
@@ -140,15 +143,16 @@ const AvatarFallbackText = React.forwardRef<
       })}
     />
   );
-});
+};
 
-type IAvatarImageProps = React.ComponentPropsWithoutRef<typeof UIAvatar.Image> &
+type IAvatarImageProps = React.ComponentProps<typeof UIAvatar.Image> &
   VariantProps<typeof avatarImageStyle>;
 
-const AvatarImage = React.forwardRef<
-  React.ComponentRef<typeof UIAvatar.Image>,
-  IAvatarImageProps
->(function AvatarImage({ className, ...props }, ref) {
+const AvatarImage = function AvatarImage({
+  className,
+  ref,
+  ...props
+}: IAvatarImageProps) {
   return (
     <UIAvatar.Image
       ref={ref}
@@ -164,15 +168,16 @@ const AvatarImage = React.forwardRef<
       }
     />
   );
-});
+};
 
-type IAvatarGroupProps = React.ComponentPropsWithoutRef<typeof UIAvatar.Group> &
+type IAvatarGroupProps = React.ComponentProps<typeof UIAvatar.Group> &
   VariantProps<typeof avatarGroupStyle>;
 
-const AvatarGroup = React.forwardRef<
-  React.ComponentRef<typeof UIAvatar.Group>,
-  IAvatarGroupProps
->(function AvatarGroup({ className, ...props }, ref) {
+const AvatarGroup = function AvatarGroup({
+  className,
+  ref,
+  ...props
+}: IAvatarGroupProps) {
   return (
     <UIAvatar.Group
       ref={ref}
@@ -182,6 +187,6 @@ const AvatarGroup = React.forwardRef<
       })}
     />
   );
-});
+};
 
 export { Avatar, AvatarBadge, AvatarFallbackText, AvatarImage, AvatarGroup };
