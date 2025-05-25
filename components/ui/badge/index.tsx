@@ -111,7 +111,7 @@ cssInterop(PrimitiveIcon, {
   },
 });
 
-type IBadgeProps = React.ComponentPropsWithoutRef<typeof ContextView> &
+type IBadgeProps = React.ComponentProps<typeof ContextView> &
   VariantProps<typeof badgeStyle>;
 
 function Badge({
@@ -137,13 +137,16 @@ function Badge({
   );
 }
 
-type IBadgeTextProps = React.ComponentPropsWithoutRef<typeof Text> &
+type IBadgeTextProps = React.ComponentPropsWithRef<typeof Text> &
   VariantProps<typeof badgeTextStyle>;
 
-const BadgeText = React.forwardRef<
-  React.ComponentRef<typeof Text>,
-  IBadgeTextProps
->(function BadgeText({ children, className, size, ...props }, ref) {
+const BadgeText = function BadgeText({
+  children,
+  className,
+  size,
+  ref,
+  ...props
+}: IBadgeTextProps) {
   const { size: parentSize, action: parentAction } = useStyleContext(SCOPE);
 
   return (
@@ -162,15 +165,17 @@ const BadgeText = React.forwardRef<
       {children}
     </Text>
   );
-});
+};
 
-type IBadgeIconProps = React.ComponentPropsWithoutRef<typeof PrimitiveIcon> &
+type IBadgeIconProps = React.ComponentProps<typeof PrimitiveIcon> &
   VariantProps<typeof badgeIconStyle>;
 
-const BadgeIcon = React.forwardRef<
-  React.ComponentRef<typeof Svg>,
-  IBadgeIconProps
->(function BadgeIcon({ className, size, ...props }, ref) {
+const BadgeIcon = function BadgeIcon({
+  className,
+  size,
+  ref,
+  ...props
+}: IBadgeIconProps) {
   const { size: parentSize, action: parentAction } = useStyleContext(SCOPE);
 
   if (typeof size === "number") {
@@ -209,7 +214,7 @@ const BadgeIcon = React.forwardRef<
       ref={ref}
     />
   );
-});
+};
 
 Badge.displayName = "Badge";
 
