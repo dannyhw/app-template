@@ -91,6 +91,7 @@
     "expo-system-ui": "~5.0.7",
     "expo-web-browser": "~14.1.6",
     "jotai": "^2.12.4",
+    "@tanstack/react-form": "^0.0.1",
     "nativewind": "^4.1.23",
     "react": "19.0.0",
     "react-dom": "19.0.0",
