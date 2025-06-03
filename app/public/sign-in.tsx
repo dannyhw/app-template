@@ -12,6 +12,7 @@ import { VStack } from "@/components/ui/vstack";
 import { supabase } from "@/database/supabase.client";
 import { Link } from "expo-router";
 import { useState } from "react";
+import { useForm } from "@tanstack/react-form";
 import { ScrollView } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
@@ -20,20 +21,26 @@ export default function SignInScreen() {
 
   const insets = useSafeAreaInsets();
 
-  const [email, setEmail] = useState("");
-
-  const [password, setPassword] = useState("");
-
   const [showPassword, setShowPassword] = useState(false);
 
   const [loading, setLoading] = useState(false);
 
-  async function signInWithEmail() {
+  const form = useForm({
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+    onSubmit: async ({ value }: { value: { email: string; password: string } }) => {
+      await signInWithEmail(value.email, value.password);
+    },
+  });
+
+  async function signInWithEmail(email: string, password: string) {
     setLoading(true);
 
     const { error } = await supabase.auth.signInWithPassword({
-      email: email,
-      password: password,
+      email,
+      password,
     });
 
     if (error) {
@@ -76,57 +83,67 @@ export default function SignInScreen() {
       style={{ padding: insets.top }}
       contentContainerClassName="gap-4"
     >
-      <VStack space="xs" className="mt-8">
-        <Text className="text-typography-900">Email</Text>
+      <form.Provider>
+        <VStack space="xs" className="mt-8">
+          <Text className="text-typography-900">Email</Text>
 
-        <Input className="bg-white">
-          <InputField
-            autoComplete="email"
-            autoCapitalize={"none"}
-            autoCorrect={false}
-            value={email}
-            type="text"
-            onChangeText={setEmail}
-          />
-        </Input>
-      </VStack>
+          <form.Field name="email">
+            {(field: any) => (
+              <Input className="bg-white">
+                <InputField
+                  autoComplete="email"
+                  autoCapitalize={"none"}
+                  autoCorrect={false}
+                  value={field.state.value}
+                  type="text"
+                  onChangeText={field.handleChange}
+                />
+              </Input>
+            )}
+          </form.Field>
+        </VStack>
 
-      <VStack space="xs">
-        <Text className="text-typography-900">Password</Text>
+        <VStack space="xs">
+          <Text className="text-typography-900">Password</Text>
 
-        <Input className="bg-white">
-          <InputField
-            type={showPassword ? "text" : "password"}
-            value={password}
-            onChangeText={setPassword}
-            autoComplete="password"
-            autoCapitalize={"none"}
-            autoCorrect={false}
-            onSubmitEditing={() => signInWithEmail()}
-          />
+          <form.Field name="password">
+            {(field: any) => (
+              <Input className="bg-white">
+                <InputField
+                  type={showPassword ? "text" : "password"}
+                  value={field.state.value}
+                  onChangeText={field.handleChange}
+                  autoComplete="password"
+                  autoCapitalize={"none"}
+                  autoCorrect={false}
+                  onSubmitEditing={() => form.handleSubmit()}
+                />
 
-          <InputSlot
-            className="pr-3"
-            onPress={() => setShowPassword((cur) => !cur)}
-          >
-            <InputIcon as={showPassword ? EyeIcon : EyeOffIcon} />
-          </InputSlot>
-        </Input>
-      </VStack>
+                <InputSlot
+                  className="pr-3"
+                  onPress={() => setShowPassword((cur) => !cur)}
+                >
+                  <InputIcon as={showPassword ? EyeIcon : EyeOffIcon} />
+                </InputSlot>
+              </Input>
+            )}
+          </form.Field>
+        </VStack>
 
-      <Button
-        className="mt-4"
-        disabled={loading}
-        onPress={() => signInWithEmail()}
-      >
-        <ButtonText>Sign in</ButtonText>
-      </Button>
-
-      <Link href="/public/sign-up" asChild>
-        <Button variant="link">
-          <ButtonText>create account</ButtonText>
+        <Button
+          className="mt-4"
+          disabled={loading}
+          onPress={() => form.handleSubmit()}
+        >
+          <ButtonText>Sign in</ButtonText>
         </Button>
-      </Link>
+
+        <Link href="/public/sign-up" asChild>
+          <Button variant="link">
+            <ButtonText>create account</ButtonText>
+          </Button>
+        </Link>
+      </form.Provider>
     </ScrollView>
   );
 }

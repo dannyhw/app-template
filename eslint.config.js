@@ -22,6 +22,7 @@ module.exports = defineConfig([
         },
       ],
       "react/jsx-newline": ["error", { prevent: false }],
+      "import/no-unresolved": "off",
     },
   },
 ]);
